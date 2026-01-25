@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5by8p2v1cyo7"]
+
+[ext_resource type="Script" uid="uid://dqf7g4e273f3r" path="res://05_ui/health_gem.gd" id="1_vxifh"]
+[ext_resource type="Texture2D" uid="uid://c7cv35i1bw6pf" path="res://04_assets/external/PixelUI/01.png" id="2_8h4lb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi42a"]
+atlas = ExtResource("2_8h4lb")
+region = Rect2(224, 48, 48, 48)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4bqqs"]
+load_path = "res://.godot/imported/01.png-89967f7a855a1afd91f6767503f9bd63.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynsuh"]
+atlas = SubResource("CompressedTexture2D_4bqqs")
+region = Rect2(80, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7dth"]
+atlas = SubResource("CompressedTexture2D_4bqqs")
+region = Rect2(80, 0, 48, 48)
+
+[node name="Health1" type="Control"]
+custom_minimum_size = Vector2(47.27, 50.055)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+script = ExtResource("1_vxifh")
+
+[node name="HealthBackground" type="TextureRect" parent="."]
+self_modulate = Color(0.22670749, 0.22670749, 0.22670746, 1)
+texture_filter = 1
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_pi42a")
+
+[node name="Indicator" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_ynsuh")
+
+[node name="Frame" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_v7dth")

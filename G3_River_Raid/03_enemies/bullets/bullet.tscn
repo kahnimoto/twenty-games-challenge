@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmx40fk0i803i"]
+
+[ext_resource type="Script" uid="uid://ddthh0jd1au5m" path="res://03_enemies/bullets/bullet.gd" id="1_7tvtu"]
+[ext_resource type="Texture2D" uid="uid://bonildi5r6pel" path="res://04_assets/external/PixelUI/00.png" id="2_c6ew5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgc3c"]
+atlas = ExtResource("2_c6ew5")
+region = Rect2(112, 20, 16, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_et1pp"]
+radius = 2.236068
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_7tvtu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1.697393, 1.697393, 1.697393, 1)
+rotation = 1.5707964
+scale = Vector2(0.46, 0.46)
+texture = SubResource("AtlasTexture_dgc3c")
+
+[node name="Area2D" type="Area2D" parent="." groups=["bullets"]]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_et1pp")
+debug_color = Color(1, 0, 0.16666698, 0.12156863)

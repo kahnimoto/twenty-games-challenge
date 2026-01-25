@@ -1,0 +1,105 @@
+[gd_scene load_steps=17 format=3 uid="uid://brgavqdsbikwx"]
+
+[ext_resource type="PackedScene" uid="uid://cnpxi3gw7bxyb" path="res://03_enemies/turrets/turret.tscn" id="1_dk0co"]
+[ext_resource type="Texture2D" uid="uid://dxbeg0ulcby" path="res://04_assets/external/Turret_G79/AnimFire/TG79Open0000.png" id="3_rngk1"]
+[ext_resource type="Texture2D" uid="uid://bowxrklks07p5" path="res://04_assets/external/Turret_G79/AnimIdle/MK531Default.png" id="15_mawde"]
+[ext_resource type="Texture2D" uid="uid://uqfkcfrnyp3i" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_02/Ship_LVL_5.png" id="27_v0k1f"]
+[ext_resource type="Texture2D" uid="uid://bhgr5a235oelm" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_02/Ship_LVL_4.png" id="28_65ebt"]
+[ext_resource type="Texture2D" uid="uid://bupskve4ixhs2" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_02/Ship_LVL_3.png" id="29_ewtdi"]
+[ext_resource type="Texture2D" uid="uid://qtk1gswt15eo" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_02/Ship_LVL_2.png" id="30_5l81j"]
+[ext_resource type="Texture2D" uid="uid://b0kxm0h4nauh2" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_02/Ship_LVL_1.png" id="31_mcv7y"]
+[ext_resource type="Texture2D" uid="uid://w6uvg7joelia" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_02/Parts/Weapon_5.png" id="32_ihbrm"]
+[ext_resource type="Texture2D" uid="uid://sfypxcwoukd" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_02/Parts/Weapon_4.png" id="33_lotv4"]
+[ext_resource type="Texture2D" uid="uid://7qgoaswel1hy" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_02/Parts/Weapon_3.png" id="34_aifqc"]
+[ext_resource type="Texture2D" uid="uid://bonildi5r6pel" path="res://04_assets/external/PixelUI/00.png" id="35_a5gkh"]
+[ext_resource type="Texture2D" uid="uid://c7cv35i1bw6pf" path="res://04_assets/external/PixelUI/01.png" id="36_bv4ag"]
+[ext_resource type="Texture2D" uid="uid://c5w14sts2uxaj" path="res://04_assets/external/PixelUI/02.png" id="37_gnp1w"]
+[ext_resource type="Texture2D" uid="uid://b45fco1t72ftg" path="res://04_assets/external/PixelUI/03.png" id="38_dwynl"]
+[ext_resource type="Texture2D" uid="uid://cqv737ifikwbl" path="res://04_assets/external/PixelUI/04.png" id="39_2qq6p"]
+
+[node name="Playground" type="Node"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Turret" parent="World" instance=ExtResource("1_dk0co")]
+position = Vector2(426, 118)
+rotation = 1.5707964
+
+[node name="Node2D" type="Node2D" parent="World"]
+position = Vector2(144, 793)
+
+[node name="ShipLvl5" type="Sprite2D" parent="World/Node2D"]
+position = Vector2(587, 257)
+scale = Vector2(0.070596844, 0.070596844)
+texture = ExtResource("27_v0k1f")
+
+[node name="ShipLvl4" type="Sprite2D" parent="World/Node2D"]
+position = Vector2(70.00003, 244.00049)
+rotation = 0.0045934753
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("28_65ebt")
+
+[node name="ShipLvl6" type="Sprite2D" parent="World/Node2D"]
+position = Vector2(604, 142)
+scale = Vector2(0.070596844, 0.070596844)
+texture = ExtResource("29_ewtdi")
+
+[node name="ShipLvl2" type="Sprite2D" parent="World/Node2D"]
+position = Vector2(313, 306)
+scale = Vector2(0.070596844, 0.070596844)
+texture = ExtResource("30_5l81j")
+
+[node name="ShipLvl7" type="Sprite2D" parent="World/Node2D"]
+position = Vector2(363, 0)
+scale = Vector2(0.070596844, 0.070596844)
+texture = ExtResource("31_mcv7y")
+
+[node name="Weapon5" type="Sprite2D" parent="World/Node2D"]
+position = Vector2(76, 101)
+scale = Vector2(0.070596844, 0.070596844)
+texture = ExtResource("32_ihbrm")
+
+[node name="Weapon6" type="Sprite2D" parent="World/Node2D"]
+position = Vector2(578, 31)
+scale = Vector2(0.070596844, 0.070596844)
+texture = ExtResource("33_lotv4")
+
+[node name="Weapon3" type="Sprite2D" parent="World/Node2D"]
+position = Vector2(349, 442)
+scale = Vector2(0.070596844, 0.070596844)
+texture = ExtResource("34_aifqc")
+
+[node name="00" type="Sprite2D" parent="World/Node2D"]
+texture_filter = 1
+position = Vector2(316, 147)
+texture = ExtResource("35_a5gkh")
+
+[node name="01" type="Sprite2D" parent="World/Node2D"]
+position = Vector2(550, 415)
+texture = ExtResource("36_bv4ag")
+
+[node name="02" type="Sprite2D" parent="World/Node2D"]
+texture_filter = 1
+position = Vector2(112, 478)
+texture = ExtResource("37_gnp1w")
+
+[node name="03" type="Sprite2D" parent="World/Node2D"]
+texture_filter = 1
+position = Vector2(-90, 272)
+texture = ExtResource("38_dwynl")
+
+[node name="04" type="Sprite2D" parent="World/Node2D"]
+position = Vector2(931, 145)
+texture = ExtResource("39_2qq6p")
+
+[node name="Mk531Default" type="Sprite2D" parent="World/Node2D"]
+texture_filter = 1
+position = Vector2(878, 465)
+texture = ExtResource("15_mawde")
+
+[node name="Tg79Open0000" type="Sprite2D" parent="World/Node2D"]
+texture_filter = 1
+position = Vector2(884, 367)
+texture = ExtResource("3_rngk1")
+
+[node name="HUD" type="CanvasLayer" parent="."]

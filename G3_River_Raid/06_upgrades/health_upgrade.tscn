@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxap161m33kby"]
+
+[ext_resource type="Script" uid="uid://cw3ky1wu0gajy" path="res://06_upgrades/health_upgrade.gd" id="1_v24kx"]
+[ext_resource type="Texture2D" uid="uid://c7cv35i1bw6pf" path="res://04_assets/external/PixelUI/01.png" id="2_3g0vn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi42a"]
+atlas = ExtResource("2_3g0vn")
+region = Rect2(128, 48, 48, 48)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h1jm5"]
+
+[node name="HealthUpgrade" type="Node2D"]
+script = ExtResource("1_v24kx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_pi42a")
+
+[node name="Area2D" type="Area2D" parent="." groups=["upgrades"]]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_h1jm5")
+debug_color = Color(0.032389503, 0.5073511, 0, 0.12941177)

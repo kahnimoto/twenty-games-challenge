@@ -659,4 +659,4 @@ shape = SubResource("RectangleShape2D_jfemr")
 
 [node name="Lander" parent="World" groups=["player"] instance=ExtResource("4_jfemr")]
 unique_name_in_owner = true
-position = Vector2(741, 224)
+position = Vector2(779, 303)

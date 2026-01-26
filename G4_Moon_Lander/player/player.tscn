@@ -1,7 +1,13 @@
-[gd_scene load_steps=28 format=3 uid="uid://c3pov32jhgxwf"]
+[gd_scene load_steps=31 format=3 uid="uid://c3pov32jhgxwf"]
 
 [ext_resource type="Script" uid="uid://bh7otpecgjowl" path="res://player/player.gd" id="1_bmncc"]
 [ext_resource type="Texture2D" uid="uid://be0neslygnh6m" path="res://assets/lunar1b_tileset_compact.png" id="2_4ldqj"]
+[ext_resource type="Material" uid="uid://dxkk1bgka6ox5" path="res://player/sideways_particle_process_material.tres" id="2_g1dw6"]
+[ext_resource type="Material" uid="uid://p1dhvnl35har" path="res://player/rotate_particle_process_material.tres" id="3_yw30f"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rkbax"]
+friction = 0.8
+rough = true
 
 [sub_resource type="Curve" id="Curve_4ldqj"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.76052636, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.502046, 0.0, 0, 0]
@@ -140,11 +146,11 @@ gravity = Vector3(0, 0, 0)
 scale_max = 6.0
 scale_curve = SubResource("CurveTexture_6pbfr")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bmncc"]
-radius = 14.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
+size = Vector2(26, 26)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jfemr"]
-radius = 15.0
+radius = 5.0
 
 [sub_resource type="Animation" id="Animation_pxs2g"]
 length = 0.001
@@ -296,17 +302,44 @@ _data = {
 &"explode": SubResource("Animation_os5vp")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 136
-motion_mode = 1
+physics_material_override = SubResource("PhysicsMaterial_rkbax")
+gravity_scale = 0.3
+can_sleep = false
+contact_monitor = true
+max_contacts_reported = 3
+angular_damp = 0.1
 script = ExtResource("1_bmncc")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="ThrustParticles" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 32
 lifetime = 0.19
 process_material = SubResource("ParticleProcessMaterial_n2q0i")
+
+[node name="LeftThrustParticles" type="GPUParticles2D" parent="."]
+scale = Vector2(-1, 1)
+emitting = false
+lifetime = 0.19
+process_material = ExtResource("2_g1dw6")
+
+[node name="RotateLeftThrustParticles" type="GPUParticles2D" parent="."]
+scale = Vector2(-1, 1)
+emitting = false
+lifetime = 0.19
+process_material = ExtResource("3_yw30f")
+
+[node name="RotateRightThrustParticles" type="GPUParticles2D" parent="."]
+emitting = false
+lifetime = 0.19
+process_material = ExtResource("3_yw30f")
+
+[node name="RightThrustParticles" type="GPUParticles2D" parent="."]
+emitting = false
+lifetime = 0.19
+process_material = ExtResource("2_g1dw6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -323,8 +356,8 @@ explosiveness = 0.25
 process_material = SubResource("ParticleProcessMaterial_3i2sj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
-shape = SubResource("CircleShape2D_bmncc")
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_rkbax")
 debug_color = Color(0, 0.6, 0.69803923, 0)
 
 [node name="LandGearDetector" type="Area2D" parent="." groups=["lander_detector"]]

@@ -8,7 +8,7 @@ const SIDE_THRUST = 30.0
 const GRAVITY = 20.0
 const ROTATION_FORGIVNESS_WHEN_LANDING := 0.2
 const FUEL_USED_PER_SECOND := 15.0
-const FUEL_GAINED_PER_SECOND := 3.0 
+const FUEL_GAINED_PER_SECOND := 0.0
 const ACCEPTABLE_LANDING_SPEED := 20
 
 var _land_gears_out := true
@@ -73,6 +73,7 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		return
 	if fuel <= 0.0:
+		Events.message.emit("Out of fuel!")
 		explode()
 	if not on_ground:
 		apply_force(Vector2.DOWN * GRAVITY)
@@ -121,6 +122,10 @@ func _on_body_entered(body: Node2D) -> void:
 			on_ground = true
 			linear_velocity = Vector2.ZERO
 			return
+		else:
+			Events.message.emit("Too much momentum")
+	else:
+		Events.message.emit("Crashed into something..")
 	if not dead:
 		explode()
 

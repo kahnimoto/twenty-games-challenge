@@ -13,6 +13,9 @@ var lander: Lander
 @onready var fuel_value: Label = %FuelValue
 
 
+func _ready() -> void:
+	hide()
+
 
 func _update_fuel_gauge() -> void:
 	fuel_gauge.value = remap(lander.fuel, 0.0, lander.fuel_capacity, 10.0, 93.0)

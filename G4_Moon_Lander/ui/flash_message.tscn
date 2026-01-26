@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjspli2mdg2br"]
+
+[ext_resource type="Script" uid="uid://yxk0y2ylfrl1" path="res://ui/flash_message.gd" id="1_a2nlp"]
+[ext_resource type="FontFile" uid="uid://c18m0qjvcynw0" path="res://assets/m5x7.ttf" id="2_mw0v5"]
+
+[sub_resource type="Theme" id="Theme_rhw4k"]
+default_font = ExtResource("2_mw0v5")
+default_font_size = 50
+Label/colors/font_color = Color(1.1638972, 0.69020253, 1.1638972, 1)
+Label/colors/font_outline_color = Color(0.08, 0.08, 0.08, 0.79607844)
+Label/constants/outline_size = 1
+
+[node name="FlashMessage" type="Node"]
+script = ExtResource("1_a2nlp")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -349.0
+offset_top = -171.0
+offset_right = 350.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme = SubResource("Theme_rhw4k")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 8
+
+[node name="Message" type="Label" parent="CanvasLayer/Control/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "You went boom"
+horizontal_alignment = 1
+vertical_alignment = 1

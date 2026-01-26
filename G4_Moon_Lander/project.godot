@@ -12,13 +12,16 @@ config_version=5
 
 config/name="MoonLander"
 config/tags=PackedStringArray("20games")
-run/main_scene="uid://dhrv8xoswlnl0"
+run/main_scene="uid://cutk3iqn6mb7m"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://assets/icon.svg"
 
 [autoload]
 
 Hud="*res://ui/hud.tscn"
+Events="*res://globals/global_event_bus.gd"
+Game="*res://globals/global_game_manager.gd"
+Message="*res://ui/flash_message.tscn"
 
 [display]
 

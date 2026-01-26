@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://cutk3iqn6mb7m"]
+
+[ext_resource type="Script" uid="uid://bybdhg23aab1p" path="res://start_screen.gd" id="1_ncxyx"]
+[ext_resource type="FontFile" uid="uid://c18m0qjvcynw0" path="res://assets/m5x7.ttf" id="2_pevhg"]
+
+[sub_resource type="Gradient" id="Gradient_bpdkj"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_afy8x"]
+gradient = SubResource("Gradient_bpdkj")
+width = 1024
+height = 1024
+
+[sub_resource type="Theme" id="Theme_k1na2"]
+default_font = ExtResource("2_pevhg")
+default_font_size = 32
+
+[node name="Control" type="Node"]
+script = ExtResource("1_ncxyx")
+
+[node name="BlackBackground" type="Sprite2D" parent="."]
+position = Vector2(473.5, 271)
+scale = Vector2(0.97753906, 0.5527344)
+texture = SubResource("GradientTexture2D_afy8x")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_k1na2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control2" type="Control" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "MOON LANDER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control3" type="Control" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label2" type="RichTextLabel" parent="Control/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]You control a moon space ship.[/b]
+
+You do not have enough fuel to
+get to your goal, come to a complete stop
+at each landing pad along the way to
+fuel up.
+
+To land safely, your momentum must be less then 30 m/s.
+
+[b]Controls:[/b]
+ [b]W[/b]: Thrust Up
+ [b]A[/b] and [b]D[/b]: Thrust sideways
+ [b]Q[/b] and [b]E[/b]: Appl rotation trust"
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="Control/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "START GAME"

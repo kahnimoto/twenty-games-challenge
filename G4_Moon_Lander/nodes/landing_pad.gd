@@ -35,6 +35,7 @@ func _process(delta: float) -> void:
 			"GOAL":
 				if time_on_ground > TIME_DELAY_BEFORE_REWARD:
 					print("YOU WIN")
+					Events.level_completed.emit()
 
 func _on_lander_on_pad(other: Area2D, entering: bool):
 	assert(other.is_in_group("lander_detector"))

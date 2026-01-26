@@ -20,11 +20,12 @@ var fuel := 100.0
 
 
 func _ready() -> void:
-	land_gear_detector.body_shape_entered.connect(_on_land_detected.bind(true))
-	land_gear_detector.body_shape_exited.connect(_on_land_detected.bind(false))
+	land_gear_detector.body_entered.connect(_on_land_detected.bind(true))
+	land_gear_detector.body_exited.connect(_on_land_detected.bind(false))
+	Hud.lander = self
 
 
-func _on_land_detected(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int, landing: bool) -> void:
+func _on_land_detected(_body, landing: bool) -> void:
 	if landing:
 		if not _land_gears_out:
 			animated_sprite_2d.play_backwards("landgears")
@@ -33,7 +34,7 @@ func _on_land_detected(_body_rid: RID, _body: Node2D, _body_shape_index: int, _l
 		if _land_gears_out:
 			animated_sprite_2d.play("landgears")
 			_land_gears_out = false
-		
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -53,8 +54,7 @@ func _physics_process(delta: float) -> void:
 		return
 	if fuel <= 0.0:
 		explode()
-	if not is_on_floor():
-		velocity = Vector2.DOWN * GRAVITY * delta
+	velocity = Vector2.DOWN * GRAVITY * delta
 
 	if Input.is_action_pressed("up"):
 		velocity += Vector2.UP.rotated(rotation) * THRUST * delta
@@ -62,7 +62,7 @@ func _physics_process(delta: float) -> void:
 		fuel = clampf(fuel - (delta * FUEL_USED_PER_SECOND), 0.0, 100.0)
 	else:
 		gpu_particles_2d.emitting = false
-		fuel = clampf(fuel + (delta * FUEL_GAINED_PER_SECOND), 0.0, 100.0)
+		#fuel = clampf(fuel + (delta * FUEL_GAINED_PER_SECOND), 0.0, 100.0)
 
 	var turn := Input.get_axis("left", "right")
 	if turn:

@@ -297,6 +297,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 collision_mask = 136
 motion_mode = 1
 script = ExtResource("1_bmncc")
@@ -326,9 +327,9 @@ position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_bmncc")
 debug_color = Color(0, 0.6, 0.69803923, 0)
 
-[node name="LandGearDetector" type="Area2D" parent="."]
+[node name="LandGearDetector" type="Area2D" parent="." groups=["lander_detector"]]
 unique_name_in_owner = true
-collision_layer = 0
+collision_layer = 4
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LandGearDetector"]

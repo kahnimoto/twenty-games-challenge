@@ -1,12 +1,9 @@
 extends CanvasLayer
 
+var lander: Lander
+
 @onready var fuel_gauge: TextureProgressBar = %FuelGauge
-@onready var lander: Lander = %Lander
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	assert(lander is Lander)
 
 
 func _update_fuel_gauge(new_value: float) -> void:
@@ -16,4 +13,5 @@ func _update_fuel_gauge(new_value: float) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	_update_fuel_gauge(lander.fuel)
+	if lander:
+		_update_fuel_gauge(lander.fuel)

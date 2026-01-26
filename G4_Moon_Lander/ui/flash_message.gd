@@ -1,6 +1,7 @@
 ## Flash Message
 extends Node
 
+
 const TIME_PER_MSG := 4.0
 
 var _timer: float = INF

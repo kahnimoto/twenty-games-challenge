@@ -1,6 +1,7 @@
 class_name LandingPad
 extends StaticBody2D
 
+
 const TIME_DELAY_BEFORE_REWARD := 1.0
 
 @export var lander: Lander
@@ -36,6 +37,7 @@ func _process(delta: float) -> void:
 				if time_on_ground > TIME_DELAY_BEFORE_REWARD:
 					print("YOU WIN")
 					Events.level_completed.emit()
+
 
 func _on_lander_on_pad(other: Area2D, entering: bool):
 	assert(other.is_in_group("lander_detector"))

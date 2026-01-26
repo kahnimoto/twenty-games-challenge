@@ -7,12 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://ciy8qpy3vxphm" path="res://nodes/landing_pad.tscn" id="5_7r7c7"]
 [ext_resource type="PackedScene" uid="uid://c3pov32jhgxwf" path="res://player/player.tscn" id="6_obuea"]
 
-[sub_resource type="Gradient" id="Gradient_bpdkj"]
+[sub_resource type="Gradient" id="Gradient_avukc"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_eph1u"]
-gradient = SubResource("Gradient_bpdkj")
+gradient = SubResource("Gradient_avukc")
 width = 1024
 height = 1024
 

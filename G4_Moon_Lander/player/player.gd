@@ -17,6 +17,11 @@ var dead := false
 
 var fuel := 100.0
 var fuel_capacity := 100.0
+var new_location := Vector2.ZERO
+var previous_location := Vector2.ZERO
+var actual_velocity := Vector2.ZERO
+var copy_linear_velocity := Vector2.ZERO
+var previous_linear_velocity := Vector2.ZERO
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var land_gear_detector: Area2D = %LandGearDetector
@@ -56,11 +61,6 @@ func _toggle_landgears() -> void:
 			animated_sprite_2d.play("landgears")
 		_land_gears_out = not _land_gears_out
 
-var new_location := Vector2.ZERO
-var previous_location := Vector2.ZERO
-var actual_velocity := Vector2.ZERO
-var copy_linear_velocity := Vector2.ZERO
-var previous_linear_velocity := Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	previous_location = new_location

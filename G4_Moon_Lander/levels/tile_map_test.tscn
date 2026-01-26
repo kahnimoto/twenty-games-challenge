@@ -1,5 +1,6 @@
-[gd_scene load_steps=50 format=4 uid="uid://dhrv8xoswlnl0"]
+[gd_scene load_steps=51 format=4 uid="uid://dhrv8xoswlnl0"]
 
+[ext_resource type="Script" uid="uid://8hsvpr6vkxrs" path="res://levels/level.gd" id="1_yu041"]
 [ext_resource type="Texture2D" uid="uid://be0neslygnh6m" path="res://assets/lunar1b_tileset_compact.png" id="1_yxwul"]
 [ext_resource type="Texture2D" uid="uid://tmb6f5wq4bsb" path="res://assets/Free Smoke Fx  Pixel 05.png" id="2_eph1u"]
 [ext_resource type="Texture2D" uid="uid://drvdgxvkknt1o" path="res://assets/Free Smoke Fx  Pixel 04.png" id="3_jfemr"]
@@ -599,6 +600,7 @@ animations = [{
 size = Vector2(16, 5)
 
 [node name="TileMapTest" type="Node"]
+script = ExtResource("1_yu041")
 
 [node name="Background" type="Node2D" parent="."]
 

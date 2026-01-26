@@ -5,6 +5,7 @@ const TIME_DELAY_BEFORE_REWARD := 1.0
 
 @export var lander: Lander
 @export_enum("START", "FUEL", "GOAL") var type: String = "START"
+@export var fuel_per_second := 40.0
 
 var lander_in_area := false
 var time_on_ground := 0.0
@@ -22,8 +23,6 @@ func _process(delta: float) -> void:
 		return
 	assert(lander is Lander)
 	
-	#lander.angular_damp = 30.0
-	#lander.linear_damp = 30.0
 	if abs(lander.angular_velocity) < 0.05 and abs(lander.linear_velocity.x) < 0.05 and abs(lander.linear_velocity.y) < 0.05:
 		time_on_ground += delta
 	if lander.on_ground:
@@ -32,7 +31,7 @@ func _process(delta: float) -> void:
 				pass
 			"FUEL":
 				if time_on_ground > TIME_DELAY_BEFORE_REWARD:
-					lander.fuel += 20 * delta
+					lander.fuel += fuel_per_second * delta
 			"GOAL":
 				if time_on_ground > TIME_DELAY_BEFORE_REWARD:
 					print("YOU WIN")

@@ -6,15 +6,17 @@ const TURN_SPEED = 150.0
 const UP_THRUST = 50.0
 const SIDE_THRUST = 30.0
 const GRAVITY = 20.0
-const ROTATION_FORGIVNESS_WHEN_LANDING := 0.7
+const ROTATION_FORGIVNESS_WHEN_LANDING := 0.2
 const FUEL_USED_PER_SECOND := 15.0
-const FUEL_GAINED_PER_SECOND := 15.0 
-const ACCEPTABLE_LANDING_SPEED := 40
+const FUEL_GAINED_PER_SECOND := 3.0 
+const ACCEPTABLE_LANDING_SPEED := 20
 
 var _land_gears_out := true
 var on_ground := false
 var dead := false
+
 var fuel := 100.0
+var fuel_capacity := 100.0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var land_gear_detector: Area2D = %LandGearDetector
@@ -34,13 +36,10 @@ func _ready() -> void:
 
 
 func _on_land_detected(_body, landing: bool) -> void:
-	if landing:
-		if not _land_gears_out:
-			animated_sprite_2d.play_backwards("landgears")
-			_land_gears_out = true
-	else:
-		#on_ground = false
-		if _land_gears_out:
+	if landing and  not _land_gears_out:
+		animated_sprite_2d.play_backwards("landgears")
+		_land_gears_out = true
+	elif _land_gears_out:
 			animated_sprite_2d.play("landgears")
 			_land_gears_out = false
 
@@ -81,10 +80,10 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("thrust"):
 		apply_force(Vector2.UP.rotated(rotation) * UP_THRUST)
 		thrust_particles.emitting = true
-		fuel = clampf(fuel - (delta * FUEL_USED_PER_SECOND), 0.0, 100.0)
+		fuel = clampf(fuel - (delta * FUEL_USED_PER_SECOND), 0.0, fuel_capacity)
 	else:
 		thrust_particles.emitting = false
-		fuel = clampf(fuel + (delta * FUEL_GAINED_PER_SECOND), 0.0, 100.0)
+		fuel = clampf(fuel + (delta * FUEL_GAINED_PER_SECOND), 0.0, fuel_capacity)
 
 	left_thrust_particles.emitting = false
 	right_thrust_particles.emitting = false
@@ -94,7 +93,7 @@ func _physics_process(delta: float) -> void:
 		right_thrust_particles.emitting = sideways > 0.
 		var dir: Vector2 = Vector2.LEFT if sideways < 0 else Vector2.RIGHT
 		apply_force(dir.rotated(rotation) * SIDE_THRUST, Vector2(0., -2.))
-		fuel = clampf(fuel - (delta * FUEL_USED_PER_SECOND), 0.0, 100.0)
+		fuel = clampf(fuel - (delta * FUEL_USED_PER_SECOND), 0.0, fuel_capacity)
 
 	rotate_left_thrust_particles.emitting = false
 	rotate_right_thrust_particles.emitting = false
@@ -109,7 +108,7 @@ func _physics_process(delta: float) -> void:
 			rotate_left_thrust_particles.emitting = turn < 0.
 			rotate_right_thrust_particles.emitting = turn > 0.
 			apply_torque(turn * TURN_SPEED)
-			fuel = clampf(fuel - (delta * FUEL_USED_PER_SECOND), 0.0, 100.0)
+			fuel = clampf(fuel - (delta * FUEL_USED_PER_SECOND), 0.0, fuel_capacity)
 	
 	if get_contact_count() == 0:
 		on_ground = false
@@ -118,15 +117,12 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is LandingPad:
 		var incoming_speed: float = previous_linear_velocity.abs().length()
-		if incoming_speed > 0.01:
-			print(incoming_speed)
-		on_ground = true
-		if incoming_speed > ACCEPTABLE_LANDING_SPEED:
-			explode()
-	else:
-		if not dead:
-			dead = true
-			explode()
+		if incoming_speed < ACCEPTABLE_LANDING_SPEED:
+			on_ground = true
+			linear_velocity = Vector2.ZERO
+			return
+	if not dead:
+		explode()
 
 
 func explode() -> void:

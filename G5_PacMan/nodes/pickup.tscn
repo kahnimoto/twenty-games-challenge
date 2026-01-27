@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cofcbf4pgaxci"]
+
+[ext_resource type="Texture2D" uid="uid://drxwh0wcucktj" path="res://resources/textures/pickup.tres" id="1_0bac1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehcal"]
+size = Vector2(16, 16)
+
+[node name="Pickup" type="Area2D" unique_id=292810958]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1245629229]
+texture_filter = 1
+texture = ExtResource("1_0bac1")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1275116829]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_ehcal")
+debug_color = Color(0.5506667, 0.56, 0, 0.06666667)

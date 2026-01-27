@@ -1,0 +1,75 @@
+[gd_resource type="TileSet" format=3 uid="uid://b41tmgfd0ld08"]
+
+[ext_resource type="Texture2D" uid="uid://bau6fbc2ete1u" path="res://resources/textures/walls.tres" id="1_7ogqh"]
+[ext_resource type="Texture2D" uid="uid://bunafp0bcyfav" path="res://resources/textures/ground.tres" id="2_k87vm"]
+[ext_resource type="Texture2D" uid="uid://bpmsw3p5ff2d7" path="res://resources/textures/void.tres" id="3_cyqvv"]
+[ext_resource type="Texture2D" uid="uid://dwvmhituoiscf" path="res://resources/textures/ground_crumb.tres" id="4_hd3cr"]
+[ext_resource type="Texture2D" uid="uid://bodne0beudned" path="res://resources/textures/ground_walled.tres" id="5_lbttv"]
+[ext_resource type="Texture2D" uid="uid://bwpfttut87qnq" path="res://resources/textures/void_portal.tres" id="6_a1742"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k87vm"]
+resource_name = "wall"
+texture = ExtResource("1_7ogqh")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cyqvv"]
+resource_name = "ground"
+texture = ExtResource("2_k87vm")
+0:0/0 = 0
+0:0/0/custom_data_1 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hd3cr"]
+resource_name = "void"
+texture = ExtResource("3_cyqvv")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 2
+0:0/0/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbttv"]
+resource_name = "crumb"
+texture = ExtResource("4_hd3cr")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 1
+0:0/0/custom_data_1 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a1742"]
+resource_name = "locked"
+texture = ExtResource("5_lbttv")
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8f3m"]
+resource_name = "portal"
+texture = ExtResource("6_a1742")
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+0:0/0/custom_data_2 = true
+
+[resource]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 3
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Wall"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+terrain_set_0/terrain_1/name = "Crumbs"
+terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
+terrain_set_0/terrain_2/name = "Void"
+terrain_set_0/terrain_2/color = Color(0.46875, 0.5, 0.25, 1)
+custom_data_layer_0/name = "wall"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "floor"
+custom_data_layer_1/type = 1
+custom_data_layer_2/name = "portal"
+custom_data_layer_2/type = 1
+sources/0 = SubResource("TileSetAtlasSource_k87vm")
+sources/1 = SubResource("TileSetAtlasSource_cyqvv")
+sources/2 = SubResource("TileSetAtlasSource_hd3cr")
+sources/3 = SubResource("TileSetAtlasSource_lbttv")
+sources/4 = SubResource("TileSetAtlasSource_a1742")
+sources/5 = SubResource("TileSetAtlasSource_f8f3m")

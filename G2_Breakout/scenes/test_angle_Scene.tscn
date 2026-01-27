@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6c3phhq4y7li"]
+
+[ext_resource type="Script" uid="uid://b43hutx6vxauo" path="res://scripts/ui/test_angle_scene.gd" id="1_f3hxp"]
+[ext_resource type="Texture2D" uid="uid://bx86461glea4r" path="res://assets/icon.svg" id="1_ufl00"]
+[ext_resource type="Texture2D" uid="uid://bhkkbas2is3v" path="res://assets/progress_bars.png" id="2_f3hxp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ugpw"]
+atlas = ExtResource("2_f3hxp")
+region = Rect2(49, 4, 45, 9)
+
+[node name="AngleTester" type="Node"]
+script = ExtResource("1_f3hxp")
+
+[node name="TestObject" type="Node2D" parent="."]
+position = Vector2(326, 150)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TestObject"]
+scale = Vector2(0.21263433, 0.19085415)
+texture = ExtResource("1_ufl00")
+
+[node name="Sprite2D" type="Sprite2D" parent="TestObject"]
+position = Vector2(64, -2)
+scale = Vector2(3.135304, 0.91575867)
+texture = SubResource("AtlasTexture_3ugpw")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="HSlider" type="HSlider" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "0.0"
+horizontal_alignment = 1
+vertical_alignment = 1

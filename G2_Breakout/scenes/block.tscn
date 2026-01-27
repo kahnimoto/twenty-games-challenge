@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://d18yh1t22dtyr"]
+
+[ext_resource type="Script" uid="uid://3ax55y6g16o2" path="res://scripts/block.gd" id="1_8r6n6"]
+[ext_resource type="AudioStream" uid="uid://cw8ln7x0ay4qx" path="res://assets/sounds/rubberballbouncing-251948.mp3" id="2_cgrg5"]
+
+[sub_resource type="Gradient" id="Gradient_cgrg5"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0.55, 0.55, 0.55, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4kun4"]
+gradient = SubResource("Gradient_cgrg5")
+width = 32
+height = 8
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ojgcc"]
+size = Vector2(32, 8)
+
+[node name="StaticBody2D" type="StaticBody2D" groups=["block"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_8r6n6")
+size = Vector2i(32, 8)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("GradientTexture2D_4kun4")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 4)
+shape = SubResource("RectangleShape2D_ojgcc")
+debug_color = Color(0.8243314, 0.39838547, 1.92523e-07, 0)
+
+[node name="AudioUpgrade" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_cgrg5")
+volume_db = 2.549
+max_polyphony = 4
+bus = &"Effects"

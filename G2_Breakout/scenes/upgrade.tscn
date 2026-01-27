@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cslx0dsai5ly3"]
+
+[ext_resource type="Script" uid="uid://dhqf2vdfarf67" path="res://scripts/upgrade.gd" id="1_b2g4b"]
+[ext_resource type="Texture2D" uid="uid://dpig7jw62pfgv" path="res://assets/tiles/tileset.png" id="2_g1npk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ra3k"]
+atlas = ExtResource("2_g1npk")
+region = Rect2(112, 64, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cdatj"]
+radius = 6.0
+
+[node name="Upgrade" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_b2g4b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -1)
+texture = SubResource("AtlasTexture_0ra3k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cdatj")
+debug_color = Color(0, 0, 0.69803923, 0)

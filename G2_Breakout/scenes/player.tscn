@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdy6eolr4pi1t"]
+
+[ext_resource type="Script" uid="uid://bw40s2r10mm1q" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://dpig7jw62pfgv" path="res://assets/tiles/tileset.png" id="2_qhqgy"]
+[ext_resource type="Shape2D" uid="uid://dkdh7u1152gq" path="res://scenes/player_col.tres" id="3_qhqgy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("2_qhqgy")
+region = Rect2(3, 68, 58, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amll8"]
+atlas = ExtResource("2_qhqgy")
+region = Rect2(0, 64, 64, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
+size = Vector2(68, 9)
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_g2els")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(58, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -4.0
+offset_right = 29.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_g2els")
+region_rect = Rect2(0, 0, 58, 8)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["player"]]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = ExtResource("3_qhqgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = SubResource("AtlasTexture_amll8")
+
+[node name="UpgradePickup" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpgradePickup"]
+shape = ExtResource("3_qhqgy")
+debug_color = Color(0.19215687, 0.6431373, 0.05490196, 0)
+
+[node name="PlayerSideDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSideDetector"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_qhqgy")
+debug_color = Color(0.99, 0, 0.23099978, 0)

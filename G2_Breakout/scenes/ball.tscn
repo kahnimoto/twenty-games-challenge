@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwthlo64pi2gx"]
+
+[ext_resource type="Script" uid="uid://sedb8ingx74" path="res://scripts/ball.gd" id="1_7s4qf"]
+[ext_resource type="AudioStream" uid="uid://cw8ln7x0ay4qx" path="res://assets/sounds/rubberballbouncing-251948.mp3" id="2_cxlvu"]
+
+[sub_resource type="Gradient" id="Gradient_770am"]
+offsets = PackedFloat32Array(0.98, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ra3k"]
+gradient = SubResource("Gradient_770am")
+width = 10
+height = 10
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_amll8"]
+radius = 4.1231055
+
+[node name="Ball" type="CharacterBody2D"]
+collision_mask = 22
+motion_mode = 1
+slide_on_ceiling = false
+floor_constant_speed = true
+platform_on_leave = 2
+platform_floor_layers = 4294967040
+script = ExtResource("1_7s4qf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_0ra3k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_amll8")
+debug_color = Color(0.99215686, 0, 0.25490198, 0)
+
+[node name="AudioBounce" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_cxlvu")
+max_polyphony = 3
+bus = &"Effects"

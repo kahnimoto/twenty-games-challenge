@@ -1,55 +1,7 @@
 [gd_scene format=3 uid="uid://etynp4x2nmyv"]
 
 [ext_resource type="Script" uid="uid://ddf8t2vykksvl" path="res://nodes/player/player.gd" id="1_bms3g"]
-[ext_resource type="Texture2D" uid="uid://cflp06t06hi84" path="res://assets/pacman.png" id="1_u63mc"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ots5e"]
-atlas = ExtResource("1_u63mc")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pti77"]
-atlas = ExtResource("1_u63mc")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gjnd3"]
-atlas = ExtResource("1_u63mc")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bmah5"]
-atlas = ExtResource("1_u63mc")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u63mc"]
-atlas = ExtResource("1_u63mc")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_00k3u"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ots5e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pti77")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gjnd3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bmah5")
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u63mc")
-}],
-"loop": false,
-"name": &"idle",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://bjq043fmmagvu" path="res://resources/textures/player_sprite_frames.tres" id="2_khfle"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bms3g"]
 radius = 7.0
@@ -64,7 +16,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(8, 8)
-sprite_frames = SubResource("SpriteFrames_00k3u")
+sprite_frames = ExtResource("2_khfle")
 autoplay = "default"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1828460385]

@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 Map="*uid://cllfeap4bru0b"
 Config="*uid://bdyhshpvle0vo"
+Events="*uid://dof2t6nn6ygbo"
 
 [display]
 
@@ -31,6 +32,7 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 tilemap=""
+path_target=""
 
 [input]
 

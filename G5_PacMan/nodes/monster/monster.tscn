@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://umlrfxeo8vps"]
+
+[ext_resource type="SpriteFrames" uid="uid://baw6bn6w2dsu7" path="res://resources/textures/monster_sprite_frames.tres" id="1_7i7r4"]
+[ext_resource type="Script" uid="uid://cy3uup3igdtbl" path="res://nodes/monster/monster.gd" id="1_abnl3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7i7r4"]
+radius = 7.0
+
+[node name="Monster" type="Area2D" unique_id=517889919]
+script = ExtResource("1_abnl3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1977439710]
+texture_filter = 1
+position = Vector2(8, 8)
+sprite_frames = ExtResource("1_7i7r4")
+autoplay = "default"
+frame_progress = 0.73097086
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=35090039]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_7i7r4")
+debug_color = Color(0.99, 0, 0.28049996, 0)

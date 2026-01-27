@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bjq043fmmagvu"]
+
+[ext_resource type="Texture2D" uid="uid://cflp06t06hi84" path="res://assets/pacman.png" id="1_64kbh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ots5e"]
+atlas = ExtResource("1_64kbh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pti77"]
+atlas = ExtResource("1_64kbh")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjnd3"]
+atlas = ExtResource("1_64kbh")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmah5"]
+atlas = ExtResource("1_64kbh")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u63mc"]
+atlas = ExtResource("1_64kbh")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ots5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pti77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjnd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmah5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u63mc")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}]

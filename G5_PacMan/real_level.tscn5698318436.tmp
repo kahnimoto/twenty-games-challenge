@@ -51,14 +51,13 @@ position = Vector2(-368, 0)
 
 [node name="Monsters" type="Node2D" parent="World" unique_id=666506303]
 
-[node name="Monster" parent="World/Monsters" unique_id=517889919 node_paths=PackedStringArray("level") instance=ExtResource("5_76vff")]
+[node name="Monster" parent="World/Monsters" unique_id=517889919 instance=ExtResource("5_76vff")]
 position = Vector2(176, 224)
-level = NodePath("../../..")
+monster_number = 1
 
-[node name="Monster2" parent="World/Monsters" unique_id=2047462542 node_paths=PackedStringArray("level") instance=ExtResource("5_76vff")]
+[node name="Monster2" parent="World/Monsters" unique_id=2047462542 instance=ExtResource("5_76vff")]
 position = Vector2(208, 224)
-level = NodePath("../../..")
-monster_number = 3
+monster_number = 2
 
 [node name="Player" parent="World" unique_id=1256497070 instance=ExtResource("3_14gkf")]
 position = Vector2(192, 272)

@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://cerbusdytb88"]
 
 [ext_resource type="TileSet" uid="uid://b41tmgfd0ld08" path="res://resources/tilesets/level_tileset.tres" id="1_eh4tv"]
-[ext_resource type="PackedScene" uid="uid://cofcbf4pgaxci" path="res://nodes/pickup.tscn" id="2_rc3em"]
-[ext_resource type="PackedScene" uid="uid://etynp4x2nmyv" path="res://nodes/player.tscn" id="3_14gkf"]
-[ext_resource type="PackedScene" uid="uid://btul73hdpa8ue" path="res://nodes/portal.tscn" id="4_14gkf"]
+[ext_resource type="PackedScene" uid="uid://cofcbf4pgaxci" path="res://nodes/pickup/pickup.tscn" id="2_rc3em"]
+[ext_resource type="PackedScene" uid="uid://etynp4x2nmyv" path="res://nodes/player/player.tscn" id="3_14gkf"]
+[ext_resource type="PackedScene" uid="uid://btul73hdpa8ue" path="res://nodes/portal/portal.tscn" id="4_14gkf"]
 
 [node name="RealLevel" type="Node" unique_id=1447495642]
 

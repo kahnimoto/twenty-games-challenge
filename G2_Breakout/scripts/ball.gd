@@ -11,6 +11,7 @@ var let_go := false
 
 func _physics_process(delta: float) -> void:
 	if not let_go:
+		global_position.x = get_viewport().get_mouse_position().x
 		return
 	if  global_position.y >= 436.0:
 		set_ball_as_too_low_to_catch()
@@ -23,7 +24,7 @@ func _physics_process(delta: float) -> void:
 			var collider: Node2D = collision.get_collider() as Node2D
 			if collider is Block:
 				(collider as Block).hit()
-				velocity = -velocity.reflect(collision.get_normal())
+				velocity = -velocity.reflect(collision.get_normal()).normalized()
 			elif collider.is_in_group("player"):
 				var hit_global_position: Vector2 = collision.get_position()
 				var hit_position = hit_global_position - collider.global_position
@@ -31,10 +32,10 @@ func _physics_process(delta: float) -> void:
 				var influence: float = 0.0
 				if hit_position.x < 0:
 					influence_angle = Vector2.LEFT 
-					influence = abs(hit_position.x) / 29
+					influence = abs(hit_position.x) / Player.current_size / 2
 				elif hit_position.x > 0:
 					influence_angle = Vector2.RIGHT
-					influence = abs(hit_position.x) / 29
+					influence = abs(hit_position.x) / Player.current_size / 2
 				if influence > 0.7:
 					influence += 0.5
 					# @TODO add effect to hint about corner hit
@@ -49,7 +50,7 @@ func _physics_process(delta: float) -> void:
 					#out_angle = out_angle.rotated(fixed_angle)
 				velocity = out_angle.normalized()
 			else: # Hit wall
-				velocity = -velocity.reflect(collision.get_normal())
+				velocity = -velocity.reflect(collision.get_normal()).normalized()
 				var a := velocity.angle()
 				var fixed_angle = _fix_angle(a)
 				if a != fixed_angle:
@@ -76,7 +77,7 @@ func _fix_angle(a: float) -> float:
 	else:
 		return a
 
+
 func _flash_ball() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(sprite, "modulate", Color.WHITE, 0.2).from(Color.INDIAN_RED)
-	

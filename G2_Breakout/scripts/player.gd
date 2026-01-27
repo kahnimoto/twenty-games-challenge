@@ -1,11 +1,13 @@
 class_name Player
-extends Node2D
+extends CharacterBody2D
 
 
 const DEFAULT_SPEED := 300.0
 const LEFT_MOVE := Game.HALF_AREA - Game.DEADZONE
 const RIGHT_MOVE := Game.HALF_AREA + Game.DEADZONE
 const REAL_PLAYER_SIZE := 58.0
+
+static var current_size := REAL_PLAYER_SIZE
 
 @export var hud: HUD
 
@@ -32,12 +34,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if _mouse_mode:
 		_desired_mouse_position = get_viewport().get_mouse_position().x
-		#var move_left: bool = _desired_mouse_position < LEFT_MOVE
-		#var move_right: bool = _desired_mouse_position > RIGHT_MOVE
-		#if move_left:
-			#global_position.x = clampf(global_position.x - (delta * _speed), Game.MIN_X, Game.MAX_X)
-		#elif move_right:
-			#global_position.x = clampf(global_position.x + (delta * _speed), Game.MIN_X, Game.MAX_X)
 		global_position.x = _desired_mouse_position
 		hud.apply_indicator(_desired_mouse_position)
 	else:
@@ -65,12 +61,14 @@ func change_size(multiplier: float, duration: float) -> void:
 	rect.custom_minimum_size.x = REAL_PLAYER_SIZE * multiplier
 	collision_shape.size.x = REAL_PLAYER_SIZE * multiplier
 	side_col_shape.size.x = collision_shape.size.x + 16
+	Player.current_size = rect.custom_minimum_size.x
 
 
 func revert_size() -> void:
 	rect.custom_minimum_size.x = REAL_PLAYER_SIZE
 	collision_shape.size.x = REAL_PLAYER_SIZE
 	side_col_shape.size.x = REAL_PLAYER_SIZE + 16
+	Player.current_size = REAL_PLAYER_SIZE
 
 
 func _on_pickup(other: Area2D) -> void:

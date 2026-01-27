@@ -15,7 +15,9 @@ region = Rect2(0, 64, 64, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(68, 9)
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_g2els")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
@@ -41,12 +43,9 @@ patch_margin_bottom = 2
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["player"]]
-collision_layer = 2
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = ExtResource("3_qhqgy")
+debug_color = Color(0, 0.5950001, 0.7, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

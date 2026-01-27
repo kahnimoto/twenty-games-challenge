@@ -14,11 +14,13 @@ config/name="Breakout"
 run/main_scene="uid://j4fio1owgimu"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://assets/icon.svg"
+config/tags=PackedStringArray("20games")
 
 [autoload]
 
 Events="*res://scripts/globals/global_event_bus.gd"
 Game="*res://scripts/globals/global_game_manager.gd"
+Overlays="*res://scenes/overlays.tscn"
 
 [display]
 

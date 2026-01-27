@@ -1,0 +1,205 @@
+[gd_scene load_steps=15 format=3 uid="uid://da8nnse7hu2wu"]
+
+[ext_resource type="Script" uid="uid://b6twgfn5wo61h" path="res://scripts/hud.gd" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://bti0xfi17prnb" path="res://scripts/player.gd" id="1_fc0e3"]
+[ext_resource type="Script" uid="uid://c3ucw2bualwxn" path="res://scripts/game.gd" id="1_ryrav"]
+[ext_resource type="Script" uid="uid://dvo75d8c84t3u" path="res://scripts/ai.gd" id="2_7jktm"]
+[ext_resource type="FontFile" uid="uid://3ea2t807hguu" path="res://assets/fonts/m5x7.ttf" id="2_e2o6t"]
+
+[sub_resource type="Gradient" id="Gradient_80nbo"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e2o6t"]
+gradient = SubResource("Gradient_80nbo")
+width = 320
+height = 320
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
+size = Vector2(320, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryrav"]
+size = Vector2(10, 64)
+
+[sub_resource type="Gradient" id="Gradient_eow3j"]
+offsets = PackedFloat32Array(0.56)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j5wjh"]
+gradient = SubResource("Gradient_eow3j")
+width = 10
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jktm"]
+size = Vector2(20, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eow3j"]
+size = Vector2(20, 320)
+
+[sub_resource type="Theme" id="Theme_e2o6t"]
+default_font = ExtResource("2_e2o6t")
+default_font_size = 16
+MarginContainer/constants/margin_bottom = 8
+MarginContainer/constants/margin_left = 28
+MarginContainer/constants/margin_right = 28
+MarginContainer/constants/margin_top = 8
+
+[node name="Pong" type="Node"]
+script = ExtResource("1_ryrav")
+
+[node name="World" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="BlackBackground" type="Sprite2D" parent="World"]
+light_mask = 0
+z_index = -1
+texture = SubResource("GradientTexture2D_e2o6t")
+centered = false
+
+[node name="WallUp" type="StaticBody2D" parent="World"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WallUp"]
+position = Vector2(160, -10)
+shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="WallDown" type="StaticBody2D" parent="World"]
+position = Vector2(0, 340)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WallDown"]
+position = Vector2(160, -10)
+shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="Player" type="Node2D" parent="World"]
+position = Vector2(12, 160)
+script = ExtResource("1_fc0e3")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ryrav")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Player"]
+texture = SubResource("GradientTexture2D_j5wjh")
+
+[node name="PlayerGoal" type="Area2D" parent="World"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerGoal"]
+position = Vector2(-10, 160)
+shape = SubResource("RectangleShape2D_7jktm")
+
+[node name="Ai" type="Node2D" parent="World"]
+position = Vector2(308, 160)
+script = ExtResource("2_7jktm")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Ai"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ai/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ryrav")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Ai"]
+texture = SubResource("GradientTexture2D_j5wjh")
+
+[node name="AIGoal" type="Area2D" parent="World"]
+unique_name_in_owner = true
+position = Vector2(320, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/AIGoal"]
+position = Vector2(10, 160)
+shape = SubResource("RectangleShape2D_eow3j")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("1_80nbo")
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_e2o6t")
+metadata/_edit_lock_ = true
+
+[node name="LeftCorner" type="Control" parent="HUD/Control"]
+anchors_preset = 0
+offset_right = 94.0
+offset_bottom = 55.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Control/LeftCorner"]
+layout_mode = 1
+offset_right = 26.0
+offset_bottom = 39.0
+
+[node name="LeftScore" type="Label" parent="HUD/Control/LeftCorner/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Center" type="Control" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.5
+offset_right = 127.5
+offset_bottom = 58.0
+grow_horizontal = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HUD/Control/Center"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -13.0
+offset_right = 13.0
+offset_bottom = 39.0
+grow_horizontal = 2
+
+[node name="Message" type="Label" parent="HUD/Control/Center/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GLHF"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightCorner" type="Control" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_bottom = 61.0
+grow_horizontal = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="HUD/Control/RightCorner"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -26.0
+offset_bottom = 39.0
+grow_horizontal = 0
+
+[node name="RightScore" type="Label" parent="HUD/Control/RightCorner/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" type="CanvasLayer" parent="."]
+layer = 3
+visible = false

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://etynp4x2nmyv" path="res://nodes/player/player.tscn" id="3_14gkf"]
 [ext_resource type="PackedScene" uid="uid://btul73hdpa8ue" path="res://nodes/portal/portal.tscn" id="4_14gkf"]
 [ext_resource type="PackedScene" uid="uid://umlrfxeo8vps" path="res://nodes/monster/monster.tscn" id="5_76vff"]
-[ext_resource type="Script" uid="uid://df3nuk31hkhq" path="res://hud.gd" id="7_dcaso"]
+[ext_resource type="PackedScene" uid="uid://bm0pft88o4l3v" path="res://ui/hud.tscn" id="7_dcaso"]
 
 [node name="RealLevel" type="Node" unique_id=1447495642]
 process_mode = 3
@@ -118,27 +118,5 @@ position = Vector2(192, 80)
 [node name="Camera2D" type="Camera2D" parent="World" unique_id=1397915827]
 position = Vector2(208, 240)
 
-[node name="Hud" type="CanvasLayer" parent="." unique_id=958242340]
-process_mode = 3
-script = ExtResource("7_dcaso")
-
-[node name="Control" type="Control" parent="Hud" unique_id=752380941]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ValueCrumbs" type="Label" parent="Hud/Control" unique_id=664053978]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "9"
-horizontal_alignment = 1
+[node name="Hud" parent="." unique_id=418786240 instance=ExtResource("7_dcaso")]
+visible = false

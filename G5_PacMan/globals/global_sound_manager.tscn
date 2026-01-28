@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cw4qpahmn751l"]
+
+[ext_resource type="Script" uid="uid://dhk3lcgqouifo" path="res://globals/global_sound_manager.gd" id="1_l8kk7"]
+[ext_resource type="AudioStream" uid="uid://c8826y3bgjoyc" path="res://assets/sounds/power_up.mp3" id="1_uuhep"]
+[ext_resource type="AudioStream" uid="uid://bruibtue5q1ct" path="res://assets/sounds/p1.mp3" id="2_d4j1j"]
+[ext_resource type="AudioStream" uid="uid://7mo45xg5gxi6" path="res://assets/sounds/game_over.mp3" id="3_rm7jf"]
+[ext_resource type="AudioStream" uid="uid://ceq6j4ep3dmha" path="res://assets/sounds/ping_1.wav" id="3_rnyyl"]
+[ext_resource type="AudioStream" uid="uid://c5xjp1pi1csup" path="res://assets/sounds/level_complete.mp3" id="4_8s2dv"]
+[ext_resource type="AudioStream" uid="uid://c25ejfe4ej6y1" path="res://assets/sounds/p4.mp3" id="4_h6lrm"]
+[ext_resource type="AudioStream" uid="uid://bhvdqt25uxj0s" path="res://assets/sounds/ping_4.wav" id="5_ofw6i"]
+
+[node name="GlobalSoundManager" type="Node" unique_id=286172884]
+script = ExtResource("1_l8kk7")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1611094317]
+bus = &"Music"
+
+[node name="PowerUp" type="AudioStreamPlayer" parent="." unique_id=467006844]
+stream = ExtResource("1_uuhep")
+bus = &"SFX"
+
+[node name="Dead" type="AudioStreamPlayer" parent="." unique_id=1312372106]
+stream = ExtResource("3_rm7jf")
+bus = &"SFX"
+
+[node name="Win" type="AudioStreamPlayer" parent="." unique_id=160790784]
+stream = ExtResource("4_8s2dv")
+bus = &"SFX"
+
+[node name="Ping1" type="AudioStreamPlayer" parent="." unique_id=485517014]
+stream = ExtResource("2_d4j1j")
+volume_db = -15.0
+pitch_scale = 1.5
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="Ping2" type="AudioStreamPlayer" parent="." unique_id=787679616]
+stream = ExtResource("3_rnyyl")
+volume_db = -15.0
+pitch_scale = 1.5
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="Ping3" type="AudioStreamPlayer" parent="." unique_id=39925979]
+stream = ExtResource("4_h6lrm")
+volume_db = -15.0
+pitch_scale = 1.5
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="Ping4" type="AudioStreamPlayer" parent="." unique_id=1155045182]
+stream = ExtResource("5_ofw6i")
+volume_db = -15.0
+pitch_scale = 1.5
+max_polyphony = 2
+bus = &"SFX"

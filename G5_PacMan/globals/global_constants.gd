@@ -7,7 +7,7 @@ const MONSTER_SPEED_WHEN_PLAYER_BOOSTED := 0.4
 const MONSTER_SPEED_WHEN_DEAD := 0.1
 
 const BOOSTED_TIME := 10.0
-const PREVIEW_MONSTER_PATH := true
+const PREVIEW_MONSTER_PATH := false
 
 class Groups:
 	const PICKUP = &"pickup"

@@ -15,11 +15,16 @@ run/main_scene="uid://cerbusdytb88"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://assets/icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://6fo7gryi5xkm"
+
 [autoload]
 
 Map="*uid://cllfeap4bru0b"
 Config="*uid://bdyhshpvle0vo"
 Events="*uid://dof2t6nn6ygbo"
+Sounds="*uid://cw4qpahmn751l"
 
 [display]
 

@@ -19,12 +19,11 @@ func _ready() -> void:
 	assert(player is Player)
 	player.entered_square.connect(_on_player_entered_square)
 	Events.level_started.emit(_crumbs_total)
-	Events.level_failed.connect(_on_level_failed)
+	Events.level_completed.connect(_on_level_completed)
 
 
-func _on_level_failed() -> void:
-	#get_tree().paused = true
-	pass
+func _on_level_completed() -> void:
+	get_tree().paused = true
 
 
 func _unhandled_key_input(event: InputEvent) -> void:

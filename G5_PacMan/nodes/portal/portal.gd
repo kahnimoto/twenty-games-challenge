@@ -1,7 +1,12 @@
 class_name Portal
 extends Area2D
 
+enum Dir { EAST, WEST }
+
+@export var direction: Dir = Dir.EAST 
+
 var target: Vector2
+
 
 func _ready() -> void:
 	var marker: Marker2D = get_node_or_null("Target")
@@ -13,4 +18,8 @@ func _ready() -> void:
 func _on_area_entered(other: Area2D) -> void:
 	var player := other.get_parent() as Player
 	assert(player is Player)
-	player.teleport_player(target)
+	if direction == Dir.EAST and  player.movement_direction == Vector2i.LEFT:
+		player.teleport_player(target)
+	elif direction == Dir.WEST and  player.movement_direction == Vector2i.RIGHT:
+		player.teleport_player(target)
+		

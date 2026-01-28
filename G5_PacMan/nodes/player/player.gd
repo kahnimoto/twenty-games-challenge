@@ -102,6 +102,7 @@ func move_character() -> void:
 			possible_directions.append(dir)
 	
 	possible_directions.erase(-movement_direction)
+	assert(possible_directions.size() > 0)
 	if possible_directions.size() == 1:
 		movement_direction = possible_directions[0]
 	elif _desired_direction == Vector2i.ZERO:
@@ -129,7 +130,7 @@ func move_character() -> void:
 		character_sprite.rotation_degrees = 90. if movement_direction.y > 0 else -90.
 	grid_position = desired_location
 	var desired_global_pos: Vector2 = Map.map_to_global(grid_position)
-	var move_duration: float = Config.TURN_TIME
+	var move_duration: float = Config.PLAYER_BOOSTED_SPEED if _state == State.BOOSTED else Config.DEFAULT_MOVE_SPEED
 	if _tween:
 		_tween.kill()
 	_tween = create_tween()

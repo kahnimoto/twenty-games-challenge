@@ -9,10 +9,12 @@
 [ext_resource type="Script" uid="uid://df3nuk31hkhq" path="res://hud.gd" id="7_dcaso"]
 
 [node name="RealLevel" type="Node" unique_id=1447495642]
+process_mode = 3
 script = ExtResource("1_itvoq")
 
 [node name="World" type="Node2D" parent="." unique_id=1625976614]
 unique_name_in_owner = true
+process_mode = 1
 
 [node name="TileMapLayer" type="TileMapLayer" parent="World" unique_id=1422192433 groups=["tilemap"]]
 unique_name_in_owner = true
@@ -99,6 +101,7 @@ position = Vector2(192, 80)
 position = Vector2(208, 240)
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=958242340]
+process_mode = 3
 script = ExtResource("7_dcaso")
 
 [node name="Control" type="Control" parent="Hud" unique_id=752380941]

@@ -1,9 +1,11 @@
+class_name Monster
 extends Area2D
 
 signal wander_completed
 
 enum States { WANDER, CHASE, RUN, RETURN }
 
+const GROUP_NAME = &"monster"
 const MONSTER_COLORS: Array[Color] = [
 	Color.DARK_BLUE,
 	Color.BLUE_VIOLET,
@@ -14,6 +16,7 @@ const MONSTER_COLORS: Array[Color] = [
 @export var level: Level
 @export_range(0, 3, 1) var monster_number: int = 1
 
+var _start_position: Vector2
 var _current_target: Vector2 = Vector2.ZERO
 var _path: Array
 var _next_step: Vector2
@@ -24,11 +27,21 @@ var state: States = States.WANDER
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+func _init() -> void:
+	add_to_group(GROUP_NAME)
+
 func _ready() -> void:
 	sprite.modulate = MONSTER_COLORS[monster_number]
 	assert(level is Level)
-	Events.level_started.connect(func(_c): wander())
+	Events.level_started.connect(_on_level_started)
 	wander_completed.connect(wander)
+	Events.monster_eaten.connect(_on_monster_eaten)
+	Events.player_state_changed.connect(_on_player_changed_state)
+
+
+func _on_level_started(_crumbs) -> void:
+	_start_position = global_position
+	wander()
 
 #func _process(_delta: float) -> void:
 	#match state:
@@ -37,6 +50,22 @@ func _ready() -> void:
 		#_:
 			#push_warning("Not implemented state")
 
+func _on_monster_eaten(monster: Monster) -> void:
+	if monster != self:
+		return
+	# @TODO animate?
+	queue_free()
+
+
+func _on_player_changed_state(new_state: Player.State) -> void:
+	match new_state:
+		Player.State.DEFAULT:
+			wander()
+		Player.State.BOOSTED:
+			return_to_base()
+		Player.State.DEAD:
+			return_to_base()
+	
 
 func wander() -> void:
 	if _current_target == Vector2.ZERO:
@@ -45,16 +74,33 @@ func wander() -> void:
 		_path.pop_front() # we dont need current position
 		preview_path()
 	if _current_target is Vector2 and _current_target != Vector2.ZERO:
-		var move_duration: float = Config.TURN_TIME
 		while _path.size() > 0:
 			_next_step = _path.pop_front()
 			if _tween:
 				_tween.kill()
 			_tween = create_tween()
-			_tween.tween_property(self, "global_position", _next_step, move_duration).set_ease(Tween.EASE_IN)
+			_tween.tween_property(self, "global_position", _next_step, Config.TURN_TIME).set_ease(Tween.EASE_IN)
 			await _tween.finished
 		_current_target = Vector2.ZERO
+	if path_viz is Line2D:
+		path_viz.queue_free()
 	wander_completed.emit()
+
+func return_to_base() -> void:
+	_current_target = _start_position
+	_path = Array(level.get_path_to_target_position(global_position, _current_target))
+	_path.pop_front() # we dont need current position
+	preview_path()
+	while _path.size() > 0:
+		_next_step = _path.pop_front()
+		if _tween:
+			_tween.kill()
+		_tween = create_tween()
+		_tween.tween_property(self, "global_position", _next_step, Config.TURN_TIME).set_ease(Tween.EASE_IN)
+		await _tween.finished
+	if path_viz is Line2D:
+		path_viz.queue_free()
+	_current_target = Vector2.ZERO
 
 
 func preview_path() -> void:

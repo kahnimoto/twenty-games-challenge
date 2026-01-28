@@ -7,6 +7,8 @@
 size = Vector2(16, 16)
 
 [node name="Pickup" type="Area2D" unique_id=292810958]
+collision_layer = 8
+collision_mask = 0
 monitoring = false
 script = ExtResource("1_ai46b")
 

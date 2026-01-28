@@ -5,6 +5,10 @@ extends Node2D
 signal entered_square(location: Vector2i)
 #endregion
 
+#region enums
+enum State { DEFAULT, BOOSTED, DEAD }
+#endregion
+
 #region constants
 const DIRECTIONS: Array[Vector2i] = [Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT, Vector2i.UP]
 #endregion
@@ -15,6 +19,12 @@ var grid_position := Vector2i.ZERO
 #endregion
 
 #region private variables
+var _state := State.DEFAULT:
+	set(v):
+		if _state != v:
+			_state = v
+			Events.player_state_changed.emit(_state)
+
 var _is_moving := false
 var _player_force_moved := false
 var _player_force_move_direction := Vector2.ZERO
@@ -38,11 +48,13 @@ var _desired_direction_is_relative := false
 func _ready() -> void:
 	grid_position = Map.global_to_map(global_position)
 	area.area_entered.connect(_on_area_entered)
+	Events.player_state_changed.connect(_on_player_state_changed)
 
 
 func _process(_delta: float) -> void:
-	set_desired_direction_from_inputs()
-	move_character()
+	if _state in [State.DEFAULT, State.BOOSTED]:
+		set_desired_direction_from_inputs()
+		move_character()
 
 
 func set_desired_direction_from_inputs() -> void:
@@ -130,14 +142,44 @@ func move_character() -> void:
 
 #region class handlers
 
-func _on_area_entered(_other_area: Area2D) -> void:
-	#print("Encountered other area: %s" % other_area)
-	pass
+func _on_area_entered(other: Area2D) -> void:
+	var groups = other.get_groups()
+	assert(groups.size() == 1)
+	match groups[0]:
+		Monster.GROUP_NAME:
+			if _state == State.DEFAULT:
+				_state = State.DEAD
+				die()
+				Events.level_failed.emit()
+			elif _state == State.BOOSTED:
+				assert(other is Monster)
+				Events.monster_eaten.emit(other as Monster)
+		PickUp.GROUP_NAME:
+			print("I collected a monster eating power!")
+			_state = State.BOOSTED
+			await get_tree().create_timer(Config.BOOSTED_TIME).timeout
+			if _state == State.BOOSTED:
+				_state = State.DEFAULT
+		_:
+			push_warning("I got a weird group: %s !" % groups[0])
 
+func _on_player_state_changed(new_state: State) -> void:
+	match new_state:
+		State.DEFAULT:
+			modulate = Color.WHITE
+		State.BOOSTED:
+			modulate = Color.MAROON.lightened(0.7)
 #endregion
 
 
 #region class methods
+func die() -> void:
+	if _tween:
+		_tween.kill()
+	character_sprite.play("idle")
+	set_process.call_deferred(false)
+
+
 func force_move_player(direction: Vector2, amount: int = 1) -> void:
 	_player_force_moved = true
 	_player_force_move_target = grid_position + ((direction * amount) as Vector2i)

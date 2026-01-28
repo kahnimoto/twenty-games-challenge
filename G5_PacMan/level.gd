@@ -13,13 +13,26 @@ var _crumbs_left: int
 @onready var player: Player = %Player
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setup_astar()
 	assert(astar_grid is AStarGrid2D)
 	assert(player is Player)
 	player.entered_square.connect(_on_player_entered_square)
 	Events.level_started.emit(_crumbs_total)
+	Events.level_failed.connect(_on_level_failed)
+
+
+func _on_level_failed() -> void:
+	#get_tree().paused = true
+	pass
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		get_tree().call_deferred("reload_current_scene")
+		get_tree().paused = false
+	elif event.is_action_pressed("ui_cancel"):
+		get_tree().quit()
 
 
 func _on_player_entered_square(location: Vector2i) -> void:
@@ -29,6 +42,7 @@ func _on_player_entered_square(location: Vector2i) -> void:
 		Events.crumb_eaten.emit(_crumbs_left)
 	if _crumbs_left <= 0:
 		Events.level_completed.emit()
+
 
 func setup_astar() -> void:
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER

@@ -3,7 +3,7 @@ extends Area2D
 
 signal wander_completed
 
-enum States { WANDER, CHASE, RUN, RETURN }
+enum States { WANDER, CHASE, RUN, DEAD }
 
 const GROUP_NAME = &"monster"
 static var colors: Array[Color] = [
@@ -13,6 +13,7 @@ static var colors: Array[Color] = [
 	Color.YELLOW_GREEN.lightened(0.5),
 ]
 static var afraid_color: Color = Color.DARK_BLUE.lightened(0.5)
+static var dead_color: Color = Color.BLACK.lightened(0.5)
 
 @export var level: Level
 @export_range(0, 3, 1) var monster_number: int = 1
@@ -22,6 +23,7 @@ var _current_target: Vector2 = Vector2.ZERO
 var _path: Array
 var _next_step: Vector2
 var _tween: Tween
+var _speed: float = Config.DEFAULT_MOVE_SPEED
 
 var path_viz: Line2D
 var state: States = States.WANDER
@@ -55,20 +57,31 @@ func _on_monster_eaten(monster: Monster) -> void:
 	if monster != self:
 		return
 	# @TODO animate?
-	if path_viz and path_viz is Line2D:
-		path_viz.queue_free()
-	queue_free()
+	#if path_viz and path_viz is Line2D:
+		#path_viz.queue_free()
+	#queue_free()
+	_speed = Config.MONSTER_SPEED_WHEN_DEAD
+	modulate = Monster.dead_color
+	await return_to_base()
+	await get_tree().create_timer(2.0).timeout
+	modulate = Monster.colors[monster_number]
+	_speed = Config.DEFAULT_MOVE_SPEED
+	wander()
 
 
 func _on_player_changed_state(new_state: Player.State) -> void:
 	match new_state:
 		Player.State.DEFAULT:
+			_speed = Config.DEFAULT_MOVE_SPEED
 			sprite.modulate = Monster.colors[monster_number]
 			wander()
 		Player.State.BOOSTED:
+			_speed = Config.MONSTER_SPEED_WHEN_PLAYER_BOOSTED
 			sprite.modulate = Monster.afraid_color
-			return_to_base()
+			#return_to_base()
 		Player.State.DEAD:
+			_speed = Config.MONSTER_SPEED_WHEN_DEAD
+			sprite.modulate = Monster.colors[monster_number]
 			return_to_base()
 	
 
@@ -84,14 +97,15 @@ func wander() -> void:
 			if _tween:
 				_tween.kill()
 			_tween = create_tween()
-			_tween.tween_property(self, "global_position", _next_step, Config.DEFAULT_MOVE_SPEED).set_ease(Tween.EASE_IN)
+			_tween.tween_property(self, "global_position", _next_step, _speed).set_ease(Tween.EASE_IN)
 			await _tween.finished
 		_current_target = Vector2.ZERO
 	if path_viz and path_viz is Line2D:
 		path_viz.queue_free()
 	wander_completed.emit()
 
-func return_to_base() -> void:
+
+func return_to_base() -> bool:
 	_current_target = _start_position
 	_path = Array(level.get_path_to_target_position(global_position, _current_target))
 	_path.pop_front() # we dont need current position
@@ -101,11 +115,12 @@ func return_to_base() -> void:
 		if _tween:
 			_tween.kill()
 		_tween = create_tween()
-		_tween.tween_property(self, "global_position", _next_step, Config.MONSTER_SPEED_WHEN_PLAYER_BOOSTED).set_ease(Tween.EASE_IN)
+		_tween.tween_property(self, "global_position", _next_step, _speed).set_ease(Tween.EASE_IN)
 		await _tween.finished
 	if path_viz is Line2D:
 		path_viz.queue_free()
 	_current_target = Vector2.ZERO
+	return true
 
 
 func preview_path() -> void:

@@ -156,7 +156,8 @@ func _on_area_entered(other: Area2D) -> void:
 				assert(other is Monster)
 				Events.monster_eaten.emit(other as Monster)
 		PickUp.GROUP_NAME:
-			print("I collected a monster eating power!")
+			#print("I collected a monster eating power!")
+			get_tree().create_timer(Config.DEFAULT_MOVE_SPEED).timeout.connect(Callable(other, "queue_free"))
 			_state = State.BOOSTED
 			await get_tree().create_timer(Config.BOOSTED_TIME).timeout
 			if _state == State.BOOSTED:

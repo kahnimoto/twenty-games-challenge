@@ -54,6 +54,7 @@ texture = ExtResource("4_i7p3f")
 0:0/0/terrain = 1
 0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_i7p3f")
 0:0/0/custom_data_1 = true
+0:0/0/custom_data_4 = true
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aeiew"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -101,6 +102,8 @@ custom_data_layer_2/name = "portal"
 custom_data_layer_2/type = 1
 custom_data_layer_3/name = "obstacle"
 custom_data_layer_3/type = 1
+custom_data_layer_4/name = "crumb"
+custom_data_layer_4/type = 1
 sources/0 = SubResource("TileSetAtlasSource_k87vm")
 sources/1 = SubResource("TileSetAtlasSource_cyqvv")
 sources/2 = SubResource("TileSetAtlasSource_hd3cr")

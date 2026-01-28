@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://cofcbf4pgaxci"]
 
 [ext_resource type="Texture2D" uid="uid://drxwh0wcucktj" path="res://resources/textures/pickup.tres" id="1_0bac1"]
+[ext_resource type="Script" uid="uid://dmmgbf1mse1yb" path="res://nodes/pickup/pickup.gd" id="1_ai46b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehcal"]
 size = Vector2(16, 16)
 
 [node name="Pickup" type="Area2D" unique_id=292810958]
+monitoring = false
+script = ExtResource("1_ai46b")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1245629229]
 texture_filter = 1

@@ -2,7 +2,7 @@ class_name Player
 extends Node2D
 
 #region signals
-signal moved_ended_at(location: Vector2i)
+signal entered_square(location: Vector2i)
 #endregion
 
 #region constants
@@ -122,7 +122,7 @@ func move_character() -> void:
 		_tween.kill()
 	_tween = create_tween()
 	_tween.tween_property(self, "global_position", desired_global_pos, move_duration).set_ease(Tween.EASE_IN)
-	_tween.tween_callback(moved_ended_at.emit.bind(desired_location))
+	_tween.tween_callback(entered_square.emit.bind(desired_location))
 	_tween.tween_property(self, "_is_moving", false, 0.0)
 
 #endregion

@@ -1,5 +1,14 @@
 extends Node
 
+enum TileId {
+	WALL = 0,
+	GROUND = 1,
+	VOID = 2,
+	CRUMB = 3,
+	LOCKED = 4,
+	PORTAL = 5,
+	CORRIDOR = 6
+}
 
 const TILE_WITH_PIT := Vector2i(9,6)
 const TILE_WITH_BRIDGE := Vector2i(9,3)
@@ -32,17 +41,10 @@ func is_wall(location: Vector2i) -> bool:
 	return _check_for_bool_custom_data(location, "wall")
 
 
-## Returns the number of turns this tile will stay after walked on
-func get_tile_floor_delay(location: Vector2i) -> int:
-	if not _tilemap:
-		_grab_tilemap_from_active_scene()
-	assert(_tilemap is TileMapLayer)
-	var data := _tilemap.get_cell_tile_data(location)
-	if not data:
-		push_warning("Looking up data on a tile without data")
-		return FLOOR_DELAY_DEFAULT
-	var decay: int = data.get_custom_data("decay")
-	return decay
+## Check if the specified map coordinate is has crumb
+func is_crumb(location: Vector2i) -> bool:
+	return _check_for_bool_custom_data(location, "crumb")
+
 
 # Look up a custom data bool type
 func _check_for_bool_custom_data(location: Vector2i, data_name: String) -> bool:
@@ -54,6 +56,19 @@ func _check_for_bool_custom_data(location: Vector2i, data_name: String) -> bool:
 		push_warning("Why checking invalid location?")
 		return false
 	return data.get_custom_data(data_name)
+
+
+## Exchange the ac
+func switch_tile_to_normal_ground(location) -> bool:
+	if not _tilemap:
+		_grab_tilemap_from_active_scene()
+	assert(_tilemap is TileMapLayer)
+	var current_source_id: int = _tilemap.get_cell_source_id(location)
+	if current_source_id != TileId.CRUMB:
+		return false
+	_tilemap.set_cell(location, TileId.GROUND, Vector2i.ZERO)
+	current_source_id = _tilemap.get_cell_source_id(location)
+	return true
 
 
 # Ensure we have access to the current active tilmape in the level

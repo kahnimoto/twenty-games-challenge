@@ -19,6 +19,7 @@ var _path: Array
 var _next_step: Vector2
 var _tween: Tween
 
+var path_viz: Line2D
 var state: States = States.WANDER
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -26,7 +27,7 @@ var state: States = States.WANDER
 func _ready() -> void:
 	sprite.modulate = MONSTER_COLORS[monster_number]
 	assert(level is Level)
-	Events.level_started.connect(wander)
+	Events.level_started.connect(func(_c): wander())
 	wander_completed.connect(wander)
 
 #func _process(_delta: float) -> void:
@@ -42,6 +43,7 @@ func wander() -> void:
 		_current_target = level.get_wander_target()
 		_path = Array(level.get_path_to_target_position(global_position, _current_target))
 		_path.pop_front() # we dont need current position
+		preview_path()
 	if _current_target is Vector2 and _current_target != Vector2.ZERO:
 		var move_duration: float = Config.TURN_TIME
 		while _path.size() > 0:
@@ -53,3 +55,14 @@ func wander() -> void:
 			await _tween.finished
 		_current_target = Vector2.ZERO
 	wander_completed.emit()
+
+
+func preview_path() -> void:
+	if path_viz is Line2D:
+		path_viz.queue_free()
+	path_viz = Line2D.new()
+	path_viz.width = 2
+	path_viz.default_color = Color(MONSTER_COLORS[monster_number], 0.4)
+	for pos:Vector2 in _path:
+		path_viz.add_point(pos + Vector2(8, 8))
+	get_parent().add_child(path_viz)

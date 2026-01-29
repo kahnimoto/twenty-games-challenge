@@ -6,54 +6,61 @@ const JUMP_VELOCITY = -400.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-var _previous_in_air := false
-var _previous_velocity: Vector2
-var _jumping := false
+var _is_landing: bool = false
+
+
+func _ready() -> void:
+	sprite.animation_finished.connect(_on_animation_finished)
+
 
 func _physics_process(delta: float) -> void:
-	var on_floor = is_on_floor()
-	
-	if not on_floor:
+	var was_in_air = not is_on_floor()
+
+	if was_in_air:
 		velocity += get_gravity() * delta
 
 	var direction := Input.get_axis("move_left", "move_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	velocity.x = direction * SPEED if direction else move_toward(velocity.x, 0, SPEED)
 
-	if Input.is_action_just_pressed("jump") and on_floor:
+	if Input.is_action_just_pressed("jump") and not was_in_air:
 		velocity.y = JUMP_VELOCITY
-		_jumping = true
+		_is_landing = false
 
 	move_and_slide()
-	_adjust_animation()
-	_previous_in_air = not is_on_floor()
-	_previous_velocity = velocity
 
+	if was_in_air and is_on_floor():
+		_is_landing = true
+		sprite.play("landing")
+
+	_adjust_animation()
 
 func _adjust_animation() -> void:
-	var floored := is_on_floor()
-	if velocity.abs().x < 0.05 and velocity.abs().y < 0.05:
-		sprite.play("default")
-	elif velocity.y < 0:
-		if sprite.animation != "jumping":
-			sprite.play("jumping")
-	elif floored and velocity.abs().x > 0.05:
-		if sprite.animation != "walking":
-			sprite.play("walking")
-	elif floored and _previous_in_air:
-		sprite.play("landing")
-		print(velocity)
-		
-	elif not floored and velocity.y > 0.05:
-		pass # falling
-	else:
-		var v = velocity
-		var pv = _previous_velocity
-		var j = _jumping
-		var sa = sprite.animation
-		print(v)
-	
 	if velocity.x != 0.0:
 		sprite.flip_h = velocity.x < 0.
+
+	if _is_landing:
+		if sprite.is_playing() and sprite.animation == "landing":
+			return
+		else:
+			_is_landing = false
+
+	if is_on_floor():
+		if abs(velocity.x) > 0.1:
+			if sprite.animation != "walking":
+				sprite.play("walking")
+		else:
+			sprite.play("default")
+	else:
+		if velocity.y < 0:
+			if sprite.animation != "jumping":
+				sprite.play("jumping")
+		else:
+			if sprite.animation != "falling":
+				sprite.play("falling") # Good to have a falling state!
+
+
+
+func _on_animation_finished() -> void:
+	if sprite.animation == "landing":
+		_is_landing = false
+		_adjust_animation()

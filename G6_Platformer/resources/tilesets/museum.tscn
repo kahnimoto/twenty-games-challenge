@@ -2,6 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://bx36jh6bnqycm" path="res://resources/tilesets/platform_tilesets.tres" id="1_h7l2n"]
 [ext_resource type="Script" uid="uid://cduufftq685r8" path="res://entities/player/player.gd" id="2_0aq6t"]
+[ext_resource type="Texture2D" uid="uid://cjh6v8rw67bbv" path="res://assets/player/6.png" id="3_1etry"]
 [ext_resource type="Texture2D" uid="uid://ctx8yc3t8rrj5" path="res://assets/player/Anim_Robot_Walk1_v1.1_spritesheet.png" id="3_dsap8"]
 [ext_resource type="Texture2D" uid="uid://b2wl3qcwbfmbl" path="res://assets/player/1.png" id="3_otpdw"]
 [ext_resource type="Texture2D" uid="uid://b4jfcaisanwg1" path="res://assets/player/Anim_Robot_Jump1_v1.1_spritesheet.png" id="4_otpdw"]
@@ -77,6 +78,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1etry")
+}],
+"loop": true,
+"name": &"falling",
 "speed": 5.0
 }, {
 "frames": [{
@@ -186,6 +195,7 @@ shape = SubResource("RectangleShape2D_otpdw")
 texture_filter = 1
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_p0my8")
-animation = &"walking"
+animation = &"jumping"
 autoplay = "default"
-frame_progress = 0.09769967
+frame = 5
+frame_progress = 1.0

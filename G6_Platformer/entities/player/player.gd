@@ -13,7 +13,7 @@ const JUMP_BUFFER_DURATION := 0.1
 const GROUND_ACCELERATION := 1200.0
 const GROUND_FRICTION := 1000.0
 const AIR_ACCELERATION := 400.0
-const AIR_FRICTION := 0.8
+const AIR_FRICTION := 300.0
 
 var _jump_buffer_timer := 0.0
 var _coyote_timer := 0.0

@@ -35,5 +35,5 @@ tile_set = ExtResource("2_ebhf1")
 unique_name_in_owner = true
 
 [node name="Player" parent="World" unique_id=191155490 node_paths=PackedStringArray("tilemap") instance=ExtResource("3_8debl")]
-position = Vector2(1207, 403)
+position = Vector2(1389, 509)
 tilemap = NodePath("../../Tiles/Farback")

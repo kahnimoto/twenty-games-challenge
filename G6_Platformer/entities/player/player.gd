@@ -29,7 +29,7 @@ var _is_landing := false
 var _double_jump_used := false
 var _was_in_air := true
 var _is_climbing_ledge := false
-var _gravity_modifier := 0.5
+var _gravity_modifier := 1.0
 #endregion
 
 #region nodes
@@ -39,6 +39,9 @@ var _gravity_modifier := 0.5
 @onready var wall_check: RayCast2D = %WallCheck
 @onready var ground_check: RayCast2D = %GroundCheck
 @onready var ledge_check: RayCast2D = %LedgeCheck
+@onready var jump_sounds: AudioStreamPlayer2D = %JumpSounds
+@onready var landing_sound: AudioStreamPlayer2D = %LandingSound
+
 #endregion
 
 func _ready() -> void:
@@ -83,6 +86,7 @@ func _vertical_movement(delta: float, on_ground: bool, on_wall: bool, jumping: b
 		_is_climbing_ledge = true
 		velocity.y = JUMP_VELOCITY
 		sprite.play("jumping")
+		jump_sounds.play()
 	elif on_ground or (on_wall and jumping and not climbing):
 		if _jump_buffer_timer > 0. and _coyote_timer >= 0.:
 			velocity.y = JUMP_VELOCITY
@@ -150,6 +154,7 @@ func _adjust_animation(just_landed: bool) -> void:
 		_is_climbing_ledge = false
 		_is_landing = true
 		sprite.play("landing")
+		landing_sound.play()
 		sprite.scale.y = 1.0
 		_double_jump_used = false
 
@@ -167,6 +172,7 @@ func _adjust_animation(just_landed: bool) -> void:
 		if velocity.y < 0:
 			if sprite.animation != "jumping":
 				sprite.play("jumping")
+				jump_sounds.play()
 		else:
 			if sprite.animation != "falling":
 				sprite.play("falling")

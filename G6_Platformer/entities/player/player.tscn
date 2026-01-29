@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b4jfcaisanwg1" path="res://assets/player/Anim_Robot_Jump1_v1.1_spritesheet.png" id="4_bectd"]
 [ext_resource type="Texture2D" uid="uid://ctx8yc3t8rrj5" path="res://assets/player/Anim_Robot_Walk1_v1.1_spritesheet.png" id="5_wvtmh"]
 [ext_resource type="Script" uid="uid://xxynnie4erx6" path="res://camera.gd" id="6_7thud"]
+[ext_resource type="AudioStream" uid="uid://cbnk0gvpr0q5y" path="res://assets/sounds/jump1.mp3" id="7_qiwj3"]
+[ext_resource type="AudioStream" uid="uid://df3hk2kio65jj" path="res://assets/sounds/land.mp3" id="8_26q78"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fjmc"]
 size = Vector2(6, 23)
@@ -217,7 +219,7 @@ process_material = SubResource("ParticleProcessMaterial_26q78")
 
 [node name="WallCheck" type="RayCast2D" parent="Orientation" unique_id=1294832653]
 unique_name_in_owner = true
-position = Vector2(0, -7)
+position = Vector2(0, -13)
 target_position = Vector2(9, 0)
 collision_mask = 16
 
@@ -232,3 +234,14 @@ unique_name_in_owner = true
 position = Vector2(0, -7)
 target_position = Vector2(0, 14)
 collision_mask = 16
+
+[node name="JumpSounds" type="AudioStreamPlayer2D" parent="." unique_id=917291046]
+unique_name_in_owner = true
+stream = ExtResource("7_qiwj3")
+volume_db = -5.0
+max_polyphony = 2
+
+[node name="LandingSound" type="AudioStreamPlayer2D" parent="." unique_id=1928084170]
+unique_name_in_owner = true
+stream = ExtResource("8_26q78")
+volume_db = -13.0

@@ -7,9 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ctx8yc3t8rrj5" path="res://assets/player/Anim_Robot_Walk1_v1.1_spritesheet.png" id="5_wvtmh"]
 [ext_resource type="Script" uid="uid://xxynnie4erx6" path="res://camera.gd" id="6_7thud"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8fjmc"]
-radius = 4.0
-height = 17.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fjmc"]
+size = Vector2(6, 23)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l7ktn"]
 atlas = ExtResource("4_bectd")
@@ -113,13 +112,13 @@ animations = [{
 "speed": 30.0
 }, {
 "frames": [{
-"duration": 2.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_8t6aa")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_o48le")
 }, {
-"duration": 2.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_351mu")
 }, {
 "duration": 1.0,
@@ -193,8 +192,8 @@ limit_bottom = 512
 script = ExtResource("6_7thud")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=635617745]
-position = Vector2(0, -8.5)
-shape = SubResource("CapsuleShape2D_8fjmc")
+position = Vector2(0, -11.5)
+shape = SubResource("RectangleShape2D_8fjmc")
 debug_color = Color(0, 0.65, 0.23833326, 0)
 
 [node name="Visuals" type="Node2D" parent="." unique_id=936524604]
@@ -204,14 +203,15 @@ unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(-1, -16)
 sprite_frames = SubResource("SpriteFrames_p0my8")
-animation = &"walking"
+animation = &"landing"
 autoplay = "default"
 frame = 3
-frame_progress = 0.2681081
+frame_progress = 1.0
 
 [node name="JetpackParticles" type="GPUParticles2D" parent="Visuals" unique_id=315257446]
 unique_name_in_owner = true
 position = Vector2(-4, -8)
+emitting = false
 amount = 40
 lifetime = 0.15000000000000002
 local_coords = true

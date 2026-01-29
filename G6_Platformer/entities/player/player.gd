@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 200.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -450.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -31,6 +31,7 @@ func _physics_process(delta: float) -> void:
 	if was_in_air and is_on_floor():
 		_is_landing = true
 		sprite.play("landing")
+		sprite.scale.y = 1.0
 
 	_adjust_animation()
 
@@ -50,14 +51,16 @@ func _adjust_animation() -> void:
 				sprite.play("walking")
 		else:
 			sprite.play("default")
+		sprite.scale.y = 1.0
 	else:
 		if velocity.y < 0:
 			if sprite.animation != "jumping":
 				sprite.play("jumping")
 		else:
 			if sprite.animation != "falling":
-				sprite.play("falling") # Good to have a falling state!
-
+				sprite.play("falling")
+		var stretch: float = remap(abs(velocity.y), 0., 800, 1.0, 1.2)
+		sprite.scale.y = stretch
 
 
 func _on_animation_finished() -> void:

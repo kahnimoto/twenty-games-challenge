@@ -196,19 +196,17 @@ position = Vector2(0, -11.5)
 shape = SubResource("RectangleShape2D_8fjmc")
 debug_color = Color(0, 0.65, 0.23833326, 0)
 
-[node name="Visuals" type="Node2D" parent="." unique_id=936524604]
+[node name="Orientation" type="Node2D" parent="." unique_id=936524604]
 
-[node name="CharacterSprite" type="AnimatedSprite2D" parent="Visuals" unique_id=419082455]
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="Orientation" unique_id=419082455]
 unique_name_in_owner = true
 texture_filter = 1
-position = Vector2(-1, -16)
+position = Vector2(-2, -16)
 sprite_frames = SubResource("SpriteFrames_p0my8")
-animation = &"landing"
 autoplay = "default"
-frame = 3
 frame_progress = 1.0
 
-[node name="JetpackParticles" type="GPUParticles2D" parent="Visuals" unique_id=315257446]
+[node name="JetpackParticles" type="GPUParticles2D" parent="Orientation" unique_id=315257446]
 unique_name_in_owner = true
 position = Vector2(-4, -8)
 emitting = false
@@ -216,3 +214,15 @@ amount = 40
 lifetime = 0.15000000000000002
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_26q78")
+
+[node name="WallCheck" type="RayCast2D" parent="Orientation" unique_id=1294832653]
+unique_name_in_owner = true
+position = Vector2(0, -7)
+target_position = Vector2(9, 0)
+collision_mask = 16
+
+[node name="GroundCheck" type="RayCast2D" parent="Orientation" unique_id=560054228]
+unique_name_in_owner = true
+position = Vector2(0, -7)
+target_position = Vector2(0, 14)
+collision_mask = 16

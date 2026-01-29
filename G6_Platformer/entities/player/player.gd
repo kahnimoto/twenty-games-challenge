@@ -14,15 +14,17 @@ const GROUND_FRICTION := 1000.0
 const AIR_ACCELERATION := 400.0
 const AIR_FRICTION := 0.8
 
-@onready var sprite: AnimatedSprite2D = %CharacterSprite
-@onready var jetpack_particles: GPUParticles2D = %JetpackParticles
-@onready var visuals: Node2D = $Visuals
-
 var _jump_buffer_timer := 0.0
 var _coyote_timer := 0.0
 var _is_landing := false
 var _double_jump_used := false
 var _was_in_air := true
+
+@onready var sprite: AnimatedSprite2D = %CharacterSprite
+@onready var jetpack_particles: GPUParticles2D = %JetpackParticles
+@onready var orientation: Node2D = $Orientation
+@onready var wall_check: RayCast2D = %WallCheck
+@onready var ground_check: RayCast2D = %GroundCheck
 
 
 func _ready() -> void:
@@ -38,11 +40,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		_coyote_timer = COYOTE_DURATION # Reset timer while on ground
 	
+	var direction := Input.get_axis("move_left", "move_right")
+	var wall_grab_possible := _check_wall_grab()
+	var grabbing_wall :=  orientation.scale.x == direction and wall_grab_possible # and direction is towards wall
 	
 	# Calculating Y velocity
 	if _was_in_air:
 		if Input.is_action_pressed("go_down"):
 			velocity += get_gravity() * delta * 3
+		elif grabbing_wall:
+			_double_jump_used = false
+			_was_in_air = false
+			_coyote_timer = 0.
+			velocity = Vector2.ZERO
 		elif velocity.y < 0.:
 			if Input.is_action_pressed("jump"):
 				velocity += get_gravity() * delta * 0.4
@@ -52,12 +62,16 @@ func _physics_process(delta: float) -> void:
 			velocity += get_gravity() * delta * 1.5
 
 	# Calculating X velocity
+	var acceleration := AIR_ACCELERATION if _was_in_air else GROUND_ACCELERATION
 	if Input.is_action_pressed("go_down"):
 		velocity.x = 0.
+	elif grabbing_wall:
+		if Input.is_action_just_pressed("jump"):
+			velocity.x = -direction * SPEED
+		else:
+			velocity.x = 0.
 	else:
-		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
-			var acceleration := AIR_ACCELERATION if _was_in_air else GROUND_ACCELERATION
 			velocity.x = move_toward(velocity.x, direction * SPEED, acceleration * delta)
 		else: 
 			var friction := AIR_FRICTION if _was_in_air else GROUND_FRICTION
@@ -76,17 +90,20 @@ func _physics_process(delta: float) -> void:
 		else:
 			_jump_buffer_timer -= delta
 		if _jump_buffer_timer > 0. and _coyote_timer >= 0.:
-			_jump_buffer_timer = 0.
 			velocity.y = JUMP_VELOCITY
+			_jump_buffer_timer = 0.
 			_is_landing = false
 			_coyote_timer = 0.
 
 	move_and_slide()
 	_adjust_animation(just_landed)
 
+func _check_wall_grab() -> bool:
+	return wall_check.is_colliding() and not ground_check.is_colliding()
+
 func _adjust_animation(just_landed: bool) -> void:
 	if velocity.x != 0.0:
-		visuals.scale.x = -1. if velocity.x < 0. else 1.0
+		orientation.scale.x = -1. if velocity.x < 0. else 1.0
 
 	# Figure out if we need to switch to landing
 	if just_landed:

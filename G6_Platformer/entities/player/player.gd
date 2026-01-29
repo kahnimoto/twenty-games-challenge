@@ -29,6 +29,7 @@ var _is_landing := false
 var _double_jump_used := false
 var _was_in_air := true
 var _is_climbing_ledge := false
+var _gravity_modifier := 0.5
 #endregion
 
 #region nodes
@@ -39,7 +40,6 @@ var _is_climbing_ledge := false
 @onready var ground_check: RayCast2D = %GroundCheck
 @onready var ledge_check: RayCast2D = %LedgeCheck
 #endregion
-
 
 func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
@@ -53,6 +53,9 @@ func _physics_process(delta: float) -> void:
 	var jumping := Input.is_action_just_pressed("jump")
 	var on_wall := grabbing_wall and not _is_climbing_ledge
 	var climbing := on_wall and jumping and not ledge_check.is_colliding()
+	
+	#if not grabbing_wall and not on_wall and not climbing and jumping and not ledge_check.is_colliding() and _check_wall_grab():
+		#_just_missed_ledge = true
 	
 	_update_timers(delta, on_ground, on_wall, jumping, climbing)
 	_vertical_movement(delta, on_ground, on_wall, jumping, climbing)
@@ -93,9 +96,9 @@ func _vertical_movement(delta: float, on_ground: bool, on_wall: bool, jumping: b
 			_is_landing = false
 			_double_jump_used = true
 		elif Input.is_action_just_pressed("go_down") and on_wall:
-			velocity.y = get_gravity().y * delta * WALL_SLIDE_SPEED
+			velocity.y = _get_modified_gravity() * delta * WALL_SLIDE_SPEED
 		elif Input.is_action_pressed("go_down"):
-			velocity += get_gravity() * delta * GO_DOWN_SPEED
+			velocity.y += _get_modified_gravity() * delta * GO_DOWN_SPEED
 		elif on_wall:
 			_double_jump_used = false
 			on_ground = true
@@ -103,11 +106,16 @@ func _vertical_movement(delta: float, on_ground: bool, on_wall: bool, jumping: b
 			velocity = Vector2.ZERO
 		elif velocity.y < 0.:
 			if Input.is_action_pressed("jump"):
-				velocity += get_gravity() * delta * GRAVITY_WHEN_HOLDING_JUMP
+				velocity.y += _get_modified_gravity() * delta * GRAVITY_WHEN_HOLDING_JUMP
 			else:
-				velocity += get_gravity() * delta
+				velocity.y += _get_modified_gravity() * delta
 		else:
-			velocity += get_gravity() * delta * GRAVITY_WHEN_FALLING
+			velocity.y += _get_modified_gravity() * delta * GRAVITY_WHEN_FALLING
+
+
+func _get_modified_gravity() -> float:
+	var gravity_vector := get_gravity()
+	return gravity_vector.y * _gravity_modifier
 
 
 func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping: bool, climbing: bool) -> void:

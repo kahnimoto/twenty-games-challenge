@@ -14,6 +14,7 @@ config/name="PacMan"
 run/main_scene="uid://cerbusdytb88"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://assets/icon.svg"
+config/tags=PackedStringArray("20games")
 
 [audio]
 

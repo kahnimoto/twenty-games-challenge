@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://b3153qdbhx6dp" path="res://levels/gym/gym.gd" id="1_accj2"]
 [ext_resource type="TileSet" uid="uid://bx36jh6bnqycm" path="res://resources/tilesets/platform_tilesets.tres" id="2_ebhf1"]
 [ext_resource type="PackedScene" uid="uid://dmjyn71xgra7f" path="res://entities/player/player.tscn" id="3_8debl"]
+[ext_resource type="Texture2D" uid="uid://gatynco1l6sn" path="res://assets/tilesets/3_Far_Background_Tile.png" id="4_ebhf1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_accj2"]
+size = Vector2(327, 423)
 
 [node name="Gym" type="Node" unique_id=1840840464]
 script = ExtResource("1_accj2")
@@ -35,5 +39,29 @@ tile_set = ExtResource("2_ebhf1")
 unique_name_in_owner = true
 
 [node name="Player" parent="World" unique_id=191155490 node_paths=PackedStringArray("tilemap") instance=ExtResource("3_8debl")]
-position = Vector2(1207, 403)
+position = Vector2(133, 341)
 tilemap = NodePath("../../Tiles/Farback")
+
+[node name="Area2D" type="Area2D" parent="World" unique_id=920581164]
+position = Vector2(1068, 98)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+gravity_space_override = 3
+gravity = 163.333
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Area2D" unique_id=432309198]
+position = Vector2(156.5, 201.5)
+shape = SubResource("RectangleShape2D_accj2")
+debug_color = Color(0.9, 0, 0.7800001, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Area2D" unique_id=1285815318]
+modulate = Color(1, 0.44, 0.44, 0.2901961)
+position = Vector2(155.99998, 200.5)
+scale = Vector2(10.374999, 13.21875)
+texture = ExtResource("4_ebhf1")
+
+[node name="Label" type="Label" parent="World/Area2D" unique_id=1155758558]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Moon Gravity"

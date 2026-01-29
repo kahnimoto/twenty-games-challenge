@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @export var tilemap: TileMapLayer
 
+#region movement config
 const SPEED := 200.0
 const JUMP_VELOCITY := -230.0
 const DOUBLE_JUMP_VELOCITY := JUMP_VELOCITY
@@ -14,20 +15,30 @@ const GROUND_ACCELERATION := 1200.0
 const GROUND_FRICTION := 1000.0
 const AIR_ACCELERATION := 400.0
 const AIR_FRICTION := 300.0
+const WALL_SLIDE_SPEED := 0.25
+const GO_DOWN_SPEED := 3.0
+const GRAVITY_WHEN_HOLDING_JUMP := 0.4
+const GRAVITY_WHEN_FALLING := 1.5
+const WALL_JUMP_AWAY_ADJUSTMENT := 0.85
+#endregion
 
+#region state variables
 var _jump_buffer_timer := 0.0
 var _coyote_timer := 0.0
 var _is_landing := false
 var _double_jump_used := false
 var _was_in_air := true
 var _is_climbing_ledge := false
+#endregion
 
+#region nodes
 @onready var sprite: AnimatedSprite2D = %CharacterSprite
 @onready var jetpack_particles: GPUParticles2D = %JetpackParticles
 @onready var orientation: Node2D = $Orientation
 @onready var wall_check: RayCast2D = %WallCheck
 @onready var ground_check: RayCast2D = %GroundCheck
 @onready var ledge_check: RayCast2D = %LedgeCheck
+#endregion
 
 
 func _ready() -> void:
@@ -37,80 +48,85 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var just_landed: bool = _was_in_air and is_on_floor()
 	var on_ground = is_on_floor()
-
 	var direction := Input.get_axis("move_left", "move_right")
-	var wall_grab_possible := _check_wall_grab()
-	var grabbing_wall :=  orientation.scale.x == direction and wall_grab_possible and not _is_climbing_ledge
+	var grabbing_wall := orientation.scale.x == direction and _check_wall_grab()
+	var jumping := Input.is_action_just_pressed("jump")
+	var on_wall := grabbing_wall and not _is_climbing_ledge
+	var climbing := on_wall and jumping and not ledge_check.is_colliding()
 	
-	var climb_up := grabbing_wall and Input.is_action_just_pressed("jump")
+	_update_timers(delta, on_ground, on_wall, jumping, climbing)
+	_vertical_movement(delta, on_ground, on_wall, jumping, climbing)
+	_horizontal_movement(delta, on_ground, on_wall, jumping, climbing)
+	move_and_slide()
+	_adjust_animation(just_landed)
+	_was_in_air = not on_ground
 
-	if grabbing_wall:
+
+func _update_timers(delta: float, on_ground: bool, on_wall: bool, jumping: bool, climbing: bool) -> void:
+	if on_wall:
 		_coyote_timer = COYOTE_DURATION_FROM_WALL_GRAB
 	elif on_ground:
 		_coyote_timer = COYOTE_DURATION # Reset timer while on ground
 	else:
 		_coyote_timer -= delta # Count down while in air
-	
-	# Calculating Y velocity
-	if on_ground:
-		if Input.is_action_just_pressed("jump"):
-			_jump_buffer_timer = JUMP_BUFFER_DURATION
-		else:
-			_jump_buffer_timer -= delta
+	if jumping or climbing:
+		_jump_buffer_timer = JUMP_BUFFER_DURATION
+	else:
+		_jump_buffer_timer -= delta
+
+
+func _vertical_movement(delta: float, on_ground: bool, on_wall: bool, jumping: bool, climbing: bool) -> void:
+	if climbing:
+		_is_climbing_ledge = true
+		velocity.y = JUMP_VELOCITY
+		sprite.play("jumping")
+	elif on_ground or (on_wall and jumping and not climbing):
 		if _jump_buffer_timer > 0. and _coyote_timer >= 0.:
 			velocity.y = JUMP_VELOCITY
 			_jump_buffer_timer = 0.
 			_is_landing = false
 			_coyote_timer = 0.
-	elif climb_up:
-		_is_climbing_ledge = true
-		velocity.y = JUMP_VELOCITY
-		sprite.play("jumping")
 	else:
-		if not _double_jump_used and Input.is_action_just_pressed("jump"):
+		if not _double_jump_used and jumping:
 			jetpack_particles.emitting = true
 			velocity.y = DOUBLE_JUMP_VELOCITY
 			_is_landing = false
 			_double_jump_used = true
-		elif Input.is_action_just_pressed("go_down") and grabbing_wall:
-			velocity.y = get_gravity().y * delta * 0.25
+		elif Input.is_action_just_pressed("go_down") and on_wall:
+			velocity.y = get_gravity().y * delta * WALL_SLIDE_SPEED
 		elif Input.is_action_pressed("go_down"):
-			velocity += get_gravity() * delta * 3
-		elif grabbing_wall:
+			velocity += get_gravity() * delta * GO_DOWN_SPEED
+		elif on_wall:
 			_double_jump_used = false
 			on_ground = true
 			_coyote_timer = 0.
 			velocity = Vector2.ZERO
 		elif velocity.y < 0.:
 			if Input.is_action_pressed("jump"):
-				velocity += get_gravity() * delta * 0.4
+				velocity += get_gravity() * delta * GRAVITY_WHEN_HOLDING_JUMP
 			else:
 				velocity += get_gravity() * delta
 		else:
-			velocity += get_gravity() * delta * 1.5
+			velocity += get_gravity() * delta * GRAVITY_WHEN_FALLING
 
-	# Calculating X velocity
+
+func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping: bool, climbing: bool) -> void:
+	var direction := Input.get_axis("move_left", "move_right")
 	var acceleration := GROUND_ACCELERATION if on_ground else AIR_ACCELERATION
 	if Input.is_action_pressed("go_down"):
-		velocity.x = 0.
-	elif grabbing_wall:
-		if Input.is_action_just_pressed("jump"):
-			if ledge_check.is_colliding():
-				velocity.x = -direction * SPEED * 0.5
-			else:
-				velocity.x = 0.
-		else:
-			velocity.x = 0.
+		velocity.x = 0.0
+	elif climbing:
+		velocity.x = 0.0
+	elif on_wall and not jumping:
+		velocity.x = 0.0
+	elif on_wall and jumping:
+		velocity.x = -direction * SPEED * WALL_JUMP_AWAY_ADJUSTMENT
 	else:
 		if direction:
 			velocity.x = move_toward(velocity.x, direction * SPEED, acceleration * delta)
 		else: 
 			var friction := GROUND_FRICTION if on_ground else AIR_FRICTION
 			velocity.x = move_toward(velocity.x, 0, friction * delta)
-
-	move_and_slide()
-	_adjust_animation(just_landed)
-	_was_in_air = not on_ground
 
 
 func _check_wall_grab() -> bool:
@@ -128,8 +144,7 @@ func _adjust_animation(just_landed: bool) -> void:
 		sprite.play("landing")
 		sprite.scale.y = 1.0
 		_double_jump_used = false
-		return
-	
+
 	if _is_landing:
 		return
 	

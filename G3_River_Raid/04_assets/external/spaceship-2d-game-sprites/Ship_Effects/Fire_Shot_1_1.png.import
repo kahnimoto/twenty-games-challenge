@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tdmphbqeq2gy"
-path="res://.godot/imported/Fire_Shot_1_1.png-a6bcd22ee51c34216102c4447e3c2758.ctex"
+uid="uid://7nw1yaywyvih"
+path="res://.godot/imported/Fire_Shot_1_1.png-d9401ae272ad7fc23156ab9355c22191.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://04_assets/external/spaceship-2d-game-sprites/Ship_Effects/Fire_Shot_1_1.png"
-dest_files=["res://.godot/imported/Fire_Shot_1_1.png-a6bcd22ee51c34216102c4447e3c2758.ctex"]
+source_file="res://04_assets/external/spaceship-2d-game-sprites/Ship_effects/Fire_Shot_1_1.png"
+dest_files=["res://.godot/imported/Fire_Shot_1_1.png-d9401ae272ad7fc23156ab9355c22191.ctex"]
 
 [params]
 

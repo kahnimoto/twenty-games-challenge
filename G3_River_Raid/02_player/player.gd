@@ -12,9 +12,8 @@ const SPEED := 300.0
 #@export var modulation_curve: CurveTexture
 var modulation_curve: CurveTexture = preload("res://02_player/modulation_curve.tres")
 
-var _viewport_rect: Vector2
 
-var aiming: bool:
+var aiming: bool = true:
 	set(v):
 		if aiming != v:
 			aiming = v
@@ -25,6 +24,8 @@ var aiming: bool:
 var lives := MAX_LIVES
 var invulnerable_time := 0.0
 
+var _started := false
+
 @onready var ship_sprite: Sprite2D = $ShipSprite
 @onready var area: Area2D = $Area
 
@@ -32,11 +33,13 @@ var invulnerable_time := 0.0
 func _ready():
 	assert(level is Level)
 	assert(modulation_curve is CurveTexture)
-	_viewport_rect = get_viewport_rect().size
 	area.area_entered.connect(_on_area_entered)
 	area.body_entered.connect(_on_shape_entered)
 	area.body_exited.connect(_on_shape_exited)
-	
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		_started = true
 
 
 func _process(delta: float) -> void:
@@ -51,7 +54,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var mouse_position := get_viewport().get_mouse_position()
-	if aiming:
+	if aiming or not _started:
 		pass
 	else:
 		var target_y = level.world_offset + mouse_position.y
@@ -61,6 +64,11 @@ func _physics_process(delta: float) -> void:
 	if _is_over_land and invulnerable_time <= 0.0:
 		take_damage(1)
 
+	if global_position.y > level.world_offset + get_viewport_rect().size.y:
+		if not _started:
+			_started = true
+		else:
+			take_damage(99)
 
 
 func _on_area_entered(other: Area2D) -> void:
@@ -89,6 +97,8 @@ func take_damage(amount: int = 1) -> void:
 	if previous_lives != lives:
 		Events.lives_changed.emit(lives)
 		invulnerable_time = INVUL_FRAME_DUR
+	if not _started:
+		_started = true
 
 
 func recover_health(amount: int = 1) -> void:

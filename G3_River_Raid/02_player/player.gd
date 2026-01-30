@@ -14,7 +14,7 @@ var modulation_curve: CurveTexture = preload("res://02_player/modulation_curve.t
 
 var _viewport_rect: Vector2
 
-var aiming := false:
+var aiming: bool:
 	set(v):
 		if aiming != v:
 			aiming = v
@@ -35,12 +35,13 @@ func _ready():
 	_viewport_rect = get_viewport_rect().size
 	area.area_entered.connect(_on_area_entered)
 	area.body_entered.connect(_on_shape_entered)
+	area.body_exited.connect(_on_shape_exited)
 	
 
 
 func _process(delta: float) -> void:
 	
-	aiming = not Input.is_action_pressed("mouse_right")
+	aiming = Input.is_action_pressed("mouse_right")
 	if invulnerable_time >= 0.0:
 		invulnerable_time = clampf(invulnerable_time - delta, 0.0, INVUL_FRAME_DUR)
 		var animation_ratio: float = inverse_lerp(INVUL_FRAME_DUR, 0.0, invulnerable_time)
@@ -56,6 +57,9 @@ func _physics_process(delta: float) -> void:
 		var target_y = level.world_offset + mouse_position.y
 		global_position.x = move_toward(global_position.x, mouse_position.x, SPEED * delta)
 		global_position.y = move_toward(global_position.y, target_y, SPEED * delta)
+	
+	if _is_over_land and invulnerable_time <= 0.0:
+		take_damage(1)
 
 
 
@@ -67,10 +71,17 @@ func _on_area_entered(other: Area2D) -> void:
 		other.get_parent().queue_free()
 		recover_health(2)
 
+
+var _is_over_land := false
 func _on_shape_entered(body: Node2D) -> void:
 	if body is TileMapLayer:
 		take_damage(1)
-	#print(body)
+		_is_over_land = true
+
+func _on_shape_exited(body: Node2D) -> void:
+	if body is TileMapLayer:
+		_is_over_land = false
+
 
 func take_damage(amount: int = 1) -> void:
 	var previous_lives := lives

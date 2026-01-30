@@ -387,6 +387,7 @@ sources/0 = SubResource("TileSetAtlasSource_c65xm")
 
 [node name="LevelOne" type="Node" unique_id=52638236]
 script = ExtResource("1_sxqa7")
+speed = 60.0
 
 [node name="World" type="Node2D" parent="." unique_id=1556140350]
 

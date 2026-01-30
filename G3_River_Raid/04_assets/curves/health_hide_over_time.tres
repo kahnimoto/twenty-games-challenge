@@ -1,4 +1,4 @@
-[gd_resource type="CurveTexture" load_steps=2 format=3 uid="uid://bbkcrbu1ugbe1"]
+[gd_resource type="CurveTexture" format=3 uid="uid://bbkcrbu1ugbe1"]
 
 [sub_resource type="Curve" id="Curve_ec5m8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.07882883, 0.23953885), 0.0, 0.0, 0, 0, Vector2(0.25, 0.74466264), 0.0, 0.0, 0, 0, Vector2(0.3693694, 0.19513237), 0.0, 0.0, 0, 0, Vector2(0.5045045, 0.48377454), 0.0, 0.0, 0, 0, Vector2(0.7522523, 0.0730145), 0.0, 0.0, 0, 0, Vector2(0.8738739, 0.23953885), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://brgavqdsbikwx"]
+[gd_scene format=3 uid="uid://brgavqdsbikwx"]
 
 [ext_resource type="PackedScene" uid="uid://cnpxi3gw7bxyb" path="res://03_enemies/turrets/turret.tscn" id="1_dk0co"]
 [ext_resource type="Script" uid="uid://0ea6qa8ouit7" path="res://playground.gd" id="1_v7dth"]
@@ -19,67 +19,67 @@ point_count = 8
 [sub_resource type="CurveTexture" id="CurveTexture_pi42a"]
 curve = SubResource("Curve_v7dth")
 
-[node name="Playground" type="Node"]
+[node name="Playground" type="Node" unique_id=867067437]
 script = ExtResource("1_v7dth")
 
-[node name="UpgradeSpawner" type="Node2D" parent="."]
+[node name="UpgradeSpawner" type="Node2D" parent="." unique_id=1440520074]
 script = ExtResource("2_pio1y")
 
-[node name="Marker2D" type="Marker2D" parent="UpgradeSpawner"]
+[node name="Marker2D" type="Marker2D" parent="UpgradeSpawner" unique_id=451761650]
 position = Vector2(306, -38)
 
-[node name="Timer" type="Timer" parent="UpgradeSpawner"]
+[node name="Timer" type="Timer" parent="UpgradeSpawner" unique_id=830030851]
 wait_time = 4.0
 autostart = true
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." unique_id=1939493754]
 unique_name_in_owner = true
 
-[node name="Node2D" type="Node2D" parent="World"]
+[node name="Node2D" type="Node2D" parent="World" unique_id=979419889]
 visible = false
 position = Vector2(1, 961)
 
-[node name="00" type="Sprite2D" parent="World/Node2D"]
+[node name="00" type="Sprite2D" parent="World/Node2D" unique_id=1145453582]
 texture_filter = 1
 position = Vector2(717, 185)
 texture = ExtResource("35_a5gkh")
 
-[node name="01" type="Sprite2D" parent="World/Node2D"]
+[node name="01" type="Sprite2D" parent="World/Node2D" unique_id=1851046710]
 position = Vector2(1056, -71)
 texture = ExtResource("36_bv4ag")
 
-[node name="02" type="Sprite2D" parent="World/Node2D"]
+[node name="02" type="Sprite2D" parent="World/Node2D" unique_id=831108166]
 texture_filter = 1
 position = Vector2(1063, 109)
 texture = ExtResource("37_gnp1w")
 
-[node name="04" type="Sprite2D" parent="World/Node2D"]
+[node name="04" type="Sprite2D" parent="World/Node2D" unique_id=1494480055]
 position = Vector2(732, -26)
 texture = ExtResource("39_2qq6p")
 
-[node name="Turret" parent="World" instance=ExtResource("1_dk0co")]
+[node name="Turret" parent="World" unique_id=1193043851 instance=ExtResource("1_dk0co")]
 position = Vector2(68, 47)
 
-[node name="Turret2" parent="World" instance=ExtResource("1_dk0co")]
+[node name="Turret2" parent="World" unique_id=1033076553 instance=ExtResource("1_dk0co")]
 position = Vector2(389, 236)
 
-[node name="Turret3" parent="World" instance=ExtResource("1_dk0co")]
+[node name="Turret3" parent="World" unique_id=1430071997 instance=ExtResource("1_dk0co")]
 position = Vector2(107, 153)
 
-[node name="Turret4" parent="World" instance=ExtResource("1_dk0co")]
+[node name="Turret4" parent="World" unique_id=1586685224 instance=ExtResource("1_dk0co")]
 position = Vector2(238, 142)
 
-[node name="Player" parent="World" instance=ExtResource("6_4bqqs")]
+[node name="Player" parent="World" unique_id=912666432 instance=ExtResource("6_4bqqs")]
 position = Vector2(224, 804)
 modulation_curve = SubResource("CurveTexture_pi42a")
 
-[node name="HealthUpgrade" parent="World" instance=ExtResource("9_te8jg")]
+[node name="HealthUpgrade" parent="World" unique_id=1783300313 instance=ExtResource("9_te8jg")]
 position = Vector2(313, 116)
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1293333598]
 script = ExtResource("7_ynsuh")
 
-[node name="Control" type="Control" parent="HUD"]
+[node name="Control" type="Control" parent="HUD" unique_id=962828364]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -90,7 +90,7 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="HealthBar" type="GridContainer" parent="HUD/Control"]
+[node name="HealthBar" type="GridContainer" parent="HUD/Control" unique_id=1426892493]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
@@ -105,11 +105,11 @@ grow_horizontal = 2
 grow_vertical = 0
 columns = 3
 
-[node name="Health1" parent="HUD/Control/HealthBar" instance=ExtResource("9_pi42a")]
+[node name="Health1" parent="HUD/Control/HealthBar" unique_id=235279865 instance=ExtResource("9_pi42a")]
 layout_mode = 2
 
-[node name="Health2" parent="HUD/Control/HealthBar" instance=ExtResource("9_pi42a")]
+[node name="Health2" parent="HUD/Control/HealthBar" unique_id=454686709 instance=ExtResource("9_pi42a")]
 layout_mode = 2
 
-[node name="Health3" parent="HUD/Control/HealthBar" instance=ExtResource("9_pi42a")]
+[node name="Health3" parent="HUD/Control/HealthBar" unique_id=59383821 instance=ExtResource("9_pi42a")]
 layout_mode = 2

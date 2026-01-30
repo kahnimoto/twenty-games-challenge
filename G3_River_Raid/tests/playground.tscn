@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://brgavqdsbikwx"]
+
+[ext_resource type="PackedScene" uid="uid://cnpxi3gw7bxyb" path="res://03_enemies/turrets/turret.tscn" id="1_dk0co"]
+[ext_resource type="Script" uid="uid://0ea6qa8ouit7" path="res://tests/playground.gd" id="1_v7dth"]
+[ext_resource type="Script" uid="uid://kjuffnd6hxam" path="res://06_upgrades/upgrade_spawner.gd" id="2_pio1y"]
+[ext_resource type="PackedScene" uid="uid://d1xmjfg8x5nt8" path="res://02_player/player.tscn" id="6_4bqqs"]
+[ext_resource type="PackedScene" uid="uid://bxap161m33kby" path="res://06_upgrades/health_upgrade.tscn" id="9_te8jg"]
+[ext_resource type="PackedScene" uid="uid://12mv65uqy4so" path="res://05_ui/hud.tscn" id="10_h1jm5"]
+[ext_resource type="Texture2D" uid="uid://bonildi5r6pel" path="res://04_assets/external/PixelUI/00.png" id="35_a5gkh"]
+[ext_resource type="Texture2D" uid="uid://c7cv35i1bw6pf" path="res://04_assets/external/PixelUI/01.png" id="36_bv4ag"]
+[ext_resource type="Texture2D" uid="uid://c5w14sts2uxaj" path="res://04_assets/external/PixelUI/02.png" id="37_gnp1w"]
+[ext_resource type="Texture2D" uid="uid://cqv737ifikwbl" path="res://04_assets/external/PixelUI/04.png" id="39_2qq6p"]
+
+[node name="Playground" type="Node" unique_id=867067437]
+script = ExtResource("1_v7dth")
+
+[node name="UpgradeSpawner" type="Node2D" parent="." unique_id=1440520074]
+script = ExtResource("2_pio1y")
+
+[node name="Marker2D" type="Marker2D" parent="UpgradeSpawner" unique_id=451761650]
+position = Vector2(306, -38)
+
+[node name="Timer" type="Timer" parent="UpgradeSpawner" unique_id=830030851]
+wait_time = 4.0
+autostart = true
+
+[node name="World" type="Node2D" parent="." unique_id=1939493754]
+unique_name_in_owner = true
+
+[node name="Node2D" type="Node2D" parent="World" unique_id=979419889]
+visible = false
+position = Vector2(1, 961)
+
+[node name="00" type="Sprite2D" parent="World/Node2D" unique_id=1145453582]
+texture_filter = 1
+position = Vector2(717, 185)
+texture = ExtResource("35_a5gkh")
+
+[node name="01" type="Sprite2D" parent="World/Node2D" unique_id=1851046710]
+position = Vector2(1056, -71)
+texture = ExtResource("36_bv4ag")
+
+[node name="02" type="Sprite2D" parent="World/Node2D" unique_id=831108166]
+texture_filter = 1
+position = Vector2(1063, 109)
+texture = ExtResource("37_gnp1w")
+
+[node name="04" type="Sprite2D" parent="World/Node2D" unique_id=1494480055]
+position = Vector2(732, -26)
+texture = ExtResource("39_2qq6p")
+
+[node name="Turret" parent="World" unique_id=1193043851 instance=ExtResource("1_dk0co")]
+position = Vector2(68, 47)
+
+[node name="Turret2" parent="World" unique_id=1033076553 instance=ExtResource("1_dk0co")]
+position = Vector2(389, 236)
+
+[node name="Turret3" parent="World" unique_id=1430071997 instance=ExtResource("1_dk0co")]
+position = Vector2(107, 153)
+
+[node name="Turret4" parent="World" unique_id=1586685224 instance=ExtResource("1_dk0co")]
+position = Vector2(238, 142)
+
+[node name="Player" parent="World" unique_id=912666432 instance=ExtResource("6_4bqqs")]
+unique_name_in_owner = true
+position = Vector2(224, 804)
+
+[node name="HealthUpgrade" parent="World" unique_id=1783300313 instance=ExtResource("9_te8jg")]
+position = Vector2(313, 116)
+
+[node name="HUD" parent="." unique_id=273474456 instance=ExtResource("10_h1jm5")]

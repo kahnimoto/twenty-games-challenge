@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://12mv65uqy4so"]
+
+[ext_resource type="Script" uid="uid://400u5jmm8e3x" path="res://05_ui/hud.gd" id="1_bygxo"]
+[ext_resource type="PackedScene" uid="uid://b5by8p2v1cyo7" path="res://05_ui/health_gem.tscn" id="2_jxu35"]
+
+[node name="HUD" type="CanvasLayer" unique_id=273474456]
+script = ExtResource("1_bygxo")
+
+[node name="Control" type="Control" parent="." unique_id=1017539753]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="HealthBar" type="GridContainer" parent="Control" unique_id=1985170403]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -74.5
+offset_top = -50.0
+offset_right = 74.5
+grow_horizontal = 2
+grow_vertical = 0
+columns = 3
+
+[node name="Health1" parent="Control/HealthBar" unique_id=693717794 instance=ExtResource("2_jxu35")]
+layout_mode = 2
+
+[node name="Health2" parent="Control/HealthBar" unique_id=1680035920 instance=ExtResource("2_jxu35")]
+layout_mode = 2
+
+[node name="Health3" parent="Control/HealthBar" unique_id=1274025489 instance=ExtResource("2_jxu35")]
+layout_mode = 2

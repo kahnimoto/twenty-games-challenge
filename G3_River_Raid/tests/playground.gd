@@ -1,7 +1,7 @@
 extends Node
 
 
-@onready var player: Player = $World/Player
+@onready var player: Player = %Player
 
 
 func _ready() -> void:

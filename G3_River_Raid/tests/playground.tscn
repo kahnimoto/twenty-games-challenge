@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://kjuffnd6hxam" path="res://06_upgrades/upgrade_spawner.gd" id="2_pio1y"]
 [ext_resource type="PackedScene" uid="uid://d1xmjfg8x5nt8" path="res://02_player/player.tscn" id="6_4bqqs"]
 [ext_resource type="PackedScene" uid="uid://bxap161m33kby" path="res://06_upgrades/health_upgrade.tscn" id="9_te8jg"]
-[ext_resource type="PackedScene" uid="uid://12mv65uqy4so" path="res://05_ui/hud.tscn" id="10_h1jm5"]
 [ext_resource type="Texture2D" uid="uid://bonildi5r6pel" path="res://04_assets/external/PixelUI/00.png" id="35_a5gkh"]
 [ext_resource type="Texture2D" uid="uid://c7cv35i1bw6pf" path="res://04_assets/external/PixelUI/01.png" id="36_bv4ag"]
 [ext_resource type="Texture2D" uid="uid://c5w14sts2uxaj" path="res://04_assets/external/PixelUI/02.png" id="37_gnp1w"]
@@ -68,5 +67,3 @@ level = NodePath("../..")
 
 [node name="HealthUpgrade" parent="World" unique_id=1783300313 instance=ExtResource("9_te8jg")]
 position = Vector2(578, 389)
-
-[node name="HUD" parent="." unique_id=273474456 instance=ExtResource("10_h1jm5")]

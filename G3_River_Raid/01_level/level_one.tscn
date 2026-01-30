@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://brjocg2lbfaqr" path="res://01_level/level.gd" id="1_sxqa7"]
 [ext_resource type="Texture2D" uid="uid://bipsxaco860md" path="res://04_assets/external/roguelikeSheet_transparent.png" id="2_j0d8w"]
 [ext_resource type="PackedScene" uid="uid://d1xmjfg8x5nt8" path="res://02_player/player.tscn" id="3_sxqa7"]
-[ext_resource type="PackedScene" uid="uid://12mv65uqy4so" path="res://05_ui/hud.tscn" id="4_6da23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sxqa7"]
 texture = ExtResource("2_j0d8w")
@@ -411,5 +410,3 @@ anchor_mode = 0
 limit_left = 0
 limit_right = 960
 limit_bottom = 960
-
-[node name="HUD" parent="." unique_id=273474456 instance=ExtResource("4_6da23")]

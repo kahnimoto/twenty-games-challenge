@@ -1,17 +1,13 @@
 class_name Player
 extends Node2D
 
-
 const MAX_LIVES = 5
 const SHIP_WIDTH := 30.0
 const INVUL_FRAME_DUR := 0.8
-const SPEED := 300.0
 
 @export var level: Level
-
 #@export var modulation_curve: CurveTexture
 var modulation_curve: CurveTexture = preload("res://02_player/modulation_curve.tres")
-
 
 var aiming: bool = true:
 	set(v):
@@ -24,8 +20,6 @@ var aiming: bool = true:
 var lives := MAX_LIVES
 var invulnerable_time := 0.0
 
-var _started := false
-
 @onready var ship_sprite: Sprite2D = $ShipSprite
 @onready var area: Area2D = $Area
 
@@ -36,10 +30,6 @@ func _ready():
 	area.area_entered.connect(_on_area_entered)
 	area.body_entered.connect(_on_shape_entered)
 	area.body_exited.connect(_on_shape_exited)
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		_started = true
 
 
 func _process(delta: float) -> void:
@@ -54,21 +44,35 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var mouse_position := get_viewport().get_mouse_position()
-	if aiming or not _started:
+	if aiming or not Game.started:
 		pass
 	else:
-		var target_y = level.world_offset + mouse_position.y
-		global_position.x = move_toward(global_position.x, mouse_position.x, SPEED * delta)
-		global_position.y = move_toward(global_position.y, target_y, SPEED * delta)
+		match Game.movement_type:
+			Game.MovementTypes.DIRECT:
+				global_position.x = mouse_position.x
+				global_position.y = level.world_offset + mouse_position.y
+			Game.MovementTypes.DELAYED:
+				var target := Vector2(mouse_position.x, level.world_offset + mouse_position.y)
+				var move: Vector2 = target - global_position
+				global_position += move * delta
+			Game.MovementTypes.CONSTANT:
+				var target := Vector2(mouse_position.x, level.world_offset + mouse_position.y)
+				var move: Vector2 = target - global_position
+				if move.length() < 10:
+					global_position.x = mouse_position.x
+					global_position.y = level.world_offset + mouse_position.y
+				else:
+					global_position += move.normalized() * delta  * Game.movement_speed
+			Game.MovementTypes.INDEPENDANT:
+				var target_y: float = level.world_offset + mouse_position.y
+				global_position.x = move_toward(global_position.x, mouse_position.x, Game.movement_speed * delta)
+				global_position.y = move_toward(global_position.y, target_y, Game.movement_speed * delta)
 	
 	if _is_over_land and invulnerable_time <= 0.0:
 		take_damage(1)
 
 	if global_position.y > level.world_offset + get_viewport_rect().size.y:
-		if not _started:
-			_started = true
-		else:
-			take_damage(99)
+		take_damage(99)
 
 
 func _on_area_entered(other: Area2D) -> void:
@@ -86,6 +90,7 @@ func _on_shape_entered(body: Node2D) -> void:
 		take_damage(1)
 		_is_over_land = true
 
+
 func _on_shape_exited(body: Node2D) -> void:
 	if body is TileMapLayer:
 		_is_over_land = false
@@ -97,8 +102,6 @@ func take_damage(amount: int = 1) -> void:
 	if previous_lives != lives:
 		Events.lives_changed.emit(lives)
 		invulnerable_time = INVUL_FRAME_DUR
-	if not _started:
-		_started = true
 
 
 func recover_health(amount: int = 1) -> void:

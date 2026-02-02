@@ -30,6 +30,10 @@ func _ready():
 	area.area_entered.connect(_on_area_entered)
 	area.body_entered.connect(_on_shape_entered)
 	area.body_exited.connect(_on_shape_exited)
+	Events.level_loaded.connect(_on_new_level)
+
+func _on_new_level() -> void:
+	lives = MAX_LIVES
 
 
 func _process(delta: float) -> void:
@@ -44,7 +48,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var mouse_position := get_viewport().get_mouse_position()
-	if aiming or not Game.started:
+	if aiming or not Game.started or Game.game_over:
 		pass
 	else:
 		match Game.movement_type:
@@ -54,7 +58,7 @@ func _physics_process(delta: float) -> void:
 			Game.MovementTypes.DELAYED:
 				var target := Vector2(mouse_position.x, level.world_offset + mouse_position.y)
 				var move: Vector2 = target - global_position
-				global_position += move * delta
+				global_position += move * delta * 2
 			Game.MovementTypes.CONSTANT:
 				var target := Vector2(mouse_position.x, level.world_offset + mouse_position.y)
 				var move: Vector2 = target - global_position

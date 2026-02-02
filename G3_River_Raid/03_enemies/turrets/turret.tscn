@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cnpxi3gw7bxyb"]
+[gd_scene format=3 uid="uid://cnpxi3gw7bxyb"]
 
 [ext_resource type="Script" uid="uid://p81o5l0fbcry" path="res://03_enemies/turret.gd" id="1_ul4ha"]
 [ext_resource type="Texture2D" uid="uid://dxbeg0ulcby" path="res://04_assets/external/Turret_G79/AnimFire/TG79Open0000.png" id="2_x7ugr"]
@@ -24,8 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://bw2oj0frilsse" path="res://04_assets/external/Turret_G79/AnimOpen/TG79Open0002.png" id="22_p0oql"]
 [ext_resource type="Texture2D" uid="uid://bgfjvde1qurx6" path="res://04_assets/external/Turret_G79/AnimOpen/TG79Open0001.png" id="23_7ojmd"]
 [ext_resource type="Texture2D" uid="uid://ba1i6vkv63uc8" path="res://04_assets/external/Turret_G79/AnimOpen/TG79Open0000.png" id="24_dg0bv"]
-[ext_resource type="Texture2D" uid="uid://tdmphbqeq2gy" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_Effects/Fire_Shot_1_1.png" id="25_d643i"]
-[ext_resource type="Texture2D" uid="uid://bwwxgisuuxsci" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_Effects/Fire_Shot_1_2.png" id="26_duaup"]
+[ext_resource type="Texture2D" uid="uid://7nw1yaywyvih" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_Effects/Fire_Shot_1_1.png" id="25_d643i"]
+[ext_resource type="Texture2D" uid="uid://exaxo2t05nu" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_Effects/Fire_Shot_1_2.png" id="26_duaup"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i30lc"]
 animations = [{
@@ -313,7 +313,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(2.005, 2.005)]
+"values": [Vector2(0.5, 0.5), Vector2(1, 1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -325,7 +325,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 42)]
+"values": [Vector2(0, 16)]
 }
 
 [sub_resource type="Animation" id="Animation_ul4ha"]
@@ -408,50 +408,64 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ul4ha"]
-radius = 19.0
+radius = 7.0
 
-[node name="Turret" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ul4ha"]
+size = Vector2(354, 434)
+
+[node name="Turret" type="Node2D" unique_id=136900581]
 script = ExtResource("1_ul4ha")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=970507002]
 texture_filter = 1
-position = Vector2(-5.2453663e-07, 12)
+position = Vector2(-1.7053026e-13, 3.000001)
 rotation = 1.5707964
+scale = Vector2(0.35, 0.35)
 sprite_frames = SubResource("SpriteFrames_i30lc")
 
-[node name="BulletSpawnMarker" type="Marker2D" parent="."]
-position = Vector2(-2.0981465e-06, 48)
+[node name="BulletSpawnMarker" type="Marker2D" parent="." unique_id=284192615]
+position = Vector2(0, 15)
 rotation = 1.5707964
 
-[node name="MussleFlash" type="Node2D" parent="."]
+[node name="MussleFlash" type="Node2D" parent="." unique_id=2088104365]
 visible = false
 texture_filter = 1
 position = Vector2(0, 42)
 
-[node name="FireShot12" type="Sprite2D" parent="MussleFlash"]
+[node name="FireShot12" type="Sprite2D" parent="MussleFlash" unique_id=908933403]
+self_modulate = Color(1, 1, 1, 0.8117647)
 texture_filter = 1
 position = Vector2(7.6293945e-06, 8.625053)
 rotation = -3.1415927
 scale = Vector2(0.11551842, 0.115518436)
 texture = ExtResource("26_duaup")
 
-[node name="FireShot11" type="Sprite2D" parent="MussleFlash"]
+[node name="FireShot11" type="Sprite2D" parent="MussleFlash" unique_id=1705572066]
+self_modulate = Color(1, 1, 1, 0.8509804)
 position = Vector2(-3.8146977e-06, 1.6250534)
 rotation = -3.1415925
 scale = Vector2(0.074597694, 0.074597634)
 texture = ExtResource("25_d643i")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_dgc3c")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2034246663]
+libraries/ = SubResource("AnimationLibrary_dgc3c")
 
-[node name="TurretBody" type="Area2D" parent="." groups=["enemies"]]
+[node name="TurretBody" type="Area2D" parent="." unique_id=1637874460 groups=["enemies"]]
 rotation = 1.5707964
 collision_layer = 2
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TurretBody"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TurretBody" unique_id=1170621600]
 shape = SubResource("CircleShape2D_ul4ha")
-debug_color = Color(0.99, 0, 0.23099978, 0)
+debug_color = Color(0.9882353, 0, 0.23137255, 0)
+
+[node name="VisibilityCone" type="Area2D" parent="." unique_id=471923097]
+unique_name_in_owner = true
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibilityCone" unique_id=455478176]
+position = Vector2(0, 197)
+shape = SubResource("RectangleShape2D_ul4ha")
+debug_color = Color(0.91764706, 0, 0.7019608, 0)

@@ -129,6 +129,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="ClickToRestartMessage" type="Label" parent="Central/CenterContainer" unique_id=1874309538]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Game Over. 
+<SPACE> to go again!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ClickToStartMessage" type="Label" parent="Central/CenterContainer" unique_id=273055755]
 unique_name_in_owner = true
 layout_mode = 2

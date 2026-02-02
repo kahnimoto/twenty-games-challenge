@@ -12,19 +12,27 @@ var _gems: Array[HealthGem] = []
 @onready var movement_type: Label = %ValueMovementType
 @onready var click_to_start_message: Label = %ClickToStartMessage
 @onready var speed: Label = %ValueSpeed
+@onready var click_to_restart_message: Label = %ClickToRestartMessage
 
 
 func _ready() -> void:
 	_reset_gems()
-	Events.level_loaded.connect(click_to_start_message.show)
+	click_to_restart_message.hide()
+	Events.level_loaded.connect(_on_level_loaded)
 	Events.lives_changed.connect(_update_health)
 	Events.player_started.connect(click_to_start_message.hide)
+	Events.game_over.connect(click_to_restart_message.show)
 	if show_debug:
 		Events.movement_type_changed.connect(_on_movement_type_changed)
 		Events.speed_changed.connect(func(v): speed.text = str(int(v)))
 	else:
 		debug.hide()
 
+
+func _on_level_loaded() -> void:
+	click_to_restart_message.hide()
+	click_to_start_message.show()
+	_update_health(Player.MAX_LIVES)
 
 func _update_health(value: int) -> void:
 	value = clampi(value, 0, Player.MAX_LIVES)

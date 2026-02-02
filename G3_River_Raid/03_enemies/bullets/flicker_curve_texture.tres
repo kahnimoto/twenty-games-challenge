@@ -1,0 +1,6 @@
+[gd_resource type="CurveTexture" format=3 uid="uid://t42i83mketen"]
+
+[ext_resource type="Curve" uid="uid://bhqmkawxhhij1" path="res://03_enemies/bullets/flicker_curve.tres" id="1_ee3mo"]
+
+[resource]
+curve = ExtResource("1_ee3mo")

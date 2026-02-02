@@ -8,6 +8,7 @@ signal player_is_aiming
 signal player_is_moving
 signal player_started
 signal level_loaded
+signal game_over
 
 #region test signals
 signal movement_type_changed(new_value: Game.MovementTypes)

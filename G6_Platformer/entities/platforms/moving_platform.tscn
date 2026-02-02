@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bex0unm1t8gpf"]
+
+[ext_resource type="Texture2D" uid="uid://bcdphvgcbar6g" path="res://assets/tilesets/1_Industrial_Tileset_1B.png" id="1_7x5x6"]
+[ext_resource type="Script" uid="uid://chf6h6nq6lc8v" path="res://entities/platforms/moving_platform.gd" id="1_q0beb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0beb"]
+atlas = ExtResource("1_7x5x6")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_napg4"]
+size = Vector2(96, 32)
+
+[node name="MovingPlatform" type="AnimatableBody2D" unique_id=247803874]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_q0beb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1831222789]
+texture_filter = 1
+position = Vector2(0, 16)
+texture = SubResource("AtlasTexture_q0beb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1044171477]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_napg4")
+debug_color = Color(0.023333311, 0, 0.7, 0)

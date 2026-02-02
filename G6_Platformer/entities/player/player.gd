@@ -30,6 +30,7 @@ var _double_jump_used := false
 var _was_in_air := true
 var _is_climbing_ledge := false
 var _gravity_modifier := 1.0
+var _platform: MovingPlatform
 #endregion
 
 #region nodes
@@ -53,6 +54,7 @@ func _physics_process(delta: float) -> void:
 	var on_ground = is_on_floor()
 	var direction := Input.get_axis("move_left", "move_right")
 	var grabbing_wall := orientation.scale.x == direction and _check_wall_grab()
+	var grabbing_platform := _check_platform_grab()
 	var jumping := Input.is_action_just_pressed("jump")
 	var on_wall := grabbing_wall and not _is_climbing_ledge
 	var climbing := on_wall and jumping and not ledge_check.is_colliding()
@@ -61,7 +63,7 @@ func _physics_process(delta: float) -> void:
 		#_just_missed_ledge = true
 	
 	_update_timers(delta, on_ground, on_wall, jumping, climbing)
-	_vertical_movement(delta, on_ground, on_wall, jumping, climbing)
+	_vertical_movement(delta, on_ground, on_wall, jumping, climbing, grabbing_platform)
 	_horizontal_movement(delta, on_ground, on_wall, jumping, climbing)
 	move_and_slide()
 	_adjust_animation(just_landed)
@@ -81,7 +83,7 @@ func _update_timers(delta: float, on_ground: bool, on_wall: bool, jumping: bool,
 		_jump_buffer_timer -= delta
 
 
-func _vertical_movement(delta: float, on_ground: bool, on_wall: bool, jumping: bool, climbing: bool) -> void:
+func _vertical_movement(delta: float, on_ground: bool, on_wall: bool, jumping: bool, climbing: bool, grabbing_platform: bool) -> void:
 	if climbing:
 		_is_climbing_ledge = true
 		velocity.y = JUMP_VELOCITY
@@ -94,7 +96,10 @@ func _vertical_movement(delta: float, on_ground: bool, on_wall: bool, jumping: b
 			_is_landing = false
 			_coyote_timer = 0.
 	else:
-		if not _double_jump_used and jumping:
+		if grabbing_platform and not jumping:
+			velocity.y = _platform.velocity.y
+			
+		elif not _double_jump_used and jumping:
 			jetpack_particles.emitting = true
 			velocity.y = DOUBLE_JUMP_VELOCITY
 			_is_landing = false
@@ -144,6 +149,15 @@ func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping:
 func _check_wall_grab() -> bool:
 	return wall_check.is_colliding() and not ground_check.is_colliding()
 
+
+func _check_platform_grab() -> bool:
+	if not wall_check.is_colliding():
+		return false
+	var c = wall_check.get_collider()
+	if c is MovingPlatform:
+		_platform = c as MovingPlatform
+		return true
+	return false
 
 func _adjust_animation(just_landed: bool) -> void:
 	if velocity.x != 0.0:

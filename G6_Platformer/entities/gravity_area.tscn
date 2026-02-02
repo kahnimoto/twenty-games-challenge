@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://ce4rlc4q7sin7"]
+
+[ext_resource type="Texture2D" uid="uid://gatynco1l6sn" path="res://assets/tilesets/3_Far_Background_Tile.png" id="1_uijvu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_accj2"]
+size = Vector2(327, 423)
+
+[node name="Area2D" type="Area2D" unique_id=1205969301]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+gravity_space_override = 3
+gravity = 163.333
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1300272652]
+position = Vector2(156.5, 201.5)
+shape = SubResource("RectangleShape2D_accj2")
+debug_color = Color(0.9, 0, 0.7800001, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2048616158]
+modulate = Color(1, 0.44, 0.44, 0.2901961)
+position = Vector2(155.99998, 200.5)
+scale = Vector2(10.374999, 13.21875)
+texture = ExtResource("1_uijvu")
+
+[node name="Label" type="Label" parent="." unique_id=141854385]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Moon Gravity"

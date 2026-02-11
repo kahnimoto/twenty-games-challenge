@@ -104,6 +104,8 @@ func take_damage(amount: int = 1) -> void:
 	var previous_lives := lives
 	lives = clampi(lives - amount, 0, MAX_LIVES)
 	if previous_lives != lives:
+		Effects.camera_shake()
+		Events.player_took_damage.emit()
 		Events.lives_changed.emit(lives)
 		invulnerable_time = INVUL_FRAME_DUR
 

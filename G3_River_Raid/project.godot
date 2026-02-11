@@ -26,6 +26,7 @@ Events="*res://00_globals/global_event_bus.gd"
 MousePointer="*uid://dnnvksqflkg7x"
 Game="*uid://dajw8w831s4ep"
 Hud="*uid://12mv65uqy4so"
+Effects="*uid://cmv2wtped25hc"
 
 [display]
 
@@ -43,6 +44,7 @@ player=""
 bullets=""
 upgrades=""
 landingpad=""
+camera=""
 
 [input]
 

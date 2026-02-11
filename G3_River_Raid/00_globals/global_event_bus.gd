@@ -7,6 +7,7 @@ signal lives_changed(new_value: int)
 signal player_is_aiming
 signal player_is_moving
 signal player_started
+signal player_took_damage
 signal level_loaded
 signal game_over
 

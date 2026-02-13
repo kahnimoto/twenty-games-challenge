@@ -1,0 +1,273 @@
+[gd_scene format=3 uid="uid://b6rhnei03phg0"]
+
+[ext_resource type="Script" uid="uid://cxl7uouq14yrt" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="Texture2D" uid="uid://b2wl3qcwbfmbl" path="res://assets/external/character/1.png" id="2_g1dw6"]
+[ext_resource type="Material" uid="uid://cpraarjf4onbw" path="res://player/player_jetpack.tres" id="2_rkbax"]
+[ext_resource type="Texture2D" uid="uid://cjh6v8rw67bbv" path="res://assets/external/character/6.png" id="3_g6k8r"]
+[ext_resource type="Texture2D" uid="uid://b4jfcaisanwg1" path="res://assets/external/character/Anim_Robot_Jump1_v1.1_spritesheet.png" id="4_boad6"]
+[ext_resource type="Texture2D" uid="uid://ctx8yc3t8rrj5" path="res://assets/external/character/Anim_Robot_Walk1_v1.1_spritesheet.png" id="5_rgyib"]
+[ext_resource type="AudioStream" uid="uid://bn3etb7nt3ra6" path="res://assets/external/sounds/jump1.mp3" id="7_rgyib"]
+[ext_resource type="AudioStream" uid="uid://bv6ht1y67egyx" path="res://assets/external/sounds/land.mp3" id="8_hg6s5"]
+
+[sub_resource type="Gradient" id="Gradient_rgyib"]
+offsets = PackedFloat32Array(0.4962963)
+colors = PackedColorArray(0.7166667, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hg6s5"]
+gradient = SubResource("Gradient_rgyib")
+width = 16
+height = 16
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
+size = Vector2(4, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgyib"]
+atlas = ExtResource("4_boad6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7c3f"]
+atlas = ExtResource("4_boad6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjvpn"]
+atlas = ExtResource("4_boad6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7qer"]
+atlas = ExtResource("4_boad6")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4c7l"]
+atlas = ExtResource("4_boad6")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knn7v"]
+atlas = ExtResource("4_boad6")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg6s5"]
+atlas = ExtResource("4_boad6")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t03j"]
+atlas = ExtResource("4_boad6")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
+atlas = ExtResource("4_boad6")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebec5"]
+atlas = ExtResource("4_boad6")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yllr7"]
+atlas = ExtResource("4_boad6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb6p2"]
+atlas = ExtResource("5_rgyib")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wodsf"]
+atlas = ExtResource("5_rgyib")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32hag"]
+atlas = ExtResource("5_rgyib")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqiix"]
+atlas = ExtResource("5_rgyib")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7oew"]
+atlas = ExtResource("5_rgyib")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c35mf"]
+atlas = ExtResource("5_rgyib")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65viv"]
+atlas = ExtResource("5_rgyib")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oul6g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g1dw6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_g6k8r")
+}],
+"loop": false,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgyib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7c3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjvpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7qer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4c7l")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_knn7v")
+}],
+"loop": false,
+"name": &"jumping",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hg6s5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t03j")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_2ieo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebec5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yllr7")
+}],
+"loop": false,
+"name": &"landing",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb6p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wodsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32hag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqiix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7oew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c35mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65viv")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 10.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_hg6s5"]
+offsets = PackedFloat32Array(0.59444445, 0.6537037)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8t03j"]
+gradient = SubResource("Gradient_hg6s5")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Player" type="CharacterBody2D" unique_id=1475977519]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_oul6g")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1749513785]
+visible = false
+position = Vector2(0, -8)
+texture = SubResource("GradientTexture2D_hg6s5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1246933170]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_rgyib")
+debug_color = Color(0.81, 0.097200006, 0.3585601, 0)
+
+[node name="Orientation" type="Node2D" parent="." unique_id=2146259961]
+
+[node name="Squish" type="Node2D" parent="Orientation" unique_id=14794289]
+unique_name_in_owner = true
+
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="Orientation/Squish" unique_id=1988078457]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(-2, -10)
+scale = Vector2(0.63, 0.63)
+sprite_frames = SubResource("SpriteFrames_oul6g")
+animation = &"jumping"
+autoplay = "default"
+
+[node name="JetpackParticles" type="GPUParticles2D" parent="Orientation" unique_id=1718924942]
+unique_name_in_owner = true
+position = Vector2(-2, -4)
+emitting = false
+amount = 40
+lifetime = 0.15000000000000002
+local_coords = true
+process_material = ExtResource("2_rkbax")
+
+[node name="WallCheck" type="RayCast2D" parent="Orientation" unique_id=1298449625]
+unique_name_in_owner = true
+position = Vector2(0, -8)
+target_position = Vector2(4, 0)
+collision_mask = 16
+
+[node name="GroundCheck" type="RayCast2D" parent="Orientation" unique_id=84961350]
+unique_name_in_owner = true
+target_position = Vector2(0, 8)
+collision_mask = 16
+
+[node name="LedgeCheck" type="RayCast2D" parent="Orientation" unique_id=16421483]
+unique_name_in_owner = true
+position = Vector2(0, -18)
+target_position = Vector2(11, 0)
+collision_mask = 16
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=146075816]
+unique_name_in_owner = true
+stream = ExtResource("7_rgyib")
+volume_db = -5.528
+
+[node name="LandingSound" type="AudioStreamPlayer2D" parent="." unique_id=893431882]
+unique_name_in_owner = true
+stream = ExtResource("8_hg6s5")
+volume_db = -13.821
+
+[node name="DigDirection" type="Node2D" parent="." unique_id=2017861207]
+unique_name_in_owner = true
+position = Vector2(0, -8)
+
+[node name="Sprite2D" type="Sprite2D" parent="DigDirection" unique_id=1965972641]
+self_modulate = Color(1, 0, 0, 0.50980395)
+texture_filter = 1
+position = Vector2(16, 0)
+texture = SubResource("GradientTexture2D_8t03j")
+
+[node name="DigMarker" type="Marker2D" parent="DigDirection" unique_id=527362554]
+unique_name_in_owner = true
+position = Vector2(16, 0)

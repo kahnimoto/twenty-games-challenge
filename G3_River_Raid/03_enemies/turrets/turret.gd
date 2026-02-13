@@ -11,6 +11,7 @@ var is_open := false
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var bullet_spawn_marker: Marker2D = $BulletSpawnMarker
 @onready var visibility_cone: Area2D = %VisibilityCone
+@onready var turret_body: Area2D = $TurretBody
 
 
 func _ready():
@@ -18,7 +19,7 @@ func _ready():
 	#get_tree().create_timer(randf_range(1, 4)).timeout.connect(_start_shooting)
 	visibility_cone.area_entered.connect(_on_player_seen)
 	visibility_cone.area_exited.connect(_on_player_left)
-
+	turret_body.area_entered.connect(_on_impact)
 
 func _on_player_seen(area: Area2D) -> void:
 	assert(area.is_in_group("player"))
@@ -29,6 +30,14 @@ func _on_player_seen(area: Area2D) -> void:
 func _on_player_left(area: Area2D) -> void:
 	assert(area.is_in_group("player"))
 	target = null
+
+
+func _on_impact(area: Area2D) -> void:
+	if area.is_in_group("player"):
+		# explode and give player damage
+		queue_free()
+	elif area.is_in_group("player_bullets"):
+		queue_free()
 
 
 func open() -> bool:

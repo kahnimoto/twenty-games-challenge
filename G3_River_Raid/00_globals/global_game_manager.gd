@@ -17,11 +17,16 @@ var movement_speed: float = 300.0:
 		Events.speed_changed.emit(v)
 var started := false
 var game_over := false
+var world_offset := 0.0
 
 
 func _ready() -> void:
 	Events.lives_changed.connect(_on_player_life_changed)
+	Events.level_loaded.connect(_on_level_loaded)
 
+
+func _on_level_loaded() -> void:
+	pass
 
 func _on_player_life_changed(new_value: int) -> void:
 	if not game_over and new_value <= 0:
@@ -31,6 +36,7 @@ func _on_player_life_changed(new_value: int) -> void:
 func restart() -> void:
 	started = false
 	game_over = false
+	world_offset = 0.0
 	get_tree().reload_current_scene()
 	Events.level_loaded.emit()
 

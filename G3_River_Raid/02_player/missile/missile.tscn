@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bn112euyrf567"]
+
+[ext_resource type="Script" uid="uid://burj7vcier4w1" path="res://02_player/missile/missile.gd" id="1_se6h4"]
+[ext_resource type="Texture2D" uid="uid://exaxo2t05nu" path="res://04_assets/external/spaceship-2d-game-sprites/Ship_effects/Fire_Shot_1_2.png" id="2_hoccc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hoccc"]
+radius = 2.0
+
+[sub_resource type="Gradient" id="Gradient_se6h4"]
+offsets = PackedFloat32Array(0.23311897, 0.25080386, 0.7749196, 0.7893891)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hoccc"]
+gradient = SubResource("Gradient_se6h4")
+width = 3
+height = 8
+
+[node name="Missile" type="Node2D" unique_id=1359382999]
+script = ExtResource("1_se6h4")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1278065645 groups=["player_bullets"]]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=847085312]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_hoccc")
+debug_color = Color(0.9843137, 0, 0.3647059, 0)
+
+[node name="FireShot12" type="Sprite2D" parent="." unique_id=956268825]
+position = Vector2(-11, 1.9073486e-06)
+rotation = 1.5707964
+scale = Vector2(0.039215688, 0.058139525)
+texture = ExtResource("2_hoccc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=460544082]
+texture_filter = 1
+position = Vector2(-4, 0)
+rotation = 1.5707964
+texture = SubResource("GradientTexture2D_hoccc")

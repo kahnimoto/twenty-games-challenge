@@ -8,6 +8,7 @@ radius = 16.03122
 
 [node name="Player" type="Node2D" unique_id=176165279]
 script = ExtResource("1_tlbqb")
+minimum_y_direction_to_shoot = 1.0
 
 [node name="ShipSprite" type="Sprite2D" parent="." unique_id=1939040609]
 z_index = 1
@@ -22,3 +23,18 @@ collision_mask = 46
 z_index = 2
 shape = SubResource("CircleShape2D_ynsuh")
 debug_color = Color(0.3370161, 0.61855817, 0, 0)
+
+[node name="Muzzles" type="Node2D" parent="." unique_id=2045565240]
+
+[node name="LeftMuzzle" type="Marker2D" parent="Muzzles" unique_id=1994990394]
+position = Vector2(-11, -24)
+
+[node name="RightMuzzle" type="Marker2D" parent="Muzzles" unique_id=960359110]
+position = Vector2(11, -24)
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1129374052]
+visible = false
+z_index = 2
+points = PackedVector2Array(0, 0, 50, 50)
+width = 8.0
+default_color = Color(1, 0.31, 0.31, 0.4392157)

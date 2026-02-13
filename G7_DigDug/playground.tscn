@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c8ocuxs66qqlp" path="res://level.gd" id="1_is3ju"]
 [ext_resource type="Texture2D" uid="uid://c6qqhhw5yth2h" path="res://assets/external/tilesets/tileset_mk_16_16_nature_tileset_godot.png" id="1_rupst"]
-[ext_resource type="Script" uid="uid://qxpt4q8lcd6j" path="res://camera.gd" id="2_wt17y"]
+[ext_resource type="Script" uid="uid://qxpt4q8lcd6j" path="res://nodes/camera.gd" id="2_wt17y"]
 [ext_resource type="PackedScene" uid="uid://b6rhnei03phg0" path="res://player/player.tscn" id="3_m8u5f"]
+[ext_resource type="Script" uid="uid://bwsyckvcebnju" path="res://ui/hud/hud.gd" id="5_o00ia"]
 
 [sub_resource type="Gradient" id="Gradient_m8u5f"]
 offsets = PackedFloat32Array(0.33574006, 0.99819493)
@@ -1708,3 +1709,47 @@ script = ExtResource("2_wt17y")
 [node name="Player" parent="." unique_id=1475977519 instance=ExtResource("3_m8u5f")]
 unique_name_in_owner = true
 position = Vector2(376, 376)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=566220270]
+script = ExtResource("5_o00ia")
+
+[node name="Control" type="Control" parent="HUD" unique_id=286540765]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="Control" parent="HUD/Control" unique_id=1703319145]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -567.0
+offset_top = 7.0
+offset_right = -280.0
+offset_bottom = 195.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+
+[node name="HFlowContainer" type="VBoxContainer" parent="HUD/Control/Buttons" unique_id=150005022]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -117.0
+offset_bottom = 66.0
+grow_horizontal = 0
+
+[node name="WallgrabToggle" type="CheckButton" parent="HUD/Control/Buttons/HFlowContainer" unique_id=1817514690]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Wallgrab"
+alignment = 2
+
+[node name="JetpackToggle" type="CheckButton" parent="HUD/Control/Buttons/HFlowContainer" unique_id=2101400749]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Jetpack"
+alignment = 2

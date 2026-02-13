@@ -69,11 +69,11 @@ func _physics_process(delta: float) -> void:
 	var just_landed: bool = _was_in_air and is_on_floor()
 	var on_ground = is_on_floor()
 	var direction := Input.get_axis("move_left", "move_right")
-	var grabbing_wall := orientation.scale.x == direction and _check_wall_grab()
-	var grabbing_platform := _check_platform_grab()
+	var grabbing_wall := orientation.scale.x == direction and _check_wall_grab() and Game.abilities[Game.Ability.WALLGRAB]
+	var grabbing_platform := _check_platform_grab() and Game.abilities[Game.Ability.WALLGRAB]
 	var jumping := Input.is_action_just_pressed("jump")
-	var on_wall := grabbing_wall and not _is_climbing_ledge
-	var climbing := on_wall and jumping and not ledge_check.is_colliding()
+	var on_wall := grabbing_wall and not _is_climbing_ledge and Game.abilities[Game.Ability.WALLGRAB]
+	var climbing := on_wall and jumping and not ledge_check.is_colliding() and Game.abilities[Game.Ability.WALLGRAB]
 	
 	_update_timers(delta, on_ground, on_wall, jumping, climbing)
 	_vertical_movement(delta, on_ground, on_wall, jumping, climbing, grabbing_platform)
@@ -111,8 +111,7 @@ func _vertical_movement(delta: float, on_ground: bool, on_wall: bool, jumping: b
 	else:
 		if grabbing_platform and not jumping:
 			velocity.y = _platform.velocity.y
-			
-		elif not _double_jump_used and jumping:
+		elif not _double_jump_used and jumping and Game.abilities[Game.Ability.JETPACK]:
 			jetpack_particles.emitting = true
 			velocity.y = DOUBLE_JUMP_VELOCITY
 			_is_landing = false

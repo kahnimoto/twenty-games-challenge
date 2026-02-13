@@ -1706,4 +1706,5 @@ limit_right = 960
 script = ExtResource("2_wt17y")
 
 [node name="Player" parent="." unique_id=1475977519 instance=ExtResource("3_m8u5f")]
+unique_name_in_owner = true
 position = Vector2(344, 316)

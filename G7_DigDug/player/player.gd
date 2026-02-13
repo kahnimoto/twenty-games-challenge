@@ -20,8 +20,10 @@ const GRAVITY_WHEN_FALLING := 1.5
 const WALL_JUMP_AWAY_ADJUSTMENT := 0.85
 const SNAP_VELOCITY_FACTOR := 8.0
 const MAX_SNAP_SPEED := 40.0
-const SNAP_STOP_DISTANCE := 1.5
-const SNAP_POSITION_SPEED := 80.0
+const SNAP_STOP_DISTANCE := 2.0
+const SNAP_POSITION_SPEED := 160.0
+const TAP_IMPULSE_FACTOR := 0.75
+const IDLE_SWITCH_DELAY := 0.12
 #endregion
 
 #region state variables
@@ -34,6 +36,9 @@ var _is_climbing_ledge := false
 var _gravity_modifier := 1.0
 var _platform: MovingPlatform
 var _facing: Vector2 = Vector2.RIGHT
+var _last_input_direction := 1 # 1 = right, -1 = left, 0 = none
+var _input_hold_time := 0.0
+var _idle_timer := 0.0
 #endregion
 
 #region nodes
@@ -74,7 +79,7 @@ func _physics_process(delta: float) -> void:
 	_vertical_movement(delta, on_ground, on_wall, jumping, climbing, grabbing_platform)
 	_horizontal_movement(delta, on_ground, on_wall, jumping, climbing)
 	move_and_slide()
-	_adjust_animation(just_landed)
+	_adjust_animation(just_landed, delta)
 	_was_in_air = not on_ground
 
 
@@ -148,8 +153,16 @@ func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping:
 		velocity.x = -direction * SPEED * WALL_JUMP_AWAY_ADJUSTMENT
 	else:
 		if direction:
+			# remember last non-zero input direction for facing
+			_last_input_direction = -1 if direction < 0.0 else 1
+			# detect a quick tap (initial press) and give a small impulse so a
+			# single tap steps one tile instead of jostling in place
+			if _input_hold_time == 0.0 and on_ground and not on_wall and abs(velocity.x) < 6.0:
+				velocity.x = direction * SPEED * TAP_IMPULSE_FACTOR
+			_input_hold_time += delta
 			velocity.x = move_toward(velocity.x, direction * SPEED, acceleration * delta)
-		else: 
+		else:
+			_input_hold_time = 0.0
 			var friction := GROUND_FRICTION if on_ground else AIR_FRICTION
 			# When on ground with no input, gently snap toward the center of
 			# the nearest grid cell instead of stopping at arbitrary positions.
@@ -186,17 +199,22 @@ func _check_platform_grab() -> bool:
 		return true
 	return false
 
-func _adjust_animation(just_landed: bool) -> void:
+func _adjust_animation(just_landed: bool, delta: float = 0.0) -> void:
 	var dig_dir := _facing
-	if velocity.x != 0.0:
+	# If player explicitly looks up/down, prefer that for digging direction.
+	if Input.is_action_pressed("look_down"):
+		dig_dir = Vector2.DOWN
+	elif Input.is_action_pressed("look_up"):
+		dig_dir = Vector2.UP
+	elif abs(velocity.x) > 0.1:
 		orientation.scale.x = -1. if velocity.x < 0. else 1.0
 		_facing = Vector2.LEFT if velocity.x < 0 else Vector2.RIGHT
 		dig_dir = _facing
-	else:
-		if Input.is_action_pressed("look_down"):
-			dig_dir = Vector2.DOWN
-		elif Input.is_action_pressed("look_up"):
-			dig_dir = Vector2.UP
+	elif _last_input_direction != 0:
+		# prefer the last explicit player input when nearly stopped
+		orientation.scale.x = -1. if _last_input_direction < 0 else 1.0
+		_facing = Vector2.LEFT if _last_input_direction < 0 else Vector2.RIGHT
+		dig_dir = _facing
 	
 	match dig_dir:
 		Vector2.RIGHT:
@@ -224,8 +242,12 @@ func _adjust_animation(just_landed: bool) -> void:
 		if abs(velocity.x) > 0.1:
 			if sprite.animation != "walking":
 				sprite.play("walking")
+			_idle_timer = 0.0
 		else:
-			sprite.play("default")
+			_idle_timer += delta
+			if _idle_timer >= IDLE_SWITCH_DELAY:
+				if sprite.animation != "default":
+					sprite.play("default")
 		squish.scale.y = 1.0
 	else:
 		if velocity.y < 0:
@@ -244,4 +266,4 @@ func _adjust_animation(just_landed: bool) -> void:
 func _on_animation_finished() -> void:
 	if sprite.animation == "landing":
 		_is_landing = false
-		_adjust_animation(false)
+		_adjust_animation(false, 0.0)

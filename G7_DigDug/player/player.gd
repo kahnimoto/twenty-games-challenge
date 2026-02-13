@@ -18,6 +18,9 @@ const GO_DOWN_SPEED := 3.0
 const GRAVITY_WHEN_HOLDING_JUMP := 0.4
 const GRAVITY_WHEN_FALLING := 1.5
 const WALL_JUMP_AWAY_ADJUSTMENT := 0.85
+const SNAP_VELOCITY_FACTOR := 8.0
+const MAX_SNAP_SPEED := 40.0
+const SNAP_STOP_DISTANCE := 1.5
 #endregion
 
 #region state variables
@@ -147,7 +150,20 @@ func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping:
 			velocity.x = move_toward(velocity.x, direction * SPEED, acceleration * delta)
 		else: 
 			var friction := GROUND_FRICTION if on_ground else AIR_FRICTION
-			velocity.x = move_toward(velocity.x, 0, friction * delta)
+			# When on ground with no input, gently snap toward the center of
+			# the nearest grid cell instead of stopping at arbitrary positions.
+			if on_ground:
+				var grid_center_x: float = round((global_position.x - Game.TILE_SIZE * 0.5) / Game.TILE_SIZE) * Game.TILE_SIZE + Game.TILE_SIZE * 0.5
+				var dist := grid_center_x - global_position.x
+				if abs(dist) < SNAP_STOP_DISTANCE:
+					velocity.x = move_toward(velocity.x, 0, friction * delta)
+					if abs(velocity.x) < 1.0:
+						global_position = Vector2(grid_center_x, global_position.y)
+				else:
+					var desired_speed: float = clampf(dist * SNAP_VELOCITY_FACTOR, -MAX_SNAP_SPEED, MAX_SNAP_SPEED)
+					velocity.x = move_toward(velocity.x, desired_speed, friction * delta)
+			else:
+				velocity.x = move_toward(velocity.x, 0, friction * delta)
 
 
 func _check_wall_grab() -> bool:

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4jfcaisanwg1" path="res://assets/player/Anim_Robot_Jump1_v1.1_spritesheet.png" id="4_bectd"]
 [ext_resource type="Texture2D" uid="uid://ctx8yc3t8rrj5" path="res://assets/player/Anim_Robot_Walk1_v1.1_spritesheet.png" id="5_wvtmh"]
 [ext_resource type="Script" uid="uid://xxynnie4erx6" path="res://camera.gd" id="6_7thud"]
+[ext_resource type="Material" uid="uid://xhkderwuptdf" path="res://player_jetpack.tres" id="7_bectd"]
 [ext_resource type="AudioStream" uid="uid://cbnk0gvpr0q5y" path="res://assets/sounds/jump1.mp3" id="7_qiwj3"]
 [ext_resource type="AudioStream" uid="uid://df3hk2kio65jj" path="res://assets/sounds/land.mp3" id="8_26q78"]
 
@@ -154,33 +155,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_8fjmc"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.24705882)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qiwj3"]
-gradient = SubResource("Gradient_8fjmc")
-
-[sub_resource type="Curve" id="Curve_8fjmc"]
-_data = [Vector2(0, 0.49162018), 0.0, 3.108309, 0, 0, Vector2(0.19318181, 0.89106154), 0.0, 0.0, 0, 0, Vector2(0.66193175, 0.5497207), -2.6586807, -2.6586807, 0, 0, Vector2(0.9886364, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_qiwj3"]
-curve = SubResource("Curve_8fjmc")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_26q78"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 1.0
-direction = Vector3(-0.3, 1, 0)
-spread = 30.0
-initial_velocity_min = 71.79
-initial_velocity_max = 71.79
-gravity = Vector3(0, 98, 0)
-scale_min = 2.0
-scale_max = 3.0
-scale_curve = SubResource("CurveTexture_qiwj3")
-color_ramp = SubResource("GradientTexture1D_qiwj3")
-
 [node name="Player" type="CharacterBody2D" unique_id=191155490]
 collision_layer = 2
 collision_mask = 252
@@ -205,8 +179,8 @@ unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(-2, -16)
 sprite_frames = SubResource("SpriteFrames_p0my8")
+animation = &"landing"
 autoplay = "default"
-frame_progress = 1.0
 
 [node name="JetpackParticles" type="GPUParticles2D" parent="Orientation" unique_id=315257446]
 unique_name_in_owner = true
@@ -215,7 +189,7 @@ emitting = false
 amount = 40
 lifetime = 0.15000000000000002
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_26q78")
+process_material = ExtResource("7_bectd")
 
 [node name="WallCheck" type="RayCast2D" parent="Orientation" unique_id=1294832653]
 unique_name_in_owner = true

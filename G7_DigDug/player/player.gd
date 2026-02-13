@@ -21,6 +21,7 @@ const WALL_JUMP_AWAY_ADJUSTMENT := 0.85
 const SNAP_VELOCITY_FACTOR := 8.0
 const MAX_SNAP_SPEED := 40.0
 const SNAP_STOP_DISTANCE := 1.5
+const SNAP_POSITION_SPEED := 80.0
 #endregion
 
 #region state variables
@@ -160,8 +161,14 @@ func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping:
 					if abs(velocity.x) < 1.0:
 						global_position = Vector2(grid_center_x, global_position.y)
 				else:
-					var desired_speed: float = clampf(dist * SNAP_VELOCITY_FACTOR, -MAX_SNAP_SPEED, MAX_SNAP_SPEED)
-					velocity.x = move_toward(velocity.x, desired_speed, friction * delta)
+					# If we still have momentum, let friction slow it normally.
+					if abs(velocity.x) > 4.0:
+						velocity.x = move_toward(velocity.x, 0, friction * delta)
+					else:
+						# Stop velocity and nudge position toward tile center directly
+						velocity.x = 0.0
+						var new_x: float = move_toward(global_position.x, grid_center_x, SNAP_POSITION_SPEED * delta)
+						global_position = Vector2(new_x, global_position.y)
 			else:
 				velocity.x = move_toward(velocity.x, 0, friction * delta)
 

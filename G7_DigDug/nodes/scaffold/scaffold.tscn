@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bexlitfnfcfwk"]
+
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/external/tilesets/Scaffolding_and_BG_Parts (16 x 16).png" id="1_il3lv"]
+[ext_resource type="Script" uid="uid://b4qhsii0c24xl" path="res://nodes/scaffold/scaffold.gd" id="1_rn1s1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rn1s1"]
+atlas = ExtResource("1_il3lv")
+region = Rect2(64, 80, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_754k8"]
+size = Vector2(16, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r81f1"]
+size = Vector2(48, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xl2gq"]
+size = Vector2(48, 13)
+
+[node name="Scaffold" type="StaticBody2D" unique_id=568145714]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_rn1s1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1104737379]
+texture_filter = 1
+texture = SubResource("AtlasTexture_rn1s1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1315753459]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_754k8")
+debug_color = Color(0, 0.64, 0.35200012, 0)
+
+[node name="AreaTurnOn" type="Area2D" parent="." unique_id=741492951]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTurnOn" unique_id=1857731674]
+position = Vector2(0, -21.5)
+shape = SubResource("RectangleShape2D_r81f1")
+debug_color = Color(0.98, 0, 0.3429999, 0)
+
+[node name="AreaTurnOff" type="Area2D" parent="." unique_id=2019769177]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTurnOff" unique_id=99013158]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_xl2gq")
+debug_color = Color(0.14666653, 0, 0.88, 0)

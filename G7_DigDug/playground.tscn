@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://qxpt4q8lcd6j" path="res://nodes/camera.gd" id="2_wt17y"]
 [ext_resource type="PackedScene" uid="uid://bexlitfnfcfwk" path="res://nodes/scaffold/scaffold.tscn" id="3_4bqqs"]
 [ext_resource type="PackedScene" uid="uid://b6rhnei03phg0" path="res://player/player.tscn" id="3_m8u5f"]
+[ext_resource type="PackedScene" uid="uid://b8uxueg5l8ayd" path="res://nodes/scaffold/scaffold_leggs.tscn" id="4_ynsuh"]
 [ext_resource type="Script" uid="uid://bwsyckvcebnju" path="res://ui/hud/hud.gd" id="5_o00ia"]
 
 [sub_resource type="Gradient" id="Gradient_m8u5f"]
@@ -30,6 +31,7 @@ noise = SubResource("FastNoiseLite_ynsuh")
 color_ramp = SubResource("Gradient_4bqqs")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wt17y"]
+resource_name = "dirt"
 texture = ExtResource("1_rupst")
 1:0/0 = 0
 1:0/0/terrain_set = 0
@@ -1655,7 +1657,9 @@ texture = ExtResource("1_rupst")
 8:24/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ynsuh"]
+resource_name = "scaffolds"
 scenes/1/scene = ExtResource("3_4bqqs")
+scenes/2/scene = ExtResource("4_ynsuh")
 
 [sub_resource type="TileSet" id="TileSet_m8u5f"]
 physics_layer_0/collision_layer = 16

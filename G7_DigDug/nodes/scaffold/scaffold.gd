@@ -3,7 +3,7 @@ extends StaticBody2D
 
 const LAYER := 6
 
-var on := true
+var on := false
 
 @onready var area_turn_on: Area2D = $AreaTurnOn
 @onready var area_turn_off: Area2D = $AreaTurnOff

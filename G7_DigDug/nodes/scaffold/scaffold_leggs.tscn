@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b8uxueg5l8ayd"]
+
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/external/tilesets/Scaffolding_and_BG_Parts (16 x 16).png" id="1_cjpnb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c72bw"]
+atlas = ExtResource("1_cjpnb")
+region = Rect2(64, 96, 16, 16)
+
+[node name="ScaffoldLegs" type="Node2D" unique_id=1715466462]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=163798667]
+texture_filter = 1
+texture = SubResource("AtlasTexture_c72bw")

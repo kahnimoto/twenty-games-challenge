@@ -9,3 +9,5 @@ signal level_loaded
 signal map_changed
 signal dig_started(position: Vector2)
 signal dig_complete(position: Vector2)
+signal scaffold_requested(position: Vector2)
+signal scaffold_placed(position: Vector2)

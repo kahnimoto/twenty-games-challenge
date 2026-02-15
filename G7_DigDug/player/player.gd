@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 #region movement config
 const SPEED := 100.0
-const JUMP_VELOCITY := -150.0
+const JUMP_VELOCITY := -185.0
 const DOUBLE_JUMP_VELOCITY := JUMP_VELOCITY
 const COYOTE_DURATION := 0.25 # About 9 frames at 60fps
 const COYOTE_DURATION_FROM_WALL_GRAB := 0.45
@@ -53,16 +53,22 @@ var _idle_timer := 0.0
 @onready var squish: Node2D = %Squish
 @onready var dig_marker: Marker2D = %DigMarker
 @onready var dig_direction: Node2D = %DigDirection
-
-
 #endregion
+
 
 func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dig"):
 		Events.dig_started.emit(dig_marker.global_position)
+	if event.is_action_released("place_scaffold"):
+		if Input.is_action_pressed("look_up"):
+			Events.scaffold_requested.emit(global_position - Vector2(0, 24))
+		else:
+			Events.scaffold_requested.emit(global_position - Vector2(0, 8))
+			
 			
 
 func _physics_process(delta: float) -> void:
@@ -141,6 +147,8 @@ func _get_modified_gravity() -> float:
 
 func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping: bool, climbing: bool) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
+	if Input.is_action_pressed("place_scaffold"):
+		direction = 0.0
 	var acceleration := GROUND_ACCELERATION if on_ground else AIR_ACCELERATION
 	if Input.is_action_pressed("go_down"):
 		velocity.x = 0.0
@@ -197,6 +205,7 @@ func _check_platform_grab() -> bool:
 		_platform = c as MovingPlatform
 		return true
 	return false
+
 
 func _adjust_animation(just_landed: bool, delta: float = 0.0) -> void:
 	var dig_dir := _facing

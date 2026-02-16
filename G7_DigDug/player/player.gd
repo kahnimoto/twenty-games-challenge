@@ -26,6 +26,8 @@ const TAP_IMPULSE_FACTOR := 0.75
 const IDLE_SWITCH_DELAY := 0.12
 #endregion
 
+@export var level: Level
+
 #region state variables
 var _jump_buffer_timer := 0.0
 var _coyote_timer := 0.0
@@ -37,8 +39,10 @@ var _gravity_modifier := 1.0
 var _platform: MovingPlatform
 var _facing: Vector2 = Vector2.RIGHT
 var _last_input_direction := 1 # 1 = right, -1 = left, 0 = none
-var _input_hold_time := 0.0
 var _idle_timer := 0.0
+var _turning := false
+var _turning_around := 0.0
+var _is_digging := false
 #endregion
 
 #region nodes
@@ -58,19 +62,22 @@ var _idle_timer := 0.0
 
 func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
+	assert(level is Level)
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("dig"):
-		Events.dig_started.emit(dig_marker.global_position)
-	if event.is_action_released("place_scaffold"):
+	if event.is_action_pressed("dig") and not _is_digging:
+		_dig()
+	elif event.is_action_released("place_scaffold"):
 		if Input.is_action_pressed("look_up"):
 			Events.scaffold_requested.emit(global_position - Vector2(0, 24))
 		else:
 			Events.scaffold_requested.emit(global_position - Vector2(0, 8))
-			
-			
+	elif event.is_action_pressed("place_bridge"):
+		Events.scaffold_requested.emit(dig_marker.global_position + Vector2.DOWN * 16)
 
+
+#region processing
 func _physics_process(delta: float) -> void:
 	var just_landed: bool = _was_in_air and is_on_floor()
 	var on_ground = is_on_floor()
@@ -80,6 +87,9 @@ func _physics_process(delta: float) -> void:
 	var jumping := Input.is_action_just_pressed("jump")
 	var on_wall := grabbing_wall and not _is_climbing_ledge and Game.abilities[Game.Ability.WALLGRAB]
 	var climbing := on_wall and jumping and not ledge_check.is_colliding() and Game.abilities[Game.Ability.WALLGRAB]
+	
+	if not _is_digging and Input.is_action_pressed("dig"):
+		_dig()
 	
 	_update_timers(delta, on_ground, on_wall, jumping, climbing)
 	_vertical_movement(delta, on_ground, on_wall, jumping, climbing, grabbing_platform)
@@ -140,12 +150,24 @@ func _vertical_movement(delta: float, on_ground: bool, on_wall: bool, jumping: b
 			velocity.y += _get_modified_gravity() * delta * GRAVITY_WHEN_FALLING
 
 
-func _get_modified_gravity() -> float:
-	var gravity_vector := get_gravity()
-	return gravity_vector.y * _gravity_modifier
-
-
 func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping: bool, climbing: bool) -> void:
+	if Input.is_action_just_pressed("move_left") and _facing == Vector2.RIGHT:
+		_turning_around = 0.0
+		_facing = Vector2.LEFT
+		_turning = true
+		_turning_around += delta
+		return
+	if Input.is_action_just_pressed("move_right") and _facing == Vector2.LEFT:
+		_turning_around = 0.0
+		_facing = Vector2.RIGHT
+		_turning = true
+		_turning_around += delta
+		return
+	_turning_around += delta
+	if _turning_around <= 0.15:
+		return
+	else:
+		_turning = false
 	var direction := Input.get_axis("move_left", "move_right")
 	if Input.is_action_pressed("place_scaffold"):
 		direction = 0.0
@@ -160,19 +182,9 @@ func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping:
 		velocity.x = -direction * SPEED * WALL_JUMP_AWAY_ADJUSTMENT
 	else:
 		if direction:
-			# remember last non-zero input direction for facing
-			_last_input_direction = -1 if direction < 0.0 else 1
-			# detect a quick tap (initial press) and give a small impulse so a
-			# single tap steps one tile instead of jostling in place
-			if _input_hold_time == 0.0 and on_ground and not on_wall and abs(velocity.x) < 6.0:
-				velocity.x = direction * SPEED * TAP_IMPULSE_FACTOR
-			_input_hold_time += delta
 			velocity.x = move_toward(velocity.x, direction * SPEED, acceleration * delta)
 		else:
-			_input_hold_time = 0.0
 			var friction := GROUND_FRICTION if on_ground else AIR_FRICTION
-			# When on ground with no input, gently snap toward the center of
-			# the nearest grid cell instead of stopping at arbitrary positions.
 			if on_ground:
 				var grid_center_x: float = round((global_position.x - Game.TILE_SIZE * 0.5) / Game.TILE_SIZE) * Game.TILE_SIZE + Game.TILE_SIZE * 0.5
 				var dist := grid_center_x - global_position.x
@@ -191,6 +203,14 @@ func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping:
 						global_position = Vector2(new_x, global_position.y)
 			else:
 				velocity.x = move_toward(velocity.x, 0, friction * delta)
+
+#endregion
+
+
+#region private methods
+func _get_modified_gravity() -> float:
+	var gravity_vector := get_gravity()
+	return gravity_vector.y * _gravity_modifier
 
 
 func _check_wall_grab() -> bool:
@@ -220,9 +240,8 @@ func _adjust_animation(just_landed: bool, delta: float = 0.0) -> void:
 		dig_dir = _facing
 	elif _last_input_direction != 0:
 		# prefer the last explicit player input when nearly stopped
-		orientation.scale.x = -1. if _last_input_direction < 0 else 1.0
-		_facing = Vector2.LEFT if _last_input_direction < 0 else Vector2.RIGHT
 		dig_dir = _facing
+	orientation.scale.x = -1. if _facing == Vector2.LEFT else 1.0
 	
 	match dig_dir:
 		Vector2.RIGHT:
@@ -234,7 +253,6 @@ func _adjust_animation(just_landed: bool, delta: float = 0.0) -> void:
 		Vector2.UP:
 			dig_direction.rotation_degrees = 270.
 	
-	# Figure out if we need to switch to landing
 	if just_landed:
 		_is_climbing_ledge = false
 		_is_landing = true
@@ -275,3 +293,11 @@ func _on_animation_finished() -> void:
 	if sprite.animation == "landing":
 		_is_landing = false
 		_adjust_animation(false, 0.0)
+
+
+func _dig() -> void:
+	_is_digging = true
+	await level.dig(dig_marker.global_position)
+	_is_digging = false
+
+#endregion

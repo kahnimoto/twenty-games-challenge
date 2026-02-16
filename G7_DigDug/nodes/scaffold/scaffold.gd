@@ -1,3 +1,4 @@
+class_name Scaffold
 extends StaticBody2D
 
 
@@ -12,6 +13,13 @@ var on := false
 func _ready() -> void:
 	area_turn_on.area_entered.connect(_on_above_entered)
 	area_turn_off.area_entered.connect(_on_below_entered)
+
+
+func _enter_tree() -> void:
+	var player: Player = get_tree().get_first_node_in_group("player")
+	assert(player is Player)
+	if player.global_position.y < global_position.y:
+		toggle(true)
 
 
 func _input(event: InputEvent) -> void:
@@ -29,7 +37,7 @@ func _on_above_entered(other: Area2D) -> void:
 func _on_below_entered(other: Area2D) -> void:
 	if on and other.is_in_group("player_head"):
 		toggle(false)
-	
+
 
 func toggle(_on: bool) -> void:
 	on = _on

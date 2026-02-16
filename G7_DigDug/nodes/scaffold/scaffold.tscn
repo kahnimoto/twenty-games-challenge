@@ -8,13 +8,13 @@ atlas = ExtResource("1_il3lv")
 region = Rect2(64, 80, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_754k8"]
-size = Vector2(16, 9)
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r81f1"]
-size = Vector2(48, 21)
+size = Vector2(48, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xl2gq"]
-size = Vector2(48, 13)
+size = Vector2(48, 16)
 
 [node name="Scaffold" type="StaticBody2D" unique_id=568145714]
 collision_layer = 0
@@ -26,7 +26,6 @@ texture_filter = 1
 texture = SubResource("AtlasTexture_rn1s1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1315753459]
-position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_754k8")
 debug_color = Color(0, 0.64, 0.35200012, 0)
 
@@ -36,7 +35,7 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTurnOn" unique_id=1857731674]
-position = Vector2(0, -21.5)
+position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_r81f1")
 debug_color = Color(0.98, 0, 0.3429999, 0)
 
@@ -46,6 +45,5 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTurnOff" unique_id=99013158]
-position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_xl2gq")
 debug_color = Color(0.14666653, 0, 0.88, 0)

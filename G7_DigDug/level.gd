@@ -44,7 +44,7 @@ func _on_dig_complete(_position: Vector2) -> void:
 	var tile_type: StringName = data.get_custom_data("type") as StringName
 	var diggable := data.get_custom_data("diggable") as bool
 	if diggable:
-		print("Digging: %s %d, %d ( %d / %d )" % [tile_type, location.x, location.y, terrain, terrain_set])
+		#print("Digging: %s %d, %d ( %d / %d )" % [tile_type, location.x, location.y, terrain, terrain_set])
 		tilemap.set_cells_terrain_connect([location], 0, -1)
 	else:
 		print("TOO HARD: %s %d, %d ( %d / %d )" % [tile_type, location.x, location.y, terrain, terrain_set])
@@ -77,7 +77,12 @@ func get_tile_instance(map: TileMapLayer, location: Vector2i) -> Variant:
 
 func is_cell_open(location: Vector2i) -> bool:
 	var source_id := tilemap.get_cell_source_id(location)
-	return source_id == -1
+	if source_id == -1:
+		return true
+	var cell = tilemap.get_cell_alternative_tile(location)
+	if source_id == TILE_COLLECTION and cell == TILE_SCAFFOLD_LEGGS:
+		return true
+	return false
 
 
 func is_cell_diggable(location: Vector2i) -> bool:

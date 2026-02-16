@@ -24,6 +24,7 @@ const SNAP_STOP_DISTANCE := 2.0
 const SNAP_POSITION_SPEED := 160.0
 const TAP_IMPULSE_FACTOR := 0.75
 const IDLE_SWITCH_DELAY := 0.12
+const POSITION_TICK := 2.0
 #endregion
 
 @export var level: Level
@@ -43,6 +44,7 @@ var _idle_timer := 0.0
 var _turning := false
 var _turning_around := 0.0
 var _is_digging := false
+var _position_timer := 0.0
 #endregion
 
 #region nodes
@@ -65,16 +67,6 @@ func _ready() -> void:
 	assert(level is Level)
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_released("place_scaffold"):
-		if Input.is_action_pressed("look_up"):
-			Events.scaffold_requested.emit(global_position - Vector2(0, 24))
-		else:
-			Events.scaffold_requested.emit(global_position - Vector2(0, 8))
-	elif event.is_action_pressed("place_bridge"):
-		Events.scaffold_requested.emit(dig_marker.global_position + Vector2.DOWN * 16)
-
-
 #region processing
 func _physics_process(delta: float) -> void:
 	var just_landed: bool = _was_in_air and is_on_floor()
@@ -88,6 +80,22 @@ func _physics_process(delta: float) -> void:
 	
 	if not _is_digging and on_ground and Input.is_action_pressed("dig"):
 		_dig()
+	if Input.is_action_just_pressed("place_scaffold"):
+		if on_ground:
+			if Input.is_action_pressed("look_up"):
+				Events.scaffold_requested.emit(global_position + Vector2.UP * Game.TILE_SIZE * 1.5)
+			else:
+				Events.scaffold_requested.emit(global_position + Vector2.UP * Game.TILE_SIZE * 0.5)
+		else:
+			# TODO even more adjustment with larger speed?
+			if velocity.x > 0.0:
+				Events.scaffold_requested.emit(global_position + Vector2.DOWN * Game.TILE_SIZE * 1.5 + Vector2.RIGHT * Game.TILE_SIZE)
+			elif velocity.x < 0.0:
+				Events.scaffold_requested.emit(global_position + Vector2.DOWN * Game.TILE_SIZE * 1.5 + Vector2.LEFT * Game.TILE_SIZE)
+			else:
+				Events.scaffold_requested.emit(global_position + Vector2.DOWN * Game.TILE_SIZE * 1.5)
+	if Input.is_action_just_pressed("place_bridge"): # TODO allow holding button to place more?
+		Events.scaffold_requested.emit(dig_marker.global_position + Vector2.DOWN * Game.TILE_SIZE)
 	
 	_update_timers(delta, on_ground, on_wall, jumping, climbing)
 	_vertical_movement(delta, on_ground, on_wall, jumping, climbing, grabbing_platform)
@@ -98,9 +106,7 @@ func _physics_process(delta: float) -> void:
 	if just_landed or grabbing_wall or _position_timer > POSITION_TICK:
 		_position_timer = 0.0
 		Events.player_position_changed.emit(global_position)
-	
-const POSITION_TICK := 2.0
-var _position_timer := 0.0
+
 
 func _update_timers(delta: float, on_ground: bool, on_wall: bool, jumping: bool, climbing: bool) -> void:
 	if on_wall:

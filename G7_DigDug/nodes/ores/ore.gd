@@ -1,3 +1,4 @@
+@tool
 class_name Ore
 extends Node2D
 

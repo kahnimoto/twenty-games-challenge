@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://b6rhnei03phg0" path="res://player/player.tscn" id="3_m8u5f"]
 [ext_resource type="PackedScene" uid="uid://b8uxueg5l8ayd" path="res://nodes/scaffold/scaffold_leggs.tscn" id="4_ynsuh"]
 [ext_resource type="Script" uid="uid://bwsyckvcebnju" path="res://ui/hud/hud.gd" id="5_o00ia"]
-[ext_resource type="PackedScene" uid="uid://dgchvyb4ml6x0" path="res://nodes/ores/ore.tscn" id="6_v7dth"]
+[ext_resource type="PackedScene" uid="uid://bj6v1vc50wt6w" path="res://nodes/ores/metals/iron.tscn" id="6_h1jm5"]
+[ext_resource type="PackedScene" uid="uid://6hbgtlhmgiud" path="res://nodes/ores/metals/copper.tscn" id="6_pi42a"]
+[ext_resource type="PackedScene" uid="uid://b2n5le45s3257" path="res://nodes/ores/metals/gold.tscn" id="7_pio1y"]
 
 [sub_resource type="Gradient" id="Gradient_m8u5f"]
 offsets = PackedFloat32Array(0.33574006, 0.99819493)
@@ -1685,10 +1687,13 @@ sources/1 = SubResource("TileSetScenesCollectionSource_ynsuh")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_pi42a"]
 resource_name = "Ores"
-scenes/1/scene = ExtResource("6_v7dth")
-scenes/1/display_placeholder = true
+scenes/2/scene = ExtResource("6_pi42a")
+scenes/3/scene = ExtResource("6_h1jm5")
+scenes/4/scene = ExtResource("7_pio1y")
 
 [sub_resource type="TileSet" id="TileSet_h1jm5"]
+custom_data_layer_0/name = "metal"
+custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetScenesCollectionSource_pi42a")
 
 [node name="Level" type="Node" unique_id=231827837 node_paths=PackedStringArray("tilemap", "object_tilemap")]
@@ -1720,7 +1725,7 @@ tile_set = SubResource("TileSet_m8u5f")
 [node name="Ores" type="TileMapLayer" parent="world" unique_id=299633044]
 self_modulate = Color(1.0368084, 0.78488356, 0.025172979, 1)
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAaABoAAAAAAAAAAQAdABkAAAAAAAAAAQAeABoAAAAAAAAAAQAiABkAAAAAAAAAAQAjABoAAAAAAAAAAQAnABoAAAAAAAAAAQAWABcAAAAAAAAAAQAUABcAAAAAAAAAAQASABcAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAAMABcAAAAAAAAAAgANABcAAAAAAAAAAgAMABgAAAAAAAAAAgAnABkAAAAAAAAAAgAmAB0AAAAAAAAAAgAkAB0AAAAAAAAAAgAvABcAAAAAAAAAAgAdABgAAAAAAAAAAgATABcAAAAAAAAAAgAQACAAAAAAAAAAAwAQACEAAAAAAAAAAwAeACMAAAAAAAAAAwArACEAAAAAAAAAAwAqACIAAAAAAAAAAwAoACQAAAAAAAAAAwAjACkAAAAAAAAAAwAXACgAAAAAAAAAAwARADMAAAAAAAAABAARAC4AAAAAAAAABAAYADMAAAAAAAAABAAsAC0AAAAAAAAABAAkADUAAAAAAAAABAAcACwAAAAAAAAABAAkABcAAAAAAAAAAwAMACQAAAAAAAAABAA=")
 tile_set = SubResource("TileSet_h1jm5")
 
 [node name="Camera" type="Camera2D" parent="world" unique_id=229695734]

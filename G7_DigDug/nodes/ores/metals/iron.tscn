@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bj6v1vc50wt6w"]
+
+[ext_resource type="Script" uid="uid://bho2p5b75rl7t" path="res://nodes/ores/ore.gd" id="1_y02u4"]
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/external/tilesets/Scaffolding_and_BG_Parts (16 x 16).png" id="2_4onp8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n0ju"]
+atlas = ExtResource("2_4onp8")
+region = Rect2(272, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66piv"]
+atlas = ExtResource("2_4onp8")
+region = Rect2(304, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kg84"]
+atlas = ExtResource("2_4onp8")
+region = Rect2(336, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ap2km"]
+atlas = ExtResource("2_4onp8")
+region = Rect2(368, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryx4d"]
+atlas = ExtResource("2_4onp8")
+region = Rect2(272, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c7deq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n0ju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66piv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kg84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ap2km")
+}],
+"loop": false,
+"name": &"decay",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryx4d")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ore" type="Node2D" unique_id=1190596547]
+modulate = Color(0.74509805, 0.74509805, 0.74509805, 1)
+script = ExtResource("1_y02u4")
+type = 1
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=877045012]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_c7deq")
+autoplay = "default"

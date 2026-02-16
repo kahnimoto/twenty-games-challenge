@@ -84,8 +84,7 @@ func is_cell_diggable(location: Vector2i) -> bool:
 	if is_cell_open(location):
 		return false
 	var data: TileData = tilemap.get_cell_tile_data(location)
-	var diggable := data.get_custom_data("diggable") as bool
-	return diggable
+	return data and data.get_custom_data("diggable") as bool
 
 
 func dig(position: Vector2) -> bool:

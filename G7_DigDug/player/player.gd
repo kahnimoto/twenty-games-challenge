@@ -66,9 +66,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("dig") and not _is_digging:
-		_dig()
-	elif event.is_action_released("place_scaffold"):
+	if event.is_action_released("place_scaffold"):
 		if Input.is_action_pressed("look_up"):
 			Events.scaffold_requested.emit(global_position - Vector2(0, 24))
 		else:
@@ -88,7 +86,7 @@ func _physics_process(delta: float) -> void:
 	var on_wall := grabbing_wall and not _is_climbing_ledge and Game.abilities[Game.Ability.WALLGRAB]
 	var climbing := on_wall and jumping and not ledge_check.is_colliding() and Game.abilities[Game.Ability.WALLGRAB]
 	
-	if not _is_digging and Input.is_action_pressed("dig"):
+	if not _is_digging and on_ground and Input.is_action_pressed("dig"):
 		_dig()
 	
 	_update_timers(delta, on_ground, on_wall, jumping, climbing)
@@ -97,7 +95,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_adjust_animation(just_landed, delta)
 	_was_in_air = not on_ground
-
+	if just_landed or grabbing_wall or _position_timer > POSITION_TICK:
+		_position_timer = 0.0
+		Events.player_position_changed.emit(global_position)
+	
+const POSITION_TICK := 2.0
+var _position_timer := 0.0
 
 func _update_timers(delta: float, on_ground: bool, on_wall: bool, jumping: bool, climbing: bool) -> void:
 	if on_wall:
@@ -106,6 +109,8 @@ func _update_timers(delta: float, on_ground: bool, on_wall: bool, jumping: bool,
 		_coyote_timer = COYOTE_DURATION # Reset timer while on ground
 	else:
 		_coyote_timer -= delta # Count down while in air
+	if on_ground:
+		_position_timer += delta
 	if jumping or climbing:
 		_jump_buffer_timer = JUMP_BUFFER_DURATION
 	else:

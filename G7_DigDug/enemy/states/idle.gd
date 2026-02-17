@@ -27,7 +27,7 @@ func tick(delta: float) -> Variant:
 
 
 func enter() -> void:
-	print("Entering Idle")
+	#print("Entering Idle")
 	assert(enemy is Enemy)
 	saw_player = false
 	time_in_state = 0.0
@@ -41,7 +41,7 @@ func _on_player_vision(_b) -> void:
 
 
 func exit() -> void:
-	print("Exiting Idle")
+	#print("Exiting Idle")
 	if vision.body_entered.is_connected(_on_player_vision):
 		vision.body_entered.disconnect(_on_player_vision)
 	else:

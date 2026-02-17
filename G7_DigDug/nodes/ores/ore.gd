@@ -32,5 +32,6 @@ func dig() -> bool:
 	sprite.play("decay")
 	await sprite.animation_finished
 	Events.dig_complete.emit(global_position)
+	Events.ore_mined.emit(type)
 	queue_free.call_deferred()
 	return hp <= 0

@@ -24,7 +24,7 @@ func tick(delta: float) -> Variant:
 
 
 func enter() -> void:
-	print("Entering Falling")
+	#print("Entering Falling")
 	timer = 0.0
 	progress = 0.0
 	start_pos = enemy.global_position
@@ -32,5 +32,5 @@ func enter() -> void:
 
 
 func exit() -> void:
-	print("Exiting Falling")
+	#print("Exiting Falling")
 	pass

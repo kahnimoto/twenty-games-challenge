@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq5gnaixa025a"
-path="res://.godot/imported/Brown_Tile_Terrain (16 x 16).png-38b24d1add2245c34bc5d7d9977a6334.ctex"
+uid="uid://crww5lirjghn4"
+path="res://.godot/imported/slot.png-da0c405054554ee52404d29ec6487048.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/external/tilesets/Brown_Tile_Terrain (16 x 16).png"
-dest_files=["res://.godot/imported/Brown_Tile_Terrain (16 x 16).png-38b24d1add2245c34bc5d7d9977a6334.ctex"]
+source_file="res://assets/slot.png"
+dest_files=["res://.godot/imported/slot.png-da0c405054554ee52404d29ec6487048.ctex"]
 
 [params]
 

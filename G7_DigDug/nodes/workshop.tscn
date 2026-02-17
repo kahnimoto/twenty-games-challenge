@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://e84d0glbi0tm"]
+
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/external/tilesets/Scaffolding_and_BG_Parts (16 x 16).png" id="1_66vvk"]
+[ext_resource type="Script" uid="uid://dwyaqrg0r48ku" path="res://nodes/workshop.gd" id="1_f7xtb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7xtb"]
+atlas = ExtResource("1_66vvk")
+region = Rect2(240, 32, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7xtb"]
+size = Vector2(32, 16)
+
+[node name="Workshop" type="Node2D" unique_id=230328740]
+script = ExtResource("1_f7xtb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=100341780]
+texture_filter = 1
+texture = SubResource("AtlasTexture_f7xtb")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1907844825]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1947034257]
+shape = SubResource("RectangleShape2D_f7xtb")
+debug_color = Color(0.11111156, 0.51730704, 3.85046e-07, 0)

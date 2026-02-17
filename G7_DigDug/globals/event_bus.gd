@@ -12,3 +12,8 @@ signal dig_complete(position: Vector2)
 signal scaffold_requested(position: Vector2)
 signal scaffold_placed(position: Vector2)
 signal player_position_changed(position: Vector2)
+signal ore_mined(ore: Ore.Metal)
+signal inventory_changed
+signal abilities_changed
+signal preview_costs_show
+signal preview_costs_hide

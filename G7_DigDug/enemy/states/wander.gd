@@ -32,7 +32,7 @@ func tick(delta: float) -> Variant:
 
 
 func enter() -> void:
-	print("Entering Wander")
+	#print("Entering Wander")
 	beat = 0.0
 	right_ray.enabled = true
 	down_ray.enabled = true
@@ -40,6 +40,6 @@ func enter() -> void:
 
 
 func exit() -> void:
-	print("Exiting Wander")
+	#print("Exiting Wander")
 	right_ray.enabled = false
 	down_ray.enabled = false

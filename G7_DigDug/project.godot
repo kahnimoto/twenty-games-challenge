@@ -99,6 +99,7 @@ place_bridge={
 2d_physics/layer_3="player_nearby"
 2d_physics/layer_5="wall"
 2d_physics/layer_6="scaffolds"
+2d_physics/layer_9="enemy"
 
 [physics]
 

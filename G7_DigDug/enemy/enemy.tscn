@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://dlg0kax4p754w"]
+
+[ext_resource type="Script" uid="uid://10hqmfg262ep" path="res://enemy/enemy.gd" id="1_2mvqj"]
+[ext_resource type="Script" uid="uid://cay1r7wuj1yei" path="res://enemy/states/idle.gd" id="2_ofsxj"]
+[ext_resource type="Script" uid="uid://dfr4b5hb544o4" path="res://enemy/states/wander.gd" id="3_ppra6"]
+[ext_resource type="Script" uid="uid://d4k8ttpahacw3" path="res://enemy/states/falling.gd" id="5_pmsee"]
+
+[sub_resource type="Gradient" id="Gradient_ofsxj"]
+offsets = PackedFloat32Array(0.6111111, 0.68333334)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ppra6"]
+gradient = SubResource("Gradient_ofsxj")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.50427353, 0.6923077)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_p200p"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pmsee"]
+gradient = SubResource("Gradient_p200p")
+width = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mvqj"]
+size = Vector2(112, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2mvqj"]
+radius = 6.0
+
+[node name="Enemy" type="Node2D" unique_id=706777525]
+script = ExtResource("1_2mvqj")
+
+[node name="Orientation" type="Node2D" parent="." unique_id=2038875866]
+position = Vector2(0, 8)
+
+[node name="Body" type="Sprite2D" parent="Orientation" unique_id=970708166]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = SubResource("GradientTexture2D_ppra6")
+
+[node name="Eyes" type="Sprite2D" parent="Orientation" unique_id=538037622]
+position = Vector2(3, -7)
+texture = SubResource("GradientTexture1D_pmsee")
+
+[node name="Vision" type="Area2D" parent="Orientation" unique_id=1273991783]
+position = Vector2(0, -8)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Orientation/Vision" unique_id=151711617]
+position = Vector2(56, -8)
+shape = SubResource("RectangleShape2D_2mvqj")
+debug_color = Color(0.7, 0, 0.011666489, 0)
+
+[node name="RightRay" type="RayCast2D" parent="Orientation" unique_id=482702883]
+position = Vector2(0, -8)
+enabled = false
+target_position = Vector2(9, 0)
+collision_mask = 16
+
+[node name="DownRay" type="RayCast2D" parent="Orientation" unique_id=2104344863]
+position = Vector2(-6, -2)
+enabled = false
+target_position = Vector2(0, 9)
+collision_mask = 16
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=286142800]
+collision_layer = 256
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=320068622]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_2mvqj")
+debug_color = Color(0.47833338, 0, 0.7, 0)
+
+[node name="StateMachine" type="Node" parent="." unique_id=2000530205]
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1341559630 node_paths=PackedStringArray("enemy", "wander_state", "vision")]
+script = ExtResource("2_ofsxj")
+enemy = NodePath("../..")
+wander_state = NodePath("../Wander")
+vision = NodePath("../../Orientation/Vision")
+
+[node name="Wander" type="Node" parent="StateMachine" unique_id=738760700 node_paths=PackedStringArray("enemy", "idle_state", "falling_state", "right_ray", "down_ray")]
+script = ExtResource("3_ppra6")
+enemy = NodePath("../..")
+idle_state = NodePath("../Idle")
+falling_state = NodePath("../Falling")
+right_ray = NodePath("../../Orientation/RightRay")
+down_ray = NodePath("../../Orientation/DownRay")
+
+[node name="Falling" type="Node" parent="StateMachine" unique_id=1763488625 node_paths=PackedStringArray("enemy", "idle_state")]
+script = ExtResource("5_pmsee")
+enemy = NodePath("../..")
+idle_state = NodePath("../Idle")

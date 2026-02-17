@@ -9,10 +9,10 @@ const DOUBLE_JUMP_VELOCITY := JUMP_VELOCITY
 const COYOTE_DURATION := 0.25 # About 9 frames at 60fps
 const COYOTE_DURATION_FROM_WALL_GRAB := 0.45
 const JUMP_BUFFER_DURATION := 0.1
-const GROUND_ACCELERATION := 800.0
-const GROUND_FRICTION := 600.0
-const AIR_ACCELERATION := 300.0
-const AIR_FRICTION := 200.0
+const GROUND_ACCELERATION := 1200.0
+const GROUND_FRICTION := 900.0
+const AIR_ACCELERATION := 400.0
+const AIR_FRICTION := 300.0
 const WALL_SLIDE_SPEED := 0.25
 const GO_DOWN_SPEED := 3.0
 const GRAVITY_WHEN_HOLDING_JUMP := 0.4
@@ -196,24 +196,7 @@ func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping:
 			velocity.x = move_toward(velocity.x, direction * SPEED, acceleration * delta)
 		else:
 			var friction := GROUND_FRICTION if on_ground else AIR_FRICTION
-			if on_ground:
-				var grid_center_x: float = round((global_position.x - Game.TILE_SIZE * 0.5) / Game.TILE_SIZE) * Game.TILE_SIZE + Game.TILE_SIZE * 0.5
-				var dist := grid_center_x - global_position.x
-				if abs(dist) < SNAP_STOP_DISTANCE:
-					velocity.x = move_toward(velocity.x, 0, friction * delta)
-					if abs(velocity.x) < 1.0:
-						global_position = Vector2(grid_center_x, global_position.y)
-				else:
-					# If we still have momentum, let friction slow it normally.
-					if abs(velocity.x) > 4.0:
-						velocity.x = move_toward(velocity.x, 0, friction * delta)
-					else:
-						# Stop velocity and nudge position toward tile center directly
-						velocity.x = 0.0
-						var new_x: float = move_toward(global_position.x, grid_center_x, SNAP_POSITION_SPEED * delta)
-						global_position = Vector2(new_x, global_position.y)
-			else:
-				velocity.x = move_toward(velocity.x, 0, friction * delta)
+			velocity.x = move_toward(velocity.x, 0, friction * delta)
 
 #endregion
 

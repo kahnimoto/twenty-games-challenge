@@ -5,12 +5,11 @@ const MAX_LIVES = 5
 const SHIP_WIDTH := 30.0
 const INVUL_FRAME_DUR := 0.8
 const MISSILE = preload("uid://bn112euyrf567")
+const BLINKING = preload("uid://b6dr65cpthpc2")
 
 
 @export_range(-1, 1, 0.05) var minimum_y_direction_to_shoot = -0.2
 @export var level: Level
-#@export var modulation_curve: CurveTexture
-var modulation_curve: CurveTexture = preload("res://02_player/modulation_curve.tres")
 
 var aiming: bool = true:
 	set(v):
@@ -33,7 +32,6 @@ var muzzles: Array[Marker2D] = []
 
 func _ready():
 	assert(level is Level)
-	assert(modulation_curve is CurveTexture)
 	for c in muzzle_parent.get_children():
 		muzzles.append(c as Marker2D)
 	area.area_entered.connect(_on_area_entered)
@@ -51,7 +49,7 @@ func _process(delta: float) -> void:
 	if invulnerable_time >= 0.0:
 		invulnerable_time = clampf(invulnerable_time - delta, 0.0, INVUL_FRAME_DUR)
 		var animation_ratio: float = inverse_lerp(INVUL_FRAME_DUR, 0.0, invulnerable_time)
-		var sampled_value: float = modulation_curve.curve.sample(animation_ratio)
+		var sampled_value: float = BLINKING.sample(animation_ratio)
 		ship_sprite.modulate = Color(Color.WHITE, sampled_value)
 		if invulnerable_time <= 0.0:
 			Effects.end_shake()

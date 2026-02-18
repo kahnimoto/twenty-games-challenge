@@ -1,8 +1,0 @@
-[gd_resource type="CurveTexture" format=3 uid="uid://cqg7b7ta7eqyy"]
-
-[sub_resource type="Curve" id="Curve_apnsi"]
-_data = [Vector2(0, 0), 0.0, 9.347998, 0, 0, Vector2(0.12389381, 0.8150628), 0.0, 0.0, 0, 0, Vector2(0.25000003, 0.22761506), 0.0, 0.0, 0, 0, Vector2(0.36725667, 0.7552302), 0.0, 0.0, 0, 0, Vector2(0.5530974, 0.505021), 0.0, 0.0, 0, 0, Vector2(0.75442487, 0.7661089), 0.0, 0.0, 0, 0, Vector2(0.8694691, 0.62468624), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 8
-
-[resource]
-curve = SubResource("Curve_apnsi")

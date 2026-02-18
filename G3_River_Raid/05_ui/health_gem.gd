@@ -2,23 +2,16 @@ class_name HealthGem
 extends Control
 
 
-# A 2D curve from 0.0 to 1.0 in both axies
-const HIDE_CURVE: CurveTexture = preload("uid://bbkcrbu1ugbe1")
-const SHOW_CURVE: CurveTexture = preload("uid://dlltqhn0b1d83")
-
-# How long the animation happens over
+const HEALTH_GAME_FLICKER_OFF_CURVE: Curve = preload("uid://bq5yg5eygja63")
+const HEALTH_GEM_APPEAR_CURVE: Curve = preload("uid://bx6x463m6ksgf")
 const DURATION: float = 0.5
 
-## Toggle this health bar "on" or "off", if value changes resets animation
 var on := true:
 	set(v):
 		if on != v:
 			on = v
 			_lapsed_time = 0.0 
-
-# Value from 0.0 to 1.0 used to pick a value from the curve
 var _animation_ratio: float
-# Timer from 0.0 to DURATION
 var _lapsed_time: float
 
 @onready var indicator: TextureRect = $Indicator
@@ -33,8 +26,8 @@ func _process(delta: float) -> void:
 	# Since we reuse the same curve that starts at 1 and ends at 0, 
 	# we revert it when we want to toggle "on" the health
 	if on:
-		indicator.modulate.a = SHOW_CURVE.curve.sample(_animation_ratio)
-		indicator.modulate.r = SHOW_CURVE.curve.sample(_animation_ratio)
+		indicator.modulate.a = HEALTH_GEM_APPEAR_CURVE.sample(_animation_ratio)
+		indicator.modulate.r = HEALTH_GEM_APPEAR_CURVE.sample(_animation_ratio)
 	else:
 		#indicator.modulate.a = HIDE_CURVE.curve.sample(_animation_ratio)
-		indicator.modulate = Color(Color.WHITE, HIDE_CURVE.curve.sample(_animation_ratio))
+		indicator.modulate = Color(Color.WHITE, HEALTH_GAME_FLICKER_OFF_CURVE.sample(_animation_ratio))

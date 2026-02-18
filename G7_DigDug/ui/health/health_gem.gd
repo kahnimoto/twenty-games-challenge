@@ -23,6 +23,6 @@ func _process(delta: float) -> void:
 	_animation_ratio = inverse_lerp(0.0, DURATION, _lapsed_time)
 	if on:
 		indicator.modulate.a = BOUNCY_FADE_IN.sample(_animation_ratio)
-		indicator.modulate.r = BOUNCY_FALLOFF.sample(_animation_ratio)
+		indicator.modulate.r = BOUNCY_FADE_IN.sample(_animation_ratio)
 	else:
 		indicator.modulate = Color(Color.WHITE, BOUNCY_FALLOFF.sample(_animation_ratio))

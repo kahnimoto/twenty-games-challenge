@@ -21,6 +21,7 @@ var abilities: Dictionary[Ability, bool] = {
 	Ability.WALLGRAB: false,
 	Ability.JETPACK: true
 }
+var pickaxe_level := 1
 var inventory: Dictionary[Ore.Metal, int] = {
 	Ore.Metal.COPPER: 0,
 	Ore.Metal.IRON: 0,
@@ -47,6 +48,7 @@ func _on_ore_mined(ore: Ore.Metal) -> void:
 func reset() -> void:
 	game_over = false
 	lives = MAX_LIVES
+	pickaxe_level = 1
 	for key in inventory:
 		inventory[key] = 0
 	for key in abilities:

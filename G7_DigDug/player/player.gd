@@ -96,8 +96,8 @@ func _physics_process(delta: float) -> void:
 	var on_wall := grabbing_wall and not _is_climbing_ledge and Game.abilities[Game.Ability.WALLGRAB]
 	var climbing := on_wall and jumping and not ledge_check.is_colliding() and Game.abilities[Game.Ability.WALLGRAB]
 
-	if just_landed:
-		_check_for_lava()
+	if on_ground:
+		_check_for_lava()  # TODO optimize with some delay between checks?
 
 	if not _is_digging and on_ground and Input.is_action_pressed("dig"):
 		_dig()

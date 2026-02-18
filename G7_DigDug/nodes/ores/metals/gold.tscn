@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b2n5le45s3257"]
 
 [ext_resource type="Script" uid="uid://bho2p5b75rl7t" path="res://nodes/ores/ore.gd" id="1_txptt"]
-[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/external/tilesets/Scaffolding_and_BG_Parts (16 x 16).png" id="2_uwgvj"]
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="2_uwgvj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2n0ju"]
 atlas = ExtResource("2_uwgvj")

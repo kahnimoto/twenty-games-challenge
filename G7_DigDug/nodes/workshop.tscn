@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://e84d0glbi0tm"]
 
-[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/external/tilesets/Scaffolding_and_BG_Parts (16 x 16).png" id="1_66vvk"]
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="1_66vvk"]
 [ext_resource type="Script" uid="uid://dwyaqrg0r48ku" path="res://nodes/workshop.gd" id="1_f7xtb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f7xtb"]

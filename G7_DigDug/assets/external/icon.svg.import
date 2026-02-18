@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beeyp4rvd5g6r"
-path="res://.godot/imported/Scaffolding_and_BG_Parts (16 x 16).png-f7415be07969c5bd4b041ff9b0835e3a.ctex"
+uid="uid://dw6ybkur0hhhk"
+path="res://.godot/imported/icon.svg-241335a368e2b82c018fc54366112c85.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/external/tilesets/Scaffolding_and_BG_Parts (16 x 16).png"
-dest_files=["res://.godot/imported/Scaffolding_and_BG_Parts (16 x 16).png-f7415be07969c5bd4b041ff9b0835e3a.ctex"]
+source_file="res://assets/external/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-241335a368e2b82c018fc54366112c85.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

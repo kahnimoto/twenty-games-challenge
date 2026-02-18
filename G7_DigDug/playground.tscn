@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://e84d0glbi0tm" path="res://nodes/workshop.tscn" id="9_yjl7g"]
 [ext_resource type="Texture2D" uid="uid://crww5lirjghn4" path="res://assets/slot.png" id="14_jgc46"]
 [ext_resource type="Theme" uid="uid://c7df028jbjpj5" path="res://nodes/hud_theme.tres" id="14_pactg"]
-[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/external/tilesets/Scaffolding_and_BG_Parts (16 x 16).png" id="15_dk0co"]
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="15_dk0co"]
 [ext_resource type="Script" uid="uid://drhvl8wcliul1" path="res://ui/inventory.gd" id="15_pactg"]
 [ext_resource type="PackedScene" uid="uid://c2hfyn6l2g63l" path="res://ui/health/health_gem.tscn" id="18_ycdrs"]
 
@@ -2820,6 +2820,47 @@ layout_mode = 2
 [node name="HFlowContainer" type="HFlowContainer" parent="HUD/Abilities/MarginContainer/VBoxContainer" unique_id=150633645]
 layout_mode = 2
 alignment = 2
+
+[node name="Pickaxe" type="Control" parent="HUD/Abilities/MarginContainer/VBoxContainer/HFlowContainer" unique_id=1081794106]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="HUD/Abilities/MarginContainer/VBoxContainer/HFlowContainer/Pickaxe" unique_id=1460135127]
+self_modulate = Color(0.74, 0.75733334, 1, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("14_jgc46")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Abilities/MarginContainer/VBoxContainer/HFlowContainer/Pickaxe" unique_id=821725887]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.5
+offset_right = 20.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Abilities/MarginContainer/VBoxContainer/HFlowContainer/Pickaxe/VBoxContainer" unique_id=1736884624]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+texture = SubResource("AtlasTexture_5m40n")
+
+[node name="Label" type="Label" parent="HUD/Abilities/MarginContainer/VBoxContainer/HFlowContainer/Pickaxe/VBoxContainer" unique_id=1164647897]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Pickaxe"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Claws" type="Control" parent="HUD/Abilities/MarginContainer/VBoxContainer/HFlowContainer" unique_id=1277945079]
 custom_minimum_size = Vector2(64, 64)

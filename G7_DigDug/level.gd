@@ -51,7 +51,30 @@ func _on_dig_complete(_position: Vector2) -> void:
 
 
 func _on_player_requested_scaffold(_position: Vector2) -> void:
-	var location = tilemap.local_to_map(_position)
+	var location: Vector2i = tilemap.local_to_map(_position)
+	var has_supported_floor := false
+	var check_location := location
+	var support_levels := Game.MAX_SUPPORT_LEVELS
+	while true:
+		if support_levels <= 0:
+			break
+		check_location += Vector2i.DOWN
+		support_levels -= 1
+		if is_cell_open(check_location):
+			continue
+		var data: TileData = tilemap.get_cell_tile_data(check_location)
+		if not data:
+			continue
+		var lava: bool = data.get_custom_data("lava")
+		if lava:
+			break # cant support
+		var diggable: bool = data.get_custom_data("diggable")
+		if diggable:
+			has_supported_floor = true
+			break
+	if not has_supported_floor:
+		# @TODO player feedback?
+		return
 	if not is_cell_open(location):
 		return
 	tilemap.set_cell(location, TILE_COLLECTION, Vector2i.ZERO, TILE_SCAFFOLD)

@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
+const BLINKING = preload("res://resources/blinking.tres")
 
 #region movement config
 const SPEED := 100.0
@@ -45,6 +46,7 @@ var _turning := false
 var _turning_around := 0.0
 var _is_digging := false
 var _position_timer := 0.0
+var _invulnerable_time := 0.0
 #endregion
 
 #region nodes
@@ -59,12 +61,31 @@ var _position_timer := 0.0
 @onready var squish: Node2D = %Squish
 @onready var dig_marker: Marker2D = %DigMarker
 @onready var dig_direction: Node2D = %DigDirection
+@onready var player_hurt: Area2D = %PlayerHurt
 #endregion
 
 
 func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
+	player_hurt.area_entered.connect(_on_player_met_enemy)
 	assert(level is Level)
+
+
+func _on_player_met_enemy(area: Area2D) -> void:
+	assert(area.is_in_group("enemy"))
+	if _invulnerable_time <= 0.0:
+		_invulnerable_time = Game.INVUL_FRAME_DUR
+		Game.take_damage(1)
+
+
+func _process(delta: float) -> void:
+	if _invulnerable_time >= 0.0:
+		_invulnerable_time = clampf(_invulnerable_time - delta, 0.0, Game.INVUL_FRAME_DUR)
+		var animation_ratio: float = inverse_lerp(Game.INVUL_FRAME_DUR, 0.0, _invulnerable_time)
+		var sampled_value: float = BLINKING.sample(animation_ratio)
+		sprite.modulate = Color(Color.WHITE, sampled_value)
+		if _invulnerable_time <= 0.0:
+			Effects.end_shake()
 
 
 #region processing

@@ -1,8 +1,10 @@
 extends Control
 
+
 @onready var copper_amount_value: Label = %CopperAmountValue
 @onready var iron_amount_value: Label = %IronAmountValue
 @onready var gold_amount_value: Label = %GoldAmountValue
+
 
 func _ready() -> void:
 	Events.inventory_changed.connect(_on_inventory_changed)
@@ -15,4 +17,3 @@ func _on_inventory_changed() -> void:
 	copper_amount_value.text = str(Game.inventory[Ore.Metal.COPPER])
 	iron_amount_value.text = str(Game.inventory[Ore.Metal.IRON])
 	gold_amount_value.text = str(Game.inventory[Ore.Metal.GOLD])
-	

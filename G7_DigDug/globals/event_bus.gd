@@ -17,3 +17,5 @@ signal inventory_changed
 signal abilities_changed
 signal preview_costs_show
 signal preview_costs_hide
+
+signal lives_changed(new_value: int)

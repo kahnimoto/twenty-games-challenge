@@ -11,7 +11,7 @@ var camera: Camera2D
 
 
 func _ready() -> void:
-	Events.game_over.connect(end_shake)
+	#Events.game_over.connect(end_shake)
 	Events.level_loaded.connect(end_shake)
 
 

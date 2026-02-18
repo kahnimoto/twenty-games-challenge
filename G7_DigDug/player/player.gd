@@ -71,14 +71,9 @@ func _ready() -> void:
 	assert(level is Level)
 
 
-func _on_player_met_enemy(area: Area2D) -> void:
-	assert(area.is_in_group("enemy"))
-	if _invulnerable_time <= 0.0:
-		_invulnerable_time = Game.INVUL_FRAME_DUR
-		Game.take_damage(1)
-
-
 func _process(delta: float) -> void:
+	if Game.game_over:
+		return
 	if _invulnerable_time >= 0.0:
 		_invulnerable_time = clampf(_invulnerable_time - delta, 0.0, Game.INVUL_FRAME_DUR)
 		var animation_ratio: float = inverse_lerp(Game.INVUL_FRAME_DUR, 0.0, _invulnerable_time)
@@ -90,6 +85,8 @@ func _process(delta: float) -> void:
 
 #region processing
 func _physics_process(delta: float) -> void:
+	if Game.game_over:
+		return
 	var just_landed: bool = _was_in_air and is_on_floor()
 	var on_ground = is_on_floor()
 	var direction := Input.get_axis("move_left", "move_right")
@@ -98,7 +95,10 @@ func _physics_process(delta: float) -> void:
 	var jumping := Input.is_action_just_pressed("jump")
 	var on_wall := grabbing_wall and not _is_climbing_ledge and Game.abilities[Game.Ability.WALLGRAB]
 	var climbing := on_wall and jumping and not ledge_check.is_colliding() and Game.abilities[Game.Ability.WALLGRAB]
-	
+
+	if just_landed:
+		_check_for_lava()
+
 	if not _is_digging and on_ground and Input.is_action_pressed("dig"):
 		_dig()
 	if Input.is_action_just_pressed("place_scaffold"):
@@ -117,7 +117,7 @@ func _physics_process(delta: float) -> void:
 				Events.scaffold_requested.emit(global_position + Vector2.DOWN * Game.TILE_SIZE * 1.5)
 	if Input.is_action_just_pressed("place_bridge"): # TODO allow holding button to place more?
 		Events.scaffold_requested.emit(dig_marker.global_position + Vector2.DOWN * Game.TILE_SIZE)
-	
+
 	_update_timers(delta, on_ground, on_wall, jumping, climbing)
 	_vertical_movement(delta, on_ground, on_wall, jumping, climbing, grabbing_platform)
 	_horizontal_movement(delta, on_ground, on_wall, jumping, climbing)
@@ -223,6 +223,15 @@ func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping:
 
 
 #region private methods
+
+
+func _on_player_met_enemy(area: Area2D) -> void:
+	assert(area.is_in_group("enemy"))
+	if _invulnerable_time <= 0.0:
+		_invulnerable_time = Game.INVUL_FRAME_DUR
+		Game.take_damage(1)
+
+
 func _get_modified_gravity() -> float:
 	var gravity_vector := get_gravity()
 	return gravity_vector.y * _gravity_modifier
@@ -257,7 +266,7 @@ func _adjust_animation(just_landed: bool, delta: float = 0.0) -> void:
 		# prefer the last explicit player input when nearly stopped
 		dig_dir = _facing
 	orientation.scale.x = -1. if _facing == Vector2.LEFT else 1.0
-	
+
 	match dig_dir:
 		Vector2.RIGHT:
 			dig_direction.rotation_degrees = 0.
@@ -267,7 +276,7 @@ func _adjust_animation(just_landed: bool, delta: float = 0.0) -> void:
 			dig_direction.rotation_degrees = 90.
 		Vector2.UP:
 			dig_direction.rotation_degrees = 270.
-	
+
 	if just_landed:
 		_is_climbing_ledge = false
 		_is_landing = true
@@ -278,7 +287,7 @@ func _adjust_animation(just_landed: bool, delta: float = 0.0) -> void:
 
 	if _is_landing:
 		return
-	
+
 	if is_on_floor():
 		if abs(velocity.x) > 0.1:
 			if sprite.animation != "walking":
@@ -308,6 +317,18 @@ func _on_animation_finished() -> void:
 	if sprite.animation == "landing":
 		_is_landing = false
 		_adjust_animation(false, 0.0)
+
+
+func _check_for_lava() -> void:
+	if _invulnerable_time <= 0.0:
+		ground_check.set_collision_mask_value(Game.WALL_LAYER_NUMBER, false)
+		ground_check.set_collision_mask_value(Game.LAVA_LAYER_NUMBER, true)
+		ground_check.force_raycast_update()
+		if ground_check.is_colliding():
+			_invulnerable_time = Game.INVUL_FRAME_DUR
+			Game.take_damage(2)
+		ground_check.set_collision_mask_value(Game.WALL_LAYER_NUMBER, true)
+		ground_check.set_collision_mask_value(Game.LAVA_LAYER_NUMBER, false)
 
 
 func _dig() -> void:

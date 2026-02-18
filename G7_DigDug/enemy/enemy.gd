@@ -1,6 +1,7 @@
 class_name Enemy
 extends Node2D
 
+
 const COLORS: Array[Color] = [
 	Color.CHOCOLATE,
 	Color.DARK_GOLDENROD,
@@ -29,6 +30,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if Game.game_over:
+		return
 	assert(active_state is State)
 	var new_state = active_state.tick(delta)
 	if new_state:

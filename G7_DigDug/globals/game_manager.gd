@@ -11,6 +11,10 @@ const TILE_SIZE := 16.0
 const MAX_SUPPORT_LEVELS := 4
 const MAX_LIVES := 3
 const INVUL_FRAME_DUR := 0.8
+const WALL_LAYER_NUMBER := 5
+const WALL_BITMASK := 16
+const LAVA_LAYER_NUMBER := 7
+const LAVA_BITMASK := 64
 
 var abilities: Dictionary[Ability, bool] = {
 	Ability.NONE: false,
@@ -23,6 +27,7 @@ var inventory: Dictionary[Ore.Metal, int] = {
 	Ore.Metal.GOLD: 0
 }
 var lives := MAX_LIVES
+var game_over := false
 
 
 func _ready() -> void:
@@ -40,12 +45,12 @@ func _on_ore_mined(ore: Ore.Metal) -> void:
 
 
 func reset() -> void:
+	game_over = false
 	lives = MAX_LIVES
 	for key in inventory:
 		inventory[key] = 0
 	for key in abilities:
 		abilities[key] = false
-
 
 
 func use(requested: Dictionary[Ore.Metal, int]) -> bool:
@@ -68,13 +73,17 @@ func gain(ability: Ability) -> void:
 func take_damage(amount: int = 1) -> void:
 	var previous_lives := lives
 	lives = clampi(lives - amount, 0, MAX_LIVES)
-	if lives == 0:
-		Events.game_over.emit()
-		reset()
-		get_tree().reload_current_scene.call_deferred()
-	elif previous_lives != lives:
+	if previous_lives != lives:
 		Effects.camera_shake()
 		Events.lives_changed.emit(lives)
+
+	if lives == 0:
+		game_over = true
+		Events.game_over.emit()
+		await get_tree().create_timer(1.).timeout
+		Effects.end_shake()
+		reset()
+		get_tree().reload_current_scene.call_deferred()
 
 
 #func recover_health(amount: int = 1) -> void:

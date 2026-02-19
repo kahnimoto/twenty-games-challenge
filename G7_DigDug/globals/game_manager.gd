@@ -4,11 +4,12 @@ extends Node
 enum Ability {
 	NONE,
 	WALLGRAB,
-	JETPACK
+	JETPACK,
+	SCAFFOLD,
+	BRIDGE,
 }
 
 const TILE_SIZE := 16.0
-const MAX_SUPPORT_LEVELS := 4
 const MAX_LIVES := 3
 const INVUL_FRAME_DUR := 0.8
 const WALL_LAYER_NUMBER := 5
@@ -20,6 +21,8 @@ var abilities: Dictionary[Ability, bool] = {
 	Ability.NONE: false,
 	Ability.WALLGRAB: false,
 	Ability.JETPACK: false,
+	Ability.SCAFFOLD: false,
+	Ability.BRIDGE: false,
 }
 var pickaxe_level := 1
 var inventory: Dictionary[Ore.Metal, int] = {
@@ -30,6 +33,7 @@ var inventory: Dictionary[Ore.Metal, int] = {
 }
 var lives := MAX_LIVES
 var game_over := false
+var scaffold_support_levels := 2
 
 
 func _ready() -> void:

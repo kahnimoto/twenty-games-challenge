@@ -53,7 +53,8 @@ region = Rect2(224, 16, 16, 16)
 [node name="HUD" type="CanvasLayer" unique_id=570225655]
 script = ExtResource("1_q43x7")
 
-[node name="Control" type="Control" parent="." unique_id=2072073139]
+[node name="DebugControl" type="Control" parent="." unique_id=2072073139]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +62,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Buttons" type="Control" parent="Control" unique_id=1528665108]
+[node name="Buttons" type="Control" parent="DebugControl" unique_id=1528665108]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -71,7 +72,7 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="HFlowContainer" type="VBoxContainer" parent="Control/Buttons" unique_id=621678123]
+[node name="HFlowContainer" type="VBoxContainer" parent="DebugControl/Buttons" unique_id=621678123]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -84,13 +85,13 @@ grow_horizontal = 0
 grow_vertical = 0
 alignment = 2
 
-[node name="WallgrabToggle" type="CheckButton" parent="Control/Buttons/HFlowContainer" unique_id=1234296514]
+[node name="WallgrabToggle" type="CheckButton" parent="DebugControl/Buttons/HFlowContainer" unique_id=1234296514]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Wallgrab"
 alignment = 2
 
-[node name="JetpackToggle" type="CheckButton" parent="Control/Buttons/HFlowContainer" unique_id=626397782]
+[node name="JetpackToggle" type="CheckButton" parent="DebugControl/Buttons/HFlowContainer" unique_id=626397782]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Jetpack"
@@ -550,11 +551,12 @@ layout_mode = 2
 alignment = 2
 script = SubResource("GDScript_pactg")
 
-[node name="Pickaxe" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=615073942]
+[node name="PickaxeCost" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=615073942]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Pickaxe" unique_id=1240522409]
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/PickaxeCost" unique_id=1240522409]
 self_modulate = Color(0.923, 1, 0.89, 0.5372549)
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
@@ -563,7 +565,7 @@ offset_right = 32.0
 offset_bottom = 32.0
 texture = ExtResource("4_ff8ar")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Pickaxe" unique_id=1949133526]
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/PickaxeCost" unique_id=1949133526]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -579,29 +581,30 @@ grow_vertical = 2
 theme_override_constants/separation = -12
 alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Pickaxe/VBoxContainer" unique_id=1370082649]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/PickaxeCost/VBoxContainer" unique_id=1370082649]
 layout_mode = 2
-theme_override_constants/separation = -6
+theme_override_constants/separation = -3
 
-[node name="Item2" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Pickaxe/VBoxContainer/HBoxContainer2" unique_id=767891428]
+[node name="Item2" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/PickaxeCost/VBoxContainer/HBoxContainer2" unique_id=767891428]
 self_modulate = Color(0.46979997, 0.87, 0.84332, 1)
 texture_filter = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = SubResource("AtlasTexture_q43x7")
 
-[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Pickaxe/VBoxContainer/HBoxContainer2" unique_id=476400975]
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/PickaxeCost/VBoxContainer/HBoxContainer2" unique_id=476400975]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "x1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Claws" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=259685522]
+[node name="ClawsCost" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=259685522]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws" unique_id=1354744315]
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ClawsCost" unique_id=1354744315]
 self_modulate = Color(0.923, 1, 0.89, 0.5372549)
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
@@ -610,7 +613,7 @@ offset_right = 32.0
 offset_bottom = 32.0
 texture = ExtResource("4_ff8ar")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws" unique_id=701632071]
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ClawsCost" unique_id=701632071]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -626,47 +629,48 @@ grow_vertical = 2
 theme_override_constants/separation = -12
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer" unique_id=557518326]
+[node name="HBoxContainer" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ClawsCost/VBoxContainer" unique_id=557518326]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="Item" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer/HBoxContainer" unique_id=1788173295]
+[node name="Item" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ClawsCost/VBoxContainer/HBoxContainer" unique_id=1788173295]
 self_modulate = Color(0.7, 0.28000003, 0, 1)
 texture_filter = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = SubResource("AtlasTexture_pactg")
 
-[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer/HBoxContainer" unique_id=779141466]
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ClawsCost/VBoxContainer/HBoxContainer" unique_id=779141466]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "x2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer" unique_id=2096557555]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ClawsCost/VBoxContainer" unique_id=2096557555]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="Item2" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer/HBoxContainer2" unique_id=227091412]
+[node name="Item2" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ClawsCost/VBoxContainer/HBoxContainer2" unique_id=227091412]
 self_modulate = Color(0.61770004, 0.73544, 0.87, 1)
 texture_filter = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = SubResource("AtlasTexture_pactg")
 
-[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer/HBoxContainer2" unique_id=1449506274]
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ClawsCost/VBoxContainer/HBoxContainer2" unique_id=1449506274]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "x1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Jetpack" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=353801612]
+[node name="JetpackCost" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=353801612]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack" unique_id=139084490]
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/JetpackCost" unique_id=139084490]
 self_modulate = Color(0.923, 1, 0.89, 0.5372549)
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
@@ -675,7 +679,7 @@ offset_right = 32.0
 offset_bottom = 32.0
 texture = ExtResource("4_ff8ar")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack" unique_id=572215563]
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/JetpackCost" unique_id=572215563]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -691,36 +695,36 @@ grow_vertical = 2
 theme_override_constants/separation = -12
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer" unique_id=2054108364]
+[node name="HBoxContainer" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/JetpackCost/VBoxContainer" unique_id=2054108364]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="Item2" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer/HBoxContainer" unique_id=393985333]
+[node name="Item2" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/JetpackCost/VBoxContainer/HBoxContainer" unique_id=393985333]
 self_modulate = Color(0.61770004, 0.73544, 0.87, 1)
 texture_filter = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = SubResource("AtlasTexture_pactg")
 
-[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer/HBoxContainer" unique_id=1200040144]
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/JetpackCost/VBoxContainer/HBoxContainer" unique_id=1200040144]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "x2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer" unique_id=1081472274]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/JetpackCost/VBoxContainer" unique_id=1081472274]
 layout_mode = 2
 theme_override_constants/separation = -6
 
-[node name="Item" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer/HBoxContainer2" unique_id=401581643]
+[node name="Item" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/JetpackCost/VBoxContainer/HBoxContainer2" unique_id=401581643]
 self_modulate = Color(1, 0.81, 0.24000001, 1)
 texture_filter = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = SubResource("AtlasTexture_pactg")
 
-[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer/HBoxContainer2" unique_id=223220215]
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/JetpackCost/VBoxContainer/HBoxContainer2" unique_id=223220215]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "x1"

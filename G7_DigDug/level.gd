@@ -54,7 +54,7 @@ func _on_player_requested_scaffold(_position: Vector2) -> void:
 	var location: Vector2i = tilemap.local_to_map(_position)
 	var has_supported_floor := false
 	var check_location := location
-	var support_levels := Game.MAX_SUPPORT_LEVELS
+	var support_levels := Game.scaffold_support_levels + 1
 	while true:
 		if support_levels <= 0:
 			break

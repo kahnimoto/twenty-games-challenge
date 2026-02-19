@@ -28,6 +28,8 @@ func _ready() -> void:
 	#Events.player_started.connect(click_to_start_message.hide)
 	#Events.game_over.connect(click_to_restart_message.show)
 	show()
+	if show_debug:
+		$DebugControl.show()
 
 
 func _on_feature_toggled(on: bool, ability: Game.Ability) -> void:
@@ -58,3 +60,10 @@ func _reset_gems() -> void:
 		var gem: HealthGem = HEALTH_GEM.instantiate()
 		_gems.append(gem)
 		health_bar.add_child(gem)
+
+
+func refresh() -> void:
+	$Inventory.show()
+	$Abilities.show()
+	$Health.show()
+	$Abilities/MarginContainer/VBoxContainer/CostPreview.hide()

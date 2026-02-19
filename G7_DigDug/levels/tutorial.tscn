@@ -1,14 +1,14 @@
 [gd_scene format=4 uid="uid://bpkjh4bv0vxid"]
 
-[ext_resource type="Script" uid="uid://c8ocuxs66qqlp" path="res://level.gd" id="1_fkhgs"]
+[ext_resource type="Script" uid="uid://c8ocuxs66qqlp" path="res://levels/level.gd" id="1_fkhgs"]
 [ext_resource type="Texture2D" uid="uid://c6qqhhw5yth2h" path="res://assets/external/tilesets/tileset_mk_16_16_nature_tileset_godot.png" id="2_qvtyd"]
 [ext_resource type="PackedScene" uid="uid://bexlitfnfcfwk" path="res://nodes/scaffold/scaffold.tscn" id="3_ud5cb"]
 [ext_resource type="PackedScene" uid="uid://b8uxueg5l8ayd" path="res://nodes/scaffold/scaffold_leggs.tscn" id="4_obw5j"]
-[ext_resource type="PackedScene" uid="uid://6j56dnwc2lfh" path="res://nodes/exit.tscn" id="5_fpvtr"]
+[ext_resource type="PackedScene" uid="uid://6j56dnwc2lfh" path="res://nodes/exit/exit.tscn" id="5_fpvtr"]
 [ext_resource type="PackedScene" uid="uid://6hbgtlhmgiud" path="res://nodes/ores/metals/copper.tscn" id="6_2lwca"]
 [ext_resource type="PackedScene" uid="uid://bj6v1vc50wt6w" path="res://nodes/ores/metals/iron.tscn" id="7_kewwy"]
 [ext_resource type="PackedScene" uid="uid://b2n5le45s3257" path="res://nodes/ores/metals/gold.tscn" id="8_f5lvq"]
-[ext_resource type="PackedScene" uid="uid://e84d0glbi0tm" path="res://nodes/workshop.tscn" id="9_hi7gy"]
+[ext_resource type="PackedScene" uid="uid://e84d0glbi0tm" path="res://nodes/workshop/workshop.tscn" id="9_hi7gy"]
 [ext_resource type="PackedScene" uid="uid://367u62kkxayu" path="res://nodes/ores/gems/diamond.tscn" id="10_ssn57"]
 [ext_resource type="PackedScene" uid="uid://dlg0kax4p754w" path="res://enemy/enemy.tscn" id="11_xwxsl"]
 [ext_resource type="PackedScene" uid="uid://b6rhnei03phg0" path="res://player/player.tscn" id="12_8bi7p"]
@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://crww5lirjghn4" path="res://assets/slot.png" id="16_fpvtr"]
 [ext_resource type="FontFile" uid="uid://bqjxinyutvtmw" path="res://assets/external/fonts/m5x7.ttf" id="17_2lwca"]
 [ext_resource type="Texture2D" uid="uid://bapxl0ei5fgma" path="res://assets/arrow.tres" id="18_kewwy"]
-[ext_resource type="Script" uid="uid://c2op2nvyow8g2" path="res://levels/hint_ui_connector.gd" id="19_fpvtr"]
+[ext_resource type="Script" uid="uid://c2op2nvyow8g2" path="res://ui/hint_ui_connector.gd" id="19_fpvtr"]
 
 [sub_resource type="Gradient" id="Gradient_m8u5f"]
 offsets = PackedFloat32Array(0.33574006, 0.99819493)

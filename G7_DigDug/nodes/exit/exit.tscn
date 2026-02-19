@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://6j56dnwc2lfh"]
+
+[ext_resource type="Script" uid="uid://cmeja5x3a74uo" path="res://nodes/exit/exit.gd" id="1_4aeux"]
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="1_e58sx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg4iw"]
+atlas = ExtResource("1_e58sx")
+region = Rect2(192, 112, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lj71v"]
+size = Vector2(10, 13)
+
+[node name="Exit" type="Node2D" unique_id=887190642]
+script = ExtResource("1_4aeux")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=405555784]
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_vg4iw")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=401480721]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1605626147]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_lj71v")
+debug_color = Color(0, 0.5950001, 0.7, 0.019607844)

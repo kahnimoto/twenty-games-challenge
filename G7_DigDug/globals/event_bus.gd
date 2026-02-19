@@ -19,3 +19,4 @@ signal preview_costs_show
 signal preview_costs_hide
 signal tried_to_digg_too_hard
 signal lives_changed(new_value: int)
+signal exit_reached

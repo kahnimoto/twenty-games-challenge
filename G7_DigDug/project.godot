@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Dig Dug"
 config/tags=PackedStringArray("20games")
-run/main_scene="uid://bqlfe4pbl4epj"
+run/main_scene="uid://bpkjh4bv0vxid"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://assets/external/icon.svg"
 

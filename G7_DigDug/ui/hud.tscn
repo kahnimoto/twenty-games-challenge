@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://vv3gmcf4cpg"]
 
 [ext_resource type="Script" uid="uid://bwsyckvcebnju" path="res://ui/hud/hud.gd" id="1_q43x7"]
-[ext_resource type="Theme" uid="uid://c7df028jbjpj5" path="res://nodes/hud_theme.tres" id="2_srpbi"]
+[ext_resource type="Theme" uid="uid://c7df028jbjpj5" path="res://ui/hud_theme.tres" id="2_srpbi"]
 [ext_resource type="Script" uid="uid://drhvl8wcliul1" path="res://ui/inventory.gd" id="3_spcu4"]
 [ext_resource type="Texture2D" uid="uid://crww5lirjghn4" path="res://assets/slot.png" id="4_ff8ar"]
 [ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="5_m0eg6"]

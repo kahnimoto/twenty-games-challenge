@@ -25,7 +25,12 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not playing or not ready_for_next:
+	if not playing:
+		return
+	if event.is_action_pressed("ui_cancel"):
+		get_viewport().set_input_as_handled()
+		skip_tutorial()
+	if not ready_for_next:
 		return
 	if event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton:
 		next_hint()
@@ -57,6 +62,12 @@ func next_hint(first: bool = false) -> void:
 	ready_for_next = true
 	input_hint.show()
 
+
+func skip_tutorial() -> void:
+	hud.refresh()
+	get_tree().paused = false
+	queue_free()
+	
 
 func done() -> void:
 	hud.refresh()

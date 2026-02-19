@@ -16,7 +16,13 @@ const WALL_LAYER_NUMBER := 5
 const WALL_BITMASK := 16
 const LAVA_LAYER_NUMBER := 7
 const LAVA_BITMASK := 64
+const LEVELS: Array[PackedScene] = [
+	preload("res://levels/tutorial.tscn"),
+	preload("res://levels/level_two.tscn"),
+	preload("res://playground.tscn"),
+]
 
+var current_level := 0
 var abilities: Dictionary[Ability, bool] = {
 	Ability.NONE: false,
 	Ability.WALLGRAB: false,
@@ -38,6 +44,7 @@ var scaffold_support_levels := 2
 
 func _ready() -> void:
 	Events.ore_mined.connect(_on_ore_mined)
+	Events.exit_reached.connect(_on_player_reached_exit)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -48,6 +55,18 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_ore_mined(ore: Ore.Metal) -> void:
 	inventory[ore as Variant] += 1
 	Events.inventory_changed.emit()
+
+
+func _on_player_reached_exit() -> void:
+	get_tree().paused = true
+	print("level completed")
+	current_level += 1
+	if current_level >= LEVELS.size():
+		current_level = 0
+	get_tree().change_scene_to_packed(LEVELS[current_level])
+	await get_tree().scene_changed
+	reset()
+	get_tree().paused = false
 
 
 func reset() -> void:

@@ -1,19 +1,19 @@
 [gd_scene format=4 uid="uid://bqlfe4pbl4epj"]
 
-[ext_resource type="Script" uid="uid://c8ocuxs66qqlp" path="res://level.gd" id="1_is3ju"]
-[ext_resource type="Texture2D" uid="uid://c6qqhhw5yth2h" path="res://assets/external/tilesets/tileset_mk_16_16_nature_tileset_godot.png" id="1_rupst"]
-[ext_resource type="Script" uid="uid://qxpt4q8lcd6j" path="res://nodes/camera.gd" id="2_wt17y"]
-[ext_resource type="PackedScene" uid="uid://bexlitfnfcfwk" path="res://nodes/scaffold/scaffold.tscn" id="3_4bqqs"]
-[ext_resource type="PackedScene" uid="uid://b6rhnei03phg0" path="res://player/player.tscn" id="3_m8u5f"]
-[ext_resource type="PackedScene" uid="uid://b8uxueg5l8ayd" path="res://nodes/scaffold/scaffold_leggs.tscn" id="4_ynsuh"]
-[ext_resource type="PackedScene" uid="uid://6j56dnwc2lfh" path="res://nodes/exit.tscn" id="5_te8jg"]
-[ext_resource type="PackedScene" uid="uid://bj6v1vc50wt6w" path="res://nodes/ores/metals/iron.tscn" id="6_h1jm5"]
-[ext_resource type="PackedScene" uid="uid://6hbgtlhmgiud" path="res://nodes/ores/metals/copper.tscn" id="6_pi42a"]
-[ext_resource type="PackedScene" uid="uid://b2n5le45s3257" path="res://nodes/ores/metals/gold.tscn" id="7_pio1y"]
-[ext_resource type="PackedScene" uid="uid://dlg0kax4p754w" path="res://enemy/enemy.tscn" id="9_pio1y"]
-[ext_resource type="PackedScene" uid="uid://e84d0glbi0tm" path="res://nodes/workshop.tscn" id="9_yjl7g"]
-[ext_resource type="PackedScene" uid="uid://367u62kkxayu" path="res://nodes/ores/gems/diamond.tscn" id="10_x6kx1"]
-[ext_resource type="PackedScene" uid="uid://vv3gmcf4cpg" path="res://ui/hud.tscn" id="14_f7pug"]
+[ext_resource type="Script" uid="uid://c8ocuxs66qqlp" path="res://levels/level.gd" id="1_d6xy2"]
+[ext_resource type="Texture2D" uid="uid://c6qqhhw5yth2h" path="res://assets/external/tilesets/tileset_mk_16_16_nature_tileset_godot.png" id="2_dgk06"]
+[ext_resource type="PackedScene" uid="uid://bexlitfnfcfwk" path="res://nodes/scaffold/scaffold.tscn" id="3_uqx1c"]
+[ext_resource type="PackedScene" uid="uid://b8uxueg5l8ayd" path="res://nodes/scaffold/scaffold_leggs.tscn" id="4_jnc0c"]
+[ext_resource type="PackedScene" uid="uid://6j56dnwc2lfh" path="res://nodes/exit/exit.tscn" id="5_4kkt4"]
+[ext_resource type="PackedScene" uid="uid://6hbgtlhmgiud" path="res://nodes/ores/metals/copper.tscn" id="6_vc6i7"]
+[ext_resource type="PackedScene" uid="uid://bj6v1vc50wt6w" path="res://nodes/ores/metals/iron.tscn" id="7_ox2gq"]
+[ext_resource type="PackedScene" uid="uid://b2n5le45s3257" path="res://nodes/ores/metals/gold.tscn" id="8_ksl6w"]
+[ext_resource type="PackedScene" uid="uid://e84d0glbi0tm" path="res://nodes/workshop/workshop.tscn" id="9_e2ho6"]
+[ext_resource type="PackedScene" uid="uid://367u62kkxayu" path="res://nodes/ores/gems/diamond.tscn" id="10_78myl"]
+[ext_resource type="PackedScene" uid="uid://dlg0kax4p754w" path="res://enemy/enemy.tscn" id="11_qva5r"]
+[ext_resource type="PackedScene" uid="uid://b6rhnei03phg0" path="res://player/player.tscn" id="12_ibwek"]
+[ext_resource type="Script" uid="uid://qxpt4q8lcd6j" path="res://nodes/camera.gd" id="13_bdsqb"]
+[ext_resource type="PackedScene" uid="uid://vv3gmcf4cpg" path="res://ui/hud.tscn" id="14_m3u8c"]
 
 [sub_resource type="Gradient" id="Gradient_m8u5f"]
 offsets = PackedFloat32Array(0.33574006, 0.99819493)
@@ -39,7 +39,7 @@ color_ramp = SubResource("Gradient_4bqqs")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wt17y"]
 resource_name = "dirt"
-texture = ExtResource("1_rupst")
+texture = ExtResource("2_dgk06")
 1:0/0 = 0
 1:0/0/terrain_set = 0
 1:0/0/terrain = 0
@@ -2459,8 +2459,8 @@ texture = ExtResource("1_rupst")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ynsuh"]
 resource_name = "scaffolds"
-scenes/1/scene = ExtResource("3_4bqqs")
-scenes/2/scene = ExtResource("4_ynsuh")
+scenes/1/scene = ExtResource("3_uqx1c")
+scenes/2/scene = ExtResource("4_jnc0c")
 
 [sub_resource type="TileSet" id="TileSet_m8u5f"]
 physics_layer_0/collision_layer = 16
@@ -2491,12 +2491,12 @@ sources/1 = SubResource("TileSetScenesCollectionSource_ynsuh")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_pi42a"]
 resource_name = "Ores"
-scenes/1/scene = ExtResource("5_te8jg")
-scenes/2/scene = ExtResource("6_pi42a")
-scenes/3/scene = ExtResource("6_h1jm5")
-scenes/4/scene = ExtResource("7_pio1y")
-scenes/5/scene = ExtResource("9_yjl7g")
-scenes/7/scene = ExtResource("10_x6kx1")
+scenes/1/scene = ExtResource("5_4kkt4")
+scenes/2/scene = ExtResource("6_vc6i7")
+scenes/3/scene = ExtResource("7_ox2gq")
+scenes/4/scene = ExtResource("8_ksl6w")
+scenes/5/scene = ExtResource("9_e2ho6")
+scenes/7/scene = ExtResource("10_78myl")
 
 [sub_resource type="TileSet" id="TileSet_h1jm5"]
 custom_data_layer_0/name = "metal"
@@ -2504,7 +2504,7 @@ custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetScenesCollectionSource_pi42a")
 
 [node name="Level" type="Node" unique_id=231827837 node_paths=PackedStringArray("tilemap", "object_tilemap")]
-script = ExtResource("1_is3ju")
+script = ExtResource("1_d6xy2")
 tilemap = NodePath("TileMap")
 object_tilemap = NodePath("Ores")
 
@@ -2532,21 +2532,21 @@ tile_set = SubResource("TileSet_m8u5f")
 [node name="Ores" type="TileMapLayer" parent="." unique_id=299633044]
 self_modulate = Color(1.0368084, 0.78488356, 0.025172979, 1)
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAMABcAAAAAAAAAAgANABcAAAAAAAAAAgAMABgAAAAAAAAAAgAnABkAAAAAAAAAAgAmAB0AAAAAAAAAAgAkAB0AAAAAAAAAAgAvABcAAAAAAAAAAgATABcAAAAAAAAAAgAQACAAAAAAAAAAAwAQACEAAAAAAAAAAwAeACMAAAAAAAAAAwArACEAAAAAAAAAAwAqACIAAAAAAAAAAwAoACQAAAAAAAAAAwAXACgAAAAAAAAAAwARADMAAAAAAAAABAARAC4AAAAAAAAABAAYADMAAAAAAAAABAAsAC0AAAAAAAAABAAcACwAAAAAAAAABAAkABcAAAAAAAAAAwAMACQAAAAAAAAABAAdABkAAAAAAAAAAgAcAD0AAAAAAAAAAQAUACIAAAAAAAAABwAvADsAAAAAAAAABQAYABUAAAAAAAAABwAfABMAAAAAAAAABQA=")
+tile_map_data = PackedByteArray("AAAMABcAAAAAAAAAAgANABcAAAAAAAAAAgAMABgAAAAAAAAAAgAnABkAAAAAAAAAAgAmAB0AAAAAAAAAAgAkAB0AAAAAAAAAAgAvABcAAAAAAAAAAgATABcAAAAAAAAAAgAQACAAAAAAAAAAAwAQACEAAAAAAAAAAwAeACMAAAAAAAAAAwArACEAAAAAAAAAAwAqACIAAAAAAAAAAwAoACQAAAAAAAAAAwAXACgAAAAAAAAAAwARADMAAAAAAAAABAARAC4AAAAAAAAABAAYADMAAAAAAAAABAAsAC0AAAAAAAAABAAcACwAAAAAAAAABAAkABcAAAAAAAAAAwAMACQAAAAAAAAABAAdABkAAAAAAAAAAgAcAD0AAAAAAAAAAQAUACIAAAAAAAAABwAvADsAAAAAAAAABQAfABMAAAAAAAAABQA=")
 tile_set = SubResource("TileSet_h1jm5")
 
 [node name="Enemies" type="Node2D" parent="." unique_id=2131399501]
 
-[node name="Enemy" parent="Enemies" unique_id=706777525 instance=ExtResource("9_pio1y")]
+[node name="Enemy" parent="Enemies" unique_id=706777525 instance=ExtResource("11_qva5r")]
 position = Vector2(518, 392)
 
-[node name="Enemy2" parent="Enemies" unique_id=1698900382 instance=ExtResource("9_pio1y")]
+[node name="Enemy2" parent="Enemies" unique_id=1698900382 instance=ExtResource("11_qva5r")]
 position = Vector2(390, 504)
 
-[node name="Enemy3" parent="Enemies" unique_id=1161192075 instance=ExtResource("9_pio1y")]
+[node name="Enemy3" parent="Enemies" unique_id=1161192075 instance=ExtResource("11_qva5r")]
 position = Vector2(454, 696)
 
-[node name="Player" parent="." unique_id=1475977519 node_paths=PackedStringArray("level") instance=ExtResource("3_m8u5f")]
+[node name="Player" parent="." unique_id=1475977519 node_paths=PackedStringArray("level") instance=ExtResource("12_ibwek")]
 unique_name_in_owner = true
 position = Vector2(364, 287)
 collision_mask = 112
@@ -2558,7 +2558,7 @@ position = Vector2(485, 310)
 limit_left = 0
 limit_top = 0
 limit_right = 960
-script = ExtResource("2_wt17y")
+script = ExtResource("13_bdsqb")
 
-[node name="HUD" parent="." unique_id=570225655 instance=ExtResource("14_f7pug")]
+[node name="HUD" parent="." unique_id=570225655 instance=ExtResource("14_m3u8c")]
 show_debug = false

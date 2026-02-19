@@ -27,6 +27,7 @@ func _ready() -> void:
 	Events.lives_changed.connect(_update_health)
 	#Events.player_started.connect(click_to_start_message.hide)
 	#Events.game_over.connect(click_to_restart_message.show)
+	show()
 
 
 func _on_feature_toggled(on: bool, ability: Game.Ability) -> void:

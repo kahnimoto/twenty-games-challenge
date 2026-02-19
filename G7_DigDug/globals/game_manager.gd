@@ -19,13 +19,14 @@ const LAVA_BITMASK := 64
 var abilities: Dictionary[Ability, bool] = {
 	Ability.NONE: false,
 	Ability.WALLGRAB: false,
-	Ability.JETPACK: true
+	Ability.JETPACK: false,
 }
 var pickaxe_level := 1
 var inventory: Dictionary[Ore.Metal, int] = {
 	Ore.Metal.COPPER: 0,
 	Ore.Metal.IRON: 0,
-	Ore.Metal.GOLD: 0
+	Ore.Metal.GOLD: 0,
+	Ore.Metal.DIAMOND: 0,
 }
 var lives := MAX_LIVES
 var game_over := false
@@ -69,6 +70,11 @@ func use(requested: Dictionary[Ore.Metal, int]) -> bool:
 
 func gain(ability: Ability) -> void:
 	abilities[ability] = true
+	Events.abilities_changed.emit()
+
+
+func upgrade_pickaxe(new_level: int = 2) -> void:
+	pickaxe_level = new_level
 	Events.abilities_changed.emit()
 
 

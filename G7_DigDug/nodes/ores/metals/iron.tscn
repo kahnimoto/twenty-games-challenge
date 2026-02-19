@@ -56,7 +56,7 @@ modulate = Color(0.74509805, 0.74509805, 0.74509805, 1)
 script = ExtResource("1_y02u4")
 type = 1
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=877045012]
+[node name="MetalSprite" type="AnimatedSprite2D" parent="." unique_id=877045012]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_c7deq")
 autoplay = "default"

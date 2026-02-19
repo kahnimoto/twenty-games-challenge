@@ -1,27 +1,27 @@
-[gd_scene format=3 uid="uid://dgchvyb4ml6x0"]
+[gd_scene format=3 uid="uid://367u62kkxayu"]
 
-[ext_resource type="Script" uid="uid://bho2p5b75rl7t" path="res://nodes/ores/ore.gd" id="1_2n0ju"]
-[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="2_66piv"]
+[ext_resource type="Script" uid="uid://wmt04mahdnni" path="res://nodes/ores/gem.gd" id="1_hvivf"]
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="2_jkqpe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2n0ju"]
-atlas = ExtResource("2_66piv")
-region = Rect2(272, 0, 16, 16)
+atlas = ExtResource("2_jkqpe")
+region = Rect2(208, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_66piv"]
-atlas = ExtResource("2_66piv")
-region = Rect2(304, 0, 16, 16)
+atlas = ExtResource("2_jkqpe")
+region = Rect2(224, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3kg84"]
-atlas = ExtResource("2_66piv")
-region = Rect2(336, 0, 16, 16)
+atlas = ExtResource("2_jkqpe")
+region = Rect2(240, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ap2km"]
-atlas = ExtResource("2_66piv")
-region = Rect2(368, 0, 16, 16)
+atlas = ExtResource("2_jkqpe")
+region = Rect2(256, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryx4d"]
-atlas = ExtResource("2_66piv")
-region = Rect2(272, 0, 16, 16)
+atlas = ExtResource("2_jkqpe")
+region = Rect2(208, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c7deq"]
 animations = [{
@@ -51,10 +51,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Ore" type="Node2D" unique_id=1190596547]
-script = ExtResource("1_2n0ju")
+[node name="Gem" type="Node2D" unique_id=1190596547]
+modulate = Color(0, 1, 1, 1)
+script = ExtResource("1_hvivf")
+type = 3
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=877045012]
+[node name="GemSprite" type="AnimatedSprite2D" parent="." unique_id=713328527]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_c7deq")
 autoplay = "default"

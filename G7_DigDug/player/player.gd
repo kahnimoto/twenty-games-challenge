@@ -223,8 +223,6 @@ func _horizontal_movement(delta: float, on_ground: bool, on_wall: bool, jumping:
 
 
 #region private methods
-
-
 func _on_player_met_enemy(area: Area2D) -> void:
 	assert(area.is_in_group("enemy"))
 	if _invulnerable_time <= 0.0:

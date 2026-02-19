@@ -3,12 +3,13 @@ class_name Ore
 extends Node2D
 
 
-enum Metal { COPPER, IRON, GOLD }
+enum Metal { COPPER, IRON, GOLD, DIAMOND }
 
 const metal_colors : Dictionary[Metal, Color] = {
 	Metal.COPPER: Color.ORANGE_RED,
 	Metal.IRON: Color.GRAY,
-	Metal.GOLD: Color.GOLD
+	Metal.GOLD: Color.GOLD,
+	Metal.DIAMOND: Color.AQUA,
 }
 
 @export var type: Metal = Metal.COPPER:
@@ -17,14 +18,11 @@ const metal_colors : Dictionary[Metal, Color] = {
 			type = v
 			modulate = metal_colors[type]
 
+
 var hp := 3
 
-@onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var map: TileMapLayer = get_parent()
-
-
-func _ready() -> void:
-	modulate = metal_colors[type]
+@onready var sprite: AnimatedSprite2D = $MetalSprite
 
 
 func dig() -> bool:

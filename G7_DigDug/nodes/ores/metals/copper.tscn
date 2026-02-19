@@ -55,7 +55,7 @@ animations = [{
 modulate = Color(1, 0.27058825, 0, 1)
 script = ExtResource("1_g6com")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=877045012]
+[node name="MetalSprite" type="AnimatedSprite2D" parent="." unique_id=877045012]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_c7deq")
 autoplay = "default"

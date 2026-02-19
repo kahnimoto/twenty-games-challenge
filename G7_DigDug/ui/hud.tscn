@@ -1,0 +1,768 @@
+[gd_scene format=3 uid="uid://vv3gmcf4cpg"]
+
+[ext_resource type="Script" uid="uid://bwsyckvcebnju" path="res://ui/hud/hud.gd" id="1_q43x7"]
+[ext_resource type="Theme" uid="uid://c7df028jbjpj5" path="res://nodes/hud_theme.tres" id="2_srpbi"]
+[ext_resource type="Script" uid="uid://drhvl8wcliul1" path="res://ui/inventory.gd" id="3_spcu4"]
+[ext_resource type="Texture2D" uid="uid://crww5lirjghn4" path="res://assets/slot.png" id="4_ff8ar"]
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="5_m0eg6"]
+[ext_resource type="Script" uid="uid://bj22a8ycqdugv" path="res://ui/hud/abilities_hud.gd" id="6_b00kl"]
+[ext_resource type="PackedScene" uid="uid://c2hfyn6l2g63l" path="res://ui/health/health_gem.tscn" id="7_so1yu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pactg"]
+atlas = ExtResource("5_m0eg6")
+region = Rect2(224, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2qr3"]
+atlas = ExtResource("5_m0eg6")
+region = Rect2(224, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jufm4"]
+atlas = ExtResource("5_m0eg6")
+region = Rect2(160, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymgag"]
+atlas = ExtResource("5_m0eg6")
+region = Rect2(176, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m40n"]
+atlas = ExtResource("5_m0eg6")
+region = Rect2(208, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycdrs"]
+atlas = ExtResource("5_m0eg6")
+region = Rect2(160, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6kx1"]
+atlas = ExtResource("5_m0eg6")
+region = Rect2(192, 32, 16, 16)
+
+[sub_resource type="GDScript" id="GDScript_pactg"]
+script/source = "extends HFlowContainer
+
+
+func _ready() -> void:
+	hide()
+	Events.preview_costs_show.connect(show)
+	Events.preview_costs_hide.connect(hide)
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q43x7"]
+atlas = ExtResource("5_m0eg6")
+region = Rect2(224, 16, 16, 16)
+
+[node name="HUD" type="CanvasLayer" unique_id=570225655]
+script = ExtResource("1_q43x7")
+
+[node name="Control" type="Control" parent="." unique_id=2072073139]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="Control" parent="Control" unique_id=1528665108]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HFlowContainer" type="VBoxContainer" parent="Control/Buttons" unique_id=621678123]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -66.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+
+[node name="WallgrabToggle" type="CheckButton" parent="Control/Buttons/HFlowContainer" unique_id=1234296514]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Wallgrab"
+alignment = 2
+
+[node name="JetpackToggle" type="CheckButton" parent="Control/Buttons/HFlowContainer" unique_id=626397782]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Jetpack"
+alignment = 2
+
+[node name="Inventory" type="Control" parent="." unique_id=468121262]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 334.0
+offset_bottom = 151.0
+mouse_filter = 2
+theme = ExtResource("2_srpbi")
+script = ExtResource("3_spcu4")
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory" unique_id=1126233277]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Inventory/MarginContainer" unique_id=515032573]
+layout_mode = 2
+
+[node name="Copper" type="Control" parent="Inventory/MarginContainer/HFlowContainer" unique_id=1699055079]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Copper" unique_id=992924491]
+self_modulate = Color(0.8743333, 1, 0.74, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ff8ar")
+
+[node name="Item" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Copper" unique_id=2035942318]
+self_modulate = Color(0.7, 0.28000003, 0, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 29.0
+offset_bottom = 28.0
+texture = SubResource("AtlasTexture_pactg")
+
+[node name="CopperLabel" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Copper" unique_id=1730882901]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_top = 4.0
+offset_right = 64.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 16
+text = "Copper"
+horizontal_alignment = 1
+
+[node name="CopperAmountValue" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Copper" unique_id=2082778934]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -42.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "12"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Iron" type="Control" parent="Inventory/MarginContainer/HFlowContainer" unique_id=269107300]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Iron" unique_id=1695420512]
+self_modulate = Color(0.8743333, 1, 0.74, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ff8ar")
+
+[node name="Item" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Iron" unique_id=1620295107]
+self_modulate = Color(0.61770004, 0.73544, 0.87, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 29.0
+offset_bottom = 28.0
+texture = SubResource("AtlasTexture_pactg")
+
+[node name="IronAmountValue" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Iron" unique_id=1807954884]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -42.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "12"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="IronLabel" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Iron" unique_id=1429874543]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_top = 4.0
+offset_right = 64.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 16
+text = "Iron"
+horizontal_alignment = 1
+
+[node name="Gold" type="Control" parent="Inventory/MarginContainer/HFlowContainer" unique_id=1411591670]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Gold" unique_id=361937150]
+self_modulate = Color(0.8743333, 1, 0.74, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ff8ar")
+
+[node name="Item" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Gold" unique_id=900103823]
+self_modulate = Color(1, 0.81, 0.24000001, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 29.0
+offset_bottom = 28.0
+texture = SubResource("AtlasTexture_pactg")
+
+[node name="GoldAmountValue" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Gold" unique_id=1994183207]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -42.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "12"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="GoldLabel" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Gold" unique_id=230420810]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_top = 4.0
+offset_right = 64.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 16
+text = "Gold"
+horizontal_alignment = 1
+
+[node name="Diamond" type="Control" parent="Inventory/MarginContainer/HFlowContainer" unique_id=1023534100]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Diamond" unique_id=693540024]
+self_modulate = Color(0.8743333, 1, 0.74, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ff8ar")
+
+[node name="Item" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Diamond" unique_id=1389410814]
+self_modulate = Color(0.51, 1, 0.9673334, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 7.0
+offset_top = 12.0
+offset_right = 59.0
+offset_bottom = 62.0
+texture = SubResource("AtlasTexture_u2qr3")
+
+[node name="DiamondAmountValue" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Diamond" unique_id=2093208082]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -42.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="DiamondLabel" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Diamond" unique_id=615730876]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_top = 4.0
+offset_right = 64.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 16
+text = "Diamond"
+horizontal_alignment = 1
+
+[node name="Abilities" type="Control" parent="." unique_id=1579321770]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+mouse_filter = 2
+theme = ExtResource("2_srpbi")
+script = ExtResource("6_b00kl")
+
+[node name="MarginContainer" type="MarginContainer" parent="Abilities" unique_id=161144079]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_bottom = 284.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer" unique_id=1912836206]
+layout_mode = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Abilities/MarginContainer/VBoxContainer" unique_id=170501698]
+layout_mode = 2
+alignment = 2
+
+[node name="Pickaxe" type="Control" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer" unique_id=998628855]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Pickaxe" unique_id=438525338]
+self_modulate = Color(0.74, 0.75733334, 1, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ff8ar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Pickaxe" unique_id=1635682659]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.5
+offset_right = 20.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -5
+alignment = 1
+
+[node name="Shaft" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Pickaxe/VBoxContainer" unique_id=519149221]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_jufm4")
+stretch_mode = 5
+
+[node name="PickaxeHead" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Pickaxe/VBoxContainer/Shaft" unique_id=935415232]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ymgag")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Pickaxe/VBoxContainer" unique_id=379686350]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Pickaxe"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Claws" type="Control" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer" unique_id=1342758677]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Claws" unique_id=158683214]
+self_modulate = Color(0.74, 0.75733334, 1, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ff8ar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Claws" unique_id=82860745]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.5
+offset_right = 20.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Claws/VBoxContainer" unique_id=861163718]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+texture = SubResource("AtlasTexture_5m40n")
+
+[node name="HasClaws" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Claws/VBoxContainer/TextureRect" unique_id=2115944995]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ycdrs")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Claws/VBoxContainer" unique_id=587185333]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Claws"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Jetpack" type="Control" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer" unique_id=1873940270]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Jetpack" unique_id=1869277126]
+self_modulate = Color(0.74, 0.75733334, 1, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ff8ar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Jetpack" unique_id=252715006]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.5
+offset_right = 20.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Jetpack/VBoxContainer" unique_id=1574827497]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+texture = SubResource("AtlasTexture_x6kx1")
+
+[node name="HasJetpack" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Jetpack/VBoxContainer/TextureRect" unique_id=1506378493]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ycdrs")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Jetpack/VBoxContainer" unique_id=1406729713]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Jetpack"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CostPreview" type="HFlowContainer" parent="Abilities/MarginContainer/VBoxContainer" unique_id=1697268249]
+layout_mode = 2
+alignment = 2
+script = SubResource("GDScript_pactg")
+
+[node name="Pickaxe" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=615073942]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Pickaxe" unique_id=1240522409]
+self_modulate = Color(0.923, 1, 0.89, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ff8ar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Pickaxe" unique_id=1949133526]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.5
+offset_right = 20.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -12
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Pickaxe/VBoxContainer" unique_id=1370082649]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Item2" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Pickaxe/VBoxContainer/HBoxContainer2" unique_id=767891428]
+self_modulate = Color(0.46979997, 0.87, 0.84332, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_q43x7")
+
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Pickaxe/VBoxContainer/HBoxContainer2" unique_id=476400975]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "x1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Claws" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=259685522]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws" unique_id=1354744315]
+self_modulate = Color(0.923, 1, 0.89, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ff8ar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws" unique_id=701632071]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.5
+offset_right = 20.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -12
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer" unique_id=557518326]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Item" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer/HBoxContainer" unique_id=1788173295]
+self_modulate = Color(0.7, 0.28000003, 0, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_pactg")
+
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer/HBoxContainer" unique_id=779141466]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "x2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer" unique_id=2096557555]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Item2" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer/HBoxContainer2" unique_id=227091412]
+self_modulate = Color(0.61770004, 0.73544, 0.87, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_pactg")
+
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Claws/VBoxContainer/HBoxContainer2" unique_id=1449506274]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "x1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Jetpack" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=353801612]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack" unique_id=139084490]
+self_modulate = Color(0.923, 1, 0.89, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ff8ar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack" unique_id=572215563]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.5
+offset_right = 20.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -12
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer" unique_id=2054108364]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Item2" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer/HBoxContainer" unique_id=393985333]
+self_modulate = Color(0.61770004, 0.73544, 0.87, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_pactg")
+
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer/HBoxContainer" unique_id=1200040144]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "x2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer" unique_id=1081472274]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="Item" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer/HBoxContainer2" unique_id=401581643]
+self_modulate = Color(1, 0.81, 0.24000001, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_pactg")
+
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/Jetpack/VBoxContainer/HBoxContainer2" unique_id=223220215]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "x1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health" type="Control" parent="." unique_id=145198366]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -114.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Health" unique_id=1687079565]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 16
+
+[node name="HealthBar" type="GridContainer" parent="Health/MarginContainer" unique_id=1902263736]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_filter = 2
+columns = 3
+
+[node name="Health1" parent="Health/MarginContainer/HealthBar" unique_id=512435503 instance=ExtResource("7_so1yu")]
+layout_mode = 2
+
+[node name="Health2" parent="Health/MarginContainer/HealthBar" unique_id=493383054 instance=ExtResource("7_so1yu")]
+layout_mode = 2
+
+[node name="Health3" parent="Health/MarginContainer/HealthBar" unique_id=1733773082 instance=ExtResource("7_so1yu")]
+layout_mode = 2

@@ -120,7 +120,17 @@ func dig(position: Vector2) -> bool:
 	if not is_cell_diggable(location):
 		await get_tree().create_timer(0.15).timeout
 		return true
-	else:
-		Events.dig_started.emit(position)
-		await Events.dig_complete
+	var data: TileData = tilemap.get_cell_tile_data(location)
+	var strength: int = data.get_custom_data("strength")
+	assert(strength is int and strength >= 0 and strength <= 3, "Improper configured tile")
+	if strength == 0:
+		push_warning("Dug at undiggable")
+		await get_tree().create_timer(0.15).timeout
 		return true
+	if strength > Game.pickaxe_level:
+		Events.tried_to_digg_too_hard.emit()
+		await get_tree().create_timer(0.15).timeout
+		return true
+	Events.dig_started.emit(position)
+	await Events.dig_complete
+	return true

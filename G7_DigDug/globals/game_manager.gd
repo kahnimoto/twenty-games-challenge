@@ -39,7 +39,7 @@ var inventory: Dictionary[Ore.Metal, int] = {
 }
 var lives := MAX_LIVES
 var game_over := false
-var scaffold_support_levels := 2
+var scaffold_support_levels := 5
 
 
 func _ready() -> void:
@@ -75,8 +75,9 @@ func reset() -> void:
 	pickaxe_level = 1
 	for key in inventory:
 		inventory[key] = 0
-	for key in abilities:
-		abilities[key] = false
+	Events.inventory_changed.emit()
+	#for key in abilities:
+		#abilities[key] = false
 
 
 func use(requested: Dictionary[Ore.Metal, int]) -> bool:

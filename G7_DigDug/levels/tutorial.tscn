@@ -2551,7 +2551,7 @@ tile_set = SubResource("TileSet_m8u5f")
 [node name="Ores" type="TileMapLayer" parent="." unique_id=299633044]
 self_modulate = Color(1.0368084, 0.78488356, 0.025172979, 1)
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAfABMAAAAAAAAABQATABgAAAAAAAAAAgASABgAAAAAAAAAAgAvABgAAAAAAAAAAwAjABoAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAAfABMAAAAAAAAABQATABgAAAAAAAAAAgASABgAAAAAAAAAAgAvABgAAAAAAAAAAwAjABoAAAAAAAAAAQARABgAAAAAAAAAAwA=")
 tile_set = SubResource("TileSet_h1jm5")
 
 [node name="Enemies" type="Node2D" parent="." unique_id=2131399501]

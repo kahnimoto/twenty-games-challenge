@@ -7,6 +7,7 @@ extends Node
 @onready var dig_sound: AudioStreamPlayer = $DigSound
 @onready var building_sound: AudioStreamPlayer = $BuildingSound
 @onready var extra_scaffold_sound: AudioStreamPlayer = $ExtraScaffoldSound
+@onready var crafting_sound: AudioStreamPlayer = $CraftingSound
 
 
 func dig() -> void:
@@ -16,10 +17,18 @@ func dig() -> void:
 func mine() -> void:
 	mining_sound.play()
 
+
+func craft() -> bool:
+	crafting_sound.play()
+	await crafting_sound.finished
+	return true
+
+
 func build() -> bool:
 	building_sound.play()
 	await building_sound.finished
 	return true
+
 
 func build_extra() -> bool:
 	extra_scaffold_sound.play()

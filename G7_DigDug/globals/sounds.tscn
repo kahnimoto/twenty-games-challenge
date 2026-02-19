@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dq3ij2j2pjihs" path="res://assets/external/sounds/dig.mp3" id="4_t5qf7"]
 [ext_resource type="AudioStream" uid="uid://c6ekbbkld55db" path="res://assets/external/sounds/building.mp3" id="5_uk1eb"]
 [ext_resource type="AudioStream" uid="uid://bwfhelr751hl6" path="res://assets/external/sounds/extra.mp3" id="6_br1tb"]
+[ext_resource type="AudioStream" uid="uid://jmo0wmh05ukt" path="res://assets/external/sounds/crafting.mp3" id="7_br1tb"]
 
 [node name="Sounds" type="Node" unique_id=1884146757]
 script = ExtResource("1_wac1x")
@@ -29,3 +30,6 @@ stream = ExtResource("5_uk1eb")
 
 [node name="ExtraScaffoldSound" type="AudioStreamPlayer" parent="." unique_id=1197574652]
 stream = ExtResource("6_br1tb")
+
+[node name="CraftingSound" type="AudioStreamPlayer" parent="." unique_id=778823373]
+stream = ExtResource("7_br1tb")

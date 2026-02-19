@@ -74,18 +74,31 @@ func _on_player_requested_scaffold(_position: Vector2) -> void:
 			break
 	if not has_supported_floor:
 		# @TODO player feedback?
+		Events.scaffold_rejected.emit(location)
 		return
 	if not is_cell_open(location):
+		Events.scaffold_rejected.emit(location)
 		return
+	# gather all open positions starting from the requested location
+	var build_positions: Array = []
+	var cursor := location
+	while is_cell_open(cursor):
+		build_positions.append(cursor)
+		cursor += Vector2i.DOWN
+
+	# legs go below the main scaffold (everything except the first entry)
+	if build_positions.size() > 1:
+		var legs := build_positions.slice(1, build_positions.size())
+		# build legs from bottom up
+		legs.reverse()
+		for pos in legs:
+			tilemap.set_cell(pos, TILE_COLLECTION, Vector2i.ZERO, TILE_SCAFFOLD_LEGGS)
+			await SFX.build_extra()
+
+	# finally build the scaffold at the original location
 	tilemap.set_cell(location, TILE_COLLECTION, Vector2i.ZERO, TILE_SCAFFOLD)
 	await SFX.build()
-	while true:
-		location += Vector2i.DOWN
-		if is_cell_open(location):
-			tilemap.set_cell(location, TILE_COLLECTION, Vector2i.ZERO, TILE_SCAFFOLD_LEGGS)
-			await SFX.build_extra()
-		else:
-			break
+	Events.scaffold_placed.emit(location)
 #endregion
 
 

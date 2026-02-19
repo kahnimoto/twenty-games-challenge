@@ -47,6 +47,8 @@ var _turning_around := 0.0
 var _is_digging := false
 var _position_timer := 0.0
 var _invulnerable_time := 0.0
+var _building := false
+var _crafting := false
 #endregion
 
 #region nodes
@@ -69,6 +71,11 @@ func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
 	player_hurt.area_entered.connect(_on_player_met_enemy)
 	assert(level is Level)
+	Events.scaffold_requested.connect(func(_p): _building = true)
+	Events.scaffold_rejected.connect(func(_p): _building = false)
+	Events.scaffold_placed.connect(func(_p): _building = false)
+	Events.craft_started.connect(func(): _crafting = true)
+	Events.craft_completed.connect(func(): _crafting = false)
 
 
 func _process(delta: float) -> void:
@@ -86,6 +93,8 @@ func _process(delta: float) -> void:
 #region processing
 func _physics_process(delta: float) -> void:
 	if Game.game_over:
+		return
+	if _building or _crafting:
 		return
 	var just_landed: bool = _was_in_air and is_on_floor()
 	var on_ground = is_on_floor()

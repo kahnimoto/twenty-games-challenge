@@ -78,10 +78,12 @@ func _on_player_requested_scaffold(_position: Vector2) -> void:
 	if not is_cell_open(location):
 		return
 	tilemap.set_cell(location, TILE_COLLECTION, Vector2i.ZERO, TILE_SCAFFOLD)
+	await SFX.build()
 	while true:
 		location += Vector2i.DOWN
 		if is_cell_open(location):
 			tilemap.set_cell(location, TILE_COLLECTION, Vector2i.ZERO, TILE_SCAFFOLD_LEGGS)
+			await SFX.build_extra()
 		else:
 			break
 #endregion
@@ -128,9 +130,12 @@ func dig(position: Vector2) -> bool:
 		await get_tree().create_timer(0.15).timeout
 		return true
 	if strength > Game.pickaxe_level:
+		SFX.hardness()
 		Events.tried_to_digg_too_hard.emit()
 		await get_tree().create_timer(0.15).timeout
 		return true
+	else:
+		SFX.dig()
 	Events.dig_started.emit(position)
 	await Events.dig_complete
 	return true

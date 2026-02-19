@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b5k6gk42wf3mi"]
+
+[ext_resource type="AudioStream" uid="uid://bsxiokidtjij3" path="res://assets/external/sounds/mining.mp3" id="1_8srb7"]
+[ext_resource type="AudioStream" uid="uid://bp5s5vceud3or" path="res://assets/external/sounds/too_hard.mp3" id="2_tfwxo"]
+
+[node name="SoundManager" type="Node" unique_id=1576109973]
+
+[node name="MiningSound" type="AudioStreamPlayer" parent="." unique_id=750242099]
+stream = ExtResource("1_8srb7")
+
+[node name="TooHardSound" type="AudioStreamPlayer" parent="." unique_id=1384622771]
+stream = ExtResource("2_tfwxo")
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="." unique_id=396343367]

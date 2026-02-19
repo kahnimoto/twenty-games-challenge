@@ -27,6 +27,7 @@ var hp := 3
 
 func dig() -> bool:
 	hp -= 1
+	SFX.mine()
 	sprite.play("decay")
 	await sprite.animation_finished
 	Events.dig_complete.emit(global_position)

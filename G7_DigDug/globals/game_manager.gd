@@ -19,7 +19,7 @@ const LAVA_BITMASK := 64
 const LEVELS: Array[PackedScene] = [
 	preload("res://levels/tutorial.tscn"),
 	preload("res://levels/level_two.tscn"),
-	preload("res://playground.tscn"),
+	preload("res://levels/playground.tscn"),
 ]
 
 var current_level := 0

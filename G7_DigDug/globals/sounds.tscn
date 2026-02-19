@@ -1,8 +1,31 @@
 [gd_scene format=3 uid="uid://dwi07pcdm3pdh"]
 
 [ext_resource type="Script" uid="uid://cum14i6dole8x" path="res://globals/sound_manager.gd" id="1_wac1x"]
+[ext_resource type="AudioStream" uid="uid://bsxiokidtjij3" path="res://assets/external/sounds/mining.mp3" id="2_y5p6a"]
+[ext_resource type="AudioStream" uid="uid://bp5s5vceud3or" path="res://assets/external/sounds/too_hard.mp3" id="3_t5qf7"]
+[ext_resource type="AudioStream" uid="uid://dq3ij2j2pjihs" path="res://assets/external/sounds/dig.mp3" id="4_t5qf7"]
+[ext_resource type="AudioStream" uid="uid://c6ekbbkld55db" path="res://assets/external/sounds/building.mp3" id="5_uk1eb"]
+[ext_resource type="AudioStream" uid="uid://bwfhelr751hl6" path="res://assets/external/sounds/extra.mp3" id="6_br1tb"]
 
 [node name="Sounds" type="Node" unique_id=1884146757]
 script = ExtResource("1_wac1x")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=371660454]
+
+[node name="MiningSound" type="AudioStreamPlayer" parent="." unique_id=1201582503]
+stream = ExtResource("2_y5p6a")
+max_polyphony = 2
+
+[node name="TooHardSound" type="AudioStreamPlayer" parent="." unique_id=1492310261]
+stream = ExtResource("3_t5qf7")
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="DigSound" type="AudioStreamPlayer" parent="." unique_id=1546653662]
+stream = ExtResource("4_t5qf7")
+
+[node name="BuildingSound" type="AudioStreamPlayer" parent="." unique_id=226009356]
+stream = ExtResource("5_uk1eb")
+
+[node name="ExtraScaffoldSound" type="AudioStreamPlayer" parent="." unique_id=1197574652]
+stream = ExtResource("6_br1tb")

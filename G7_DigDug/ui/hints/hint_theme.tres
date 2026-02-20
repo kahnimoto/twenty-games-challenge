@@ -1,0 +1,17 @@
+[gd_resource type="Theme" format=3 uid="uid://brcbsgkgnb22t"]
+
+[ext_resource type="Texture2D" uid="uid://crww5lirjghn4" path="res://assets/slot.png" id="1_vdy17"]
+[ext_resource type="FontFile" uid="uid://bqjxinyutvtmw" path="res://assets/external/fonts/m5x7.ttf" id="2_7uvq8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_id20x"]
+texture = ExtResource("1_vdy17")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[resource]
+default_font = ExtResource("2_7uvq8")
+default_font_size = 26
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_id20x")
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.44705883)

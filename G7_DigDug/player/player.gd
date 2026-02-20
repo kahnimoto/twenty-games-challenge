@@ -10,8 +10,8 @@ const DOUBLE_JUMP_VELOCITY := JUMP_VELOCITY
 const COYOTE_DURATION := 0.25 # About 9 frames at 60fps
 const COYOTE_DURATION_FROM_WALL_GRAB := 0.45
 const JUMP_BUFFER_DURATION := 0.1
-const GROUND_ACCELERATION := 1200.0
-const GROUND_FRICTION := 900.0
+const GROUND_ACCELERATION := 900.0
+const GROUND_FRICTION := 800.0
 const AIR_ACCELERATION := 400.0
 const AIR_FRICTION := 300.0
 const WALL_SLIDE_SPEED := 0.25
@@ -110,7 +110,7 @@ func _physics_process(delta: float) -> void:
 
 	if not _is_digging and on_ground and Input.is_action_pressed("dig"):
 		_dig()
-	if Input.is_action_just_pressed("place_scaffold"):
+	if Game.abilities[Game.Ability.SCAFFOLD] and Input.is_action_just_pressed("place_scaffold"):
 		if on_ground:
 			if Input.is_action_pressed("look_up"):
 				Events.scaffold_requested.emit(global_position + Vector2.UP * Game.TILE_SIZE * 1.5)
@@ -124,7 +124,7 @@ func _physics_process(delta: float) -> void:
 				Events.scaffold_requested.emit(global_position + Vector2.DOWN * Game.TILE_SIZE * 1.5 + Vector2.LEFT * Game.TILE_SIZE)
 			else:
 				Events.scaffold_requested.emit(global_position + Vector2.DOWN * Game.TILE_SIZE * 1.5)
-	if Input.is_action_just_pressed("place_bridge"): # TODO allow holding button to place more?
+	if Game.abilities[Game.Ability.BRIDGE] and Input.is_action_just_pressed("place_bridge"): # TODO allow holding button to place more?
 		Events.scaffold_requested.emit(dig_marker.global_position + Vector2.DOWN * Game.TILE_SIZE)
 
 	_update_timers(delta, on_ground, on_wall, jumping, climbing)

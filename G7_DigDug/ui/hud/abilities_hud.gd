@@ -10,6 +10,8 @@ const PICK_LEVEL_THREE: Color = Color(0.628, 0.525, 1.096)
 @onready var pickaxe_cost: Control = %PickaxeCost
 @onready var claws_cost: Control = %ClawsCost
 @onready var jetpack_cost: Control = %JetpackCost
+@onready var has_scaffold: TextureRect = %HasScaffold
+@onready var scaffold_cost: Control = %ScaffoldCost
 
 
 func _ready() -> void:
@@ -29,6 +31,11 @@ func update_abilities() -> void:
 		claws_cost.modulate = Color(Color.WHITE, 0.0)
 	else:
 		has_claws.show()
+	if Game.abilities[Game.Ability.SCAFFOLD]:
+		has_scaffold.hide()
+		scaffold_cost.modulate = Color(Color.WHITE, 0.0)
+	else:
+		has_scaffold.show()
 	if Game.abilities[Game.Ability.JETPACK]:
 		has_jetpack.hide()
 		jetpack_cost.modulate = Color(Color.WHITE, 0.0)

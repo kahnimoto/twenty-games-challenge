@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="1_66vvk"]
 [ext_resource type="Script" uid="uid://dwyaqrg0r48ku" path="res://nodes/workshop/workshop.gd" id="1_f7xtb"]
+[ext_resource type="Theme" uid="uid://brcbsgkgnb22t" path="res://ui/hints/hint_theme.tres" id="3_wodd7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f7xtb"]
 atlas = ExtResource("1_66vvk")
@@ -26,3 +27,32 @@ monitorable = false
 position = Vector2(0.5, 4)
 shape = SubResource("RectangleShape2D_f7xtb")
 debug_color = Color(0.11111156, 0.51730704, 3.85046e-07, 0)
+
+[node name="KeyHint" type="Control" parent="." unique_id=1247145545]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -44.0
+offset_right = 127.0
+grow_vertical = 0
+theme = ExtResource("3_wodd7")
+
+[node name="PanelContainer" type="PanelContainer" parent="KeyHint" unique_id=2122101060]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+offset_right = 78.0
+grow_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="KeyHint/PanelContainer" unique_id=2015200568]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[color=cyan]E[/color] to craft"
+horizontal_alignment = 1
+vertical_alignment = 1

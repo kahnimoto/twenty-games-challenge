@@ -1,39 +1,47 @@
 [gd_scene format=3 uid="uid://vv3gmcf4cpg"]
 
-[ext_resource type="Script" uid="uid://bwsyckvcebnju" path="res://ui/hud/hud.gd" id="1_q43x7"]
-[ext_resource type="Theme" uid="uid://c7df028jbjpj5" path="res://ui/hud_theme.tres" id="2_srpbi"]
-[ext_resource type="Script" uid="uid://drhvl8wcliul1" path="res://ui/inventory.gd" id="3_spcu4"]
-[ext_resource type="Texture2D" uid="uid://crww5lirjghn4" path="res://assets/slot.png" id="4_ff8ar"]
-[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="5_m0eg6"]
-[ext_resource type="Script" uid="uid://bj22a8ycqdugv" path="res://ui/hud/abilities_hud.gd" id="6_b00kl"]
-[ext_resource type="PackedScene" uid="uid://c2hfyn6l2g63l" path="res://ui/health/health_gem.tscn" id="7_so1yu"]
+[ext_resource type="Script" uid="uid://bwsyckvcebnju" path="res://ui/hud/hud.gd" id="1_o2lis"]
+[ext_resource type="Theme" uid="uid://c7df028jbjpj5" path="res://ui/hud/hud_theme.tres" id="2_gfles"]
+[ext_resource type="Script" uid="uid://drhvl8wcliul1" path="res://ui/hud/inventory.gd" id="3_aixkq"]
+[ext_resource type="Texture2D" uid="uid://crww5lirjghn4" path="res://assets/slot.png" id="4_cxhb7"]
+[ext_resource type="Texture2D" uid="uid://beeyp4rvd5g6r" path="res://assets/scaffold_and_items.png" id="5_5uuaq"]
+[ext_resource type="Script" uid="uid://bj22a8ycqdugv" path="res://ui/hud/abilities_hud.gd" id="6_p3vm3"]
+[ext_resource type="PackedScene" uid="uid://c2hfyn6l2g63l" path="res://ui/health/health_gem.tscn" id="7_gv4gi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pactg"]
-atlas = ExtResource("5_m0eg6")
+atlas = ExtResource("5_5uuaq")
 region = Rect2(224, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2qr3"]
-atlas = ExtResource("5_m0eg6")
+atlas = ExtResource("5_5uuaq")
 region = Rect2(224, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ff8ar"]
+atlas = ExtResource("5_5uuaq")
+region = Rect2(119, 131, 18, 13)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jufm4"]
-atlas = ExtResource("5_m0eg6")
+atlas = ExtResource("5_5uuaq")
 region = Rect2(160, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ymgag"]
-atlas = ExtResource("5_m0eg6")
+atlas = ExtResource("5_5uuaq")
 region = Rect2(176, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5m40n"]
-atlas = ExtResource("5_m0eg6")
-region = Rect2(208, 32, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_srpbi"]
+atlas = ExtResource("5_5uuaq")
+region = Rect2(64, 80, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ycdrs"]
-atlas = ExtResource("5_m0eg6")
+atlas = ExtResource("5_5uuaq")
 region = Rect2(160, 64, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m40n"]
+atlas = ExtResource("5_5uuaq")
+region = Rect2(208, 32, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_x6kx1"]
-atlas = ExtResource("5_m0eg6")
+atlas = ExtResource("5_5uuaq")
 region = Rect2(192, 32, 16, 16)
 
 [sub_resource type="GDScript" id="GDScript_pactg"]
@@ -47,11 +55,15 @@ func _ready() -> void:
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q43x7"]
-atlas = ExtResource("5_m0eg6")
+atlas = ExtResource("5_5uuaq")
 region = Rect2(224, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_spcu4"]
+atlas = ExtResource("5_5uuaq")
+region = Rect2(120, 128, 16, 16)
+
 [node name="HUD" type="CanvasLayer" unique_id=570225655]
-script = ExtResource("1_q43x7")
+script = ExtResource("1_o2lis")
 
 [node name="DebugControl" type="Control" parent="." unique_id=2072073139]
 visible = false
@@ -85,6 +97,18 @@ grow_horizontal = 0
 grow_vertical = 0
 alignment = 2
 
+[node name="ScaffoldToggle" type="CheckButton" parent="DebugControl/Buttons/HFlowContainer" unique_id=1438721606]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Scaffold"
+alignment = 2
+
+[node name="BridgeToggle" type="CheckButton" parent="DebugControl/Buttons/HFlowContainer" unique_id=700411269]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bridge"
+alignment = 2
+
 [node name="WallgrabToggle" type="CheckButton" parent="DebugControl/Buttons/HFlowContainer" unique_id=1234296514]
 unique_name_in_owner = true
 layout_mode = 2
@@ -100,11 +124,11 @@ alignment = 2
 [node name="Inventory" type="Control" parent="." unique_id=468121262]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 334.0
-offset_bottom = 151.0
+offset_right = 307.0
+offset_bottom = 87.0
 mouse_filter = 2
-theme = ExtResource("2_srpbi")
-script = ExtResource("3_spcu4")
+theme = ExtResource("2_gfles")
+script = ExtResource("3_aixkq")
 
 [node name="MarginContainer" type="MarginContainer" parent="Inventory" unique_id=1126233277]
 layout_mode = 1
@@ -113,42 +137,46 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 
 [node name="HFlowContainer" type="HFlowContainer" parent="Inventory/MarginContainer" unique_id=515032573]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Copper" type="Control" parent="Inventory/MarginContainer/HFlowContainer" unique_id=1699055079]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
 [node name="Slot" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Copper" unique_id=992924491]
 self_modulate = Color(0.8743333, 1, 0.74, 0.5372549)
 texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("4_ff8ar")
+texture = ExtResource("4_cxhb7")
 
 [node name="Item" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Copper" unique_id=2035942318]
 self_modulate = Color(0.7, 0.28000003, 0, 1)
 texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
-offset_right = 29.0
-offset_bottom = 28.0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 44.0
+offset_bottom = 45.0
 texture = SubResource("AtlasTexture_pactg")
 
 [node name="CopperLabel" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Copper" unique_id=1730882901]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 0
+offset_left = -5.0
 offset_top = 4.0
-offset_right = 64.0
+offset_right = 59.0
 offset_bottom = 23.0
-theme_override_font_sizes/font_size = 16
 text = "Copper"
 horizontal_alignment = 1
 
@@ -162,10 +190,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -42.0
-offset_top = -42.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = -41.0
+offset_top = -40.0
+offset_right = -9.0
+offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "12"
@@ -173,25 +201,27 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="Iron" type="Control" parent="Inventory/MarginContainer/HFlowContainer" unique_id=269107300]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
 [node name="Slot" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Iron" unique_id=1695420512]
 self_modulate = Color(0.8743333, 1, 0.74, 0.5372549)
 texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("4_ff8ar")
+texture = ExtResource("4_cxhb7")
 
 [node name="Item" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Iron" unique_id=1620295107]
 self_modulate = Color(0.61770004, 0.73544, 0.87, 1)
 texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
-offset_right = 29.0
-offset_bottom = 28.0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 44.0
+offset_bottom = 45.0
 texture = SubResource("AtlasTexture_pactg")
 
 [node name="IronAmountValue" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Iron" unique_id=1807954884]
@@ -204,10 +234,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -42.0
-offset_top = -42.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = -41.0
+offset_top = -40.0
+offset_right = -9.0
+offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "12"
@@ -218,33 +248,35 @@ vertical_alignment = 2
 texture_filter = 1
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 0
+offset_left = -5.0
 offset_top = 4.0
-offset_right = 64.0
+offset_right = 59.0
 offset_bottom = 23.0
-theme_override_font_sizes/font_size = 16
 text = "Iron"
 horizontal_alignment = 1
 
 [node name="Gold" type="Control" parent="Inventory/MarginContainer/HFlowContainer" unique_id=1411591670]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
 [node name="Slot" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Gold" unique_id=361937150]
 self_modulate = Color(0.8743333, 1, 0.74, 0.5372549)
 texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("4_ff8ar")
+texture = ExtResource("4_cxhb7")
 
 [node name="Item" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Gold" unique_id=900103823]
 self_modulate = Color(1, 0.81, 0.24000001, 1)
 texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
-offset_right = 29.0
-offset_bottom = 28.0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 44.0
+offset_bottom = 45.0
 texture = SubResource("AtlasTexture_pactg")
 
 [node name="GoldAmountValue" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Gold" unique_id=1994183207]
@@ -257,10 +289,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -42.0
-offset_top = -42.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = -41.0
+offset_top = -40.0
+offset_right = -9.0
+offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "12"
@@ -271,35 +303,34 @@ vertical_alignment = 2
 texture_filter = 1
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 0
+offset_left = -5.0
 offset_top = 4.0
-offset_right = 64.0
+offset_right = 59.0
 offset_bottom = 23.0
-theme_override_font_sizes/font_size = 16
 text = "Gold"
 horizontal_alignment = 1
 
 [node name="Diamond" type="Control" parent="Inventory/MarginContainer/HFlowContainer" unique_id=1023534100]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
 [node name="Slot" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Diamond" unique_id=693540024]
 self_modulate = Color(0.8743333, 1, 0.74, 0.5372549)
 texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("4_ff8ar")
+texture = ExtResource("4_cxhb7")
 
 [node name="Item" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Diamond" unique_id=1389410814]
 self_modulate = Color(0.51, 1, 0.9673334, 1)
 texture_filter = 1
-custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = 7.0
-offset_top = 12.0
-offset_right = 59.0
-offset_bottom = 62.0
+offset_left = 4.0
+offset_top = 10.0
+offset_right = 44.0
+offset_bottom = 50.0
 texture = SubResource("AtlasTexture_u2qr3")
 
 [node name="DiamondAmountValue" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Diamond" unique_id=2093208082]
@@ -312,10 +343,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -42.0
-offset_top = -42.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = -41.0
+offset_top = -40.0
+offset_right = -9.0
+offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "1"
@@ -326,11 +357,66 @@ vertical_alignment = 2
 texture_filter = 1
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 0
+offset_left = -5.0
 offset_top = 4.0
-offset_right = 64.0
+offset_right = 59.0
 offset_bottom = 23.0
-theme_override_font_sizes/font_size = 16
 text = "Diamond"
+horizontal_alignment = 1
+
+[node name="Wood" type="Control" parent="Inventory/MarginContainer/HFlowContainer" unique_id=1286936639]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Wood" unique_id=1526663344]
+self_modulate = Color(0.8743333, 1, 0.74, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_cxhb7")
+
+[node name="Item" type="TextureRect" parent="Inventory/MarginContainer/HFlowContainer/Wood" unique_id=502802056]
+self_modulate = Color(0.51, 1, 0.9673334, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 9.0
+offset_top = 15.0
+offset_right = 49.0
+offset_bottom = 55.0
+scale = Vector2(0.62098646, 0.61057216)
+texture = SubResource("AtlasTexture_ff8ar")
+
+[node name="WoodAmountValue" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Wood" unique_id=893447379]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -41.0
+offset_top = -40.0
+offset_right = -9.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="WoodLabel" type="Label" parent="Inventory/MarginContainer/HFlowContainer/Wood" unique_id=275611674]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_left = -5.0
+offset_top = 4.0
+offset_right = 59.0
+offset_bottom = 23.0
+text = "Wood"
 horizontal_alignment = 1
 
 [node name="Abilities" type="Control" parent="." unique_id=1579321770]
@@ -341,8 +427,8 @@ anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
 mouse_filter = 2
-theme = ExtResource("2_srpbi")
-script = ExtResource("6_b00kl")
+theme = ExtResource("2_gfles")
+script = ExtResource("6_p3vm3")
 
 [node name="MarginContainer" type="MarginContainer" parent="Abilities" unique_id=161144079]
 custom_minimum_size = Vector2(300, 0)
@@ -350,14 +436,16 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -80.0
-offset_bottom = 284.0
+offset_left = -300.0
+offset_bottom = 157.0
 grow_horizontal = 0
+mouse_filter = 2
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer" unique_id=1912836206]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HFlowContainer" type="HFlowContainer" parent="Abilities/MarginContainer/VBoxContainer" unique_id=170501698]
 layout_mode = 2
@@ -374,7 +462,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("4_ff8ar")
+texture = ExtResource("4_cxhb7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Pickaxe" unique_id=1635682659]
 layout_mode = 1
@@ -425,6 +513,67 @@ text = "Pickaxe"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Scaffold" type="Control" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer" unique_id=1629375302]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Scaffold" unique_id=876013934]
+self_modulate = Color(0.74, 0.75733334, 1, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_cxhb7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Scaffold" unique_id=307682371]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.5
+offset_right = 20.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Scaffold/VBoxContainer" unique_id=669423151]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+texture = SubResource("AtlasTexture_srpbi")
+stretch_mode = 5
+
+[node name="HasScaffold" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Scaffold/VBoxContainer/TextureRect" unique_id=1760032325]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ycdrs")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Scaffold/VBoxContainer" unique_id=1619101498]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Scaffold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Claws" type="Control" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer" unique_id=1342758677]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -436,7 +585,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("4_ff8ar")
+texture = ExtResource("4_cxhb7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Claws" unique_id=82860745]
 layout_mode = 1
@@ -496,7 +645,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("4_ff8ar")
+texture = ExtResource("4_cxhb7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/HFlowContainer/Jetpack" unique_id=252715006]
 layout_mode = 1
@@ -563,7 +712,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("4_ff8ar")
+texture = ExtResource("4_cxhb7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/PickaxeCost" unique_id=1949133526]
 layout_mode = 1
@@ -599,6 +748,54 @@ text = "x1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ScaffoldCost" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=1943203185]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Slot" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ScaffoldCost" unique_id=1931843378]
+self_modulate = Color(0.923, 1, 0.89, 0.5372549)
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_cxhb7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ScaffoldCost" unique_id=1696216325]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.5
+offset_right = 20.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -12
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ScaffoldCost/VBoxContainer" unique_id=728943620]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Item2" type="TextureRect" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ScaffoldCost/VBoxContainer/HBoxContainer2" unique_id=1491631119]
+self_modulate = Color(0.46979997, 0.87, 0.84332, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = SubResource("AtlasTexture_spcu4")
+
+[node name="Label" type="Label" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ScaffoldCost/VBoxContainer/HBoxContainer2" unique_id=1855523832]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "x1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ClawsCost" type="Control" parent="Abilities/MarginContainer/VBoxContainer/CostPreview" unique_id=259685522]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
@@ -611,7 +808,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("4_ff8ar")
+texture = ExtResource("4_cxhb7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/ClawsCost" unique_id=701632071]
 layout_mode = 1
@@ -677,7 +874,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("4_ff8ar")
+texture = ExtResource("4_cxhb7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Abilities/MarginContainer/VBoxContainer/CostPreview/JetpackCost" unique_id=572215563]
 layout_mode = 1
@@ -762,11 +959,11 @@ size_flags_vertical = 8
 mouse_filter = 2
 columns = 3
 
-[node name="Health1" parent="Health/MarginContainer/HealthBar" unique_id=512435503 instance=ExtResource("7_so1yu")]
+[node name="Health1" parent="Health/MarginContainer/HealthBar" unique_id=512435503 instance=ExtResource("7_gv4gi")]
 layout_mode = 2
 
-[node name="Health2" parent="Health/MarginContainer/HealthBar" unique_id=493383054 instance=ExtResource("7_so1yu")]
+[node name="Health2" parent="Health/MarginContainer/HealthBar" unique_id=493383054 instance=ExtResource("7_gv4gi")]
 layout_mode = 2
 
-[node name="Health3" parent="Health/MarginContainer/HealthBar" unique_id=1733773082 instance=ExtResource("7_so1yu")]
+[node name="Health3" parent="Health/MarginContainer/HealthBar" unique_id=1733773082 instance=ExtResource("7_gv4gi")]
 layout_mode = 2

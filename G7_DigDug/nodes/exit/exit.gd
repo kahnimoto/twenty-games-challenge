@@ -14,7 +14,6 @@ func _ready() -> void:
 func _on_player_near(body: Node2D, enter: bool) -> void:
 	assert(body.is_in_group("player"))
 	player_near = enter
-	print("hello")
 
 
 func _unhandled_input(event: InputEvent) -> void:

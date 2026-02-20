@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://keq0wq0ug1fq"]
+
+[ext_resource type="Script" uid="uid://ciu1jx1k322pc" path="res://ui/hints/hints.gd" id="1_wjd2j"]
+[ext_resource type="Theme" uid="uid://brcbsgkgnb22t" path="res://ui/hints/hint_theme.tres" id="2_goqgj"]
+
+[node name="Hints" type="CanvasLayer" unique_id=1570564365]
+process_mode = 3
+script = ExtResource("1_wjd2j")
+
+[node name="Hints" type="Control" parent="." unique_id=170607696]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_goqgj")
+metadata/_edit_lock_ = true
+
+[node name="InputHint" type="Control" parent="." unique_id=2004670666]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_goqgj")
+metadata/_edit_lock_ = true
+
+[node name="Control" type="Control" parent="InputHint" unique_id=52650178]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -81.0
+offset_right = 20.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="RichTextLabel" parent="InputHint/Control" unique_id=1321157138]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -33.0
+offset_right = 42.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "<space>
+to
+continue"
+horizontal_alignment = 1
+vertical_alignment = 1

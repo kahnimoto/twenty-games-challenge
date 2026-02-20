@@ -18,7 +18,8 @@ const LAVA_LAYER_NUMBER := 7
 const LAVA_BITMASK := 64
 const LEVELS: Array[PackedScene] = [
 	preload("res://levels/tutorial.tscn"),
-	preload("res://levels/level_two.tscn"),
+	preload("res://levels/level_scaffold.tscn"),
+	preload("res://levels/level_climb.tscn"),
 	preload("res://levels/playground.tscn"),
 ]
 
@@ -36,10 +37,11 @@ var inventory: Dictionary[Ore.Metal, int] = {
 	Ore.Metal.IRON: 0,
 	Ore.Metal.GOLD: 0,
 	Ore.Metal.DIAMOND: 0,
+	Ore.Metal.WOODKIT: 0,
 }
 var lives := MAX_LIVES
 var game_over := false
-var scaffold_support_levels := 5
+var scaffold_support_levels := 3
 
 
 func _ready() -> void:
@@ -48,18 +50,17 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+	if event.is_action_pressed("restart"):
+		get_tree().reload_current_scene()
 
 
 func _on_ore_mined(ore: Ore.Metal) -> void:
-	inventory[ore as Variant] += 1
+	inventory[ore] += 1
 	Events.inventory_changed.emit()
 
 
 func _on_player_reached_exit() -> void:
 	get_tree().paused = true
-	print("level completed")
 	current_level += 1
 	if current_level >= LEVELS.size():
 		current_level = 0
@@ -72,7 +73,7 @@ func _on_player_reached_exit() -> void:
 func reset() -> void:
 	game_over = false
 	lives = MAX_LIVES
-	pickaxe_level = 1
+	#pickaxe_level = 1
 	for key in inventory:
 		inventory[key] = 0
 	Events.inventory_changed.emit()

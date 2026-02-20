@@ -1,0 +1,514 @@
+[gd_scene format=3 uid="uid://bxcd4gm14eb6s"]
+
+[ext_resource type="Script" uid="uid://ciu1jx1k322pc" path="res://ui/hints/hints.gd" id="1_a1m6k"]
+[ext_resource type="Theme" uid="uid://brcbsgkgnb22t" path="res://ui/hints/hint_theme.tres" id="2_kmc1n"]
+[ext_resource type="Texture2D" uid="uid://bapxl0ei5fgma" path="res://assets/arrow.tres" id="3_evtv7"]
+[ext_resource type="Script" uid="uid://c2op2nvyow8g2" path="res://ui/hints/hint_ui_connector.gd" id="4_eoud1"]
+
+[node name="Hints" type="CanvasLayer" unique_id=1570564365]
+process_mode = 3
+script = ExtResource("1_a1m6k")
+
+[node name="Hints" type="Control" parent="." unique_id=170607696]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_kmc1n")
+metadata/_edit_lock_ = true
+
+[node name="HintWelcome" type="Control" parent="Hints" unique_id=105362204]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Hints/HintWelcome" unique_id=12899832]
+texture_filter = 1
+layout_mode = 0
+offset_left = -147.0
+offset_top = 64.0
+offset_right = -107.0
+offset_bottom = 104.0
+rotation = -1.3089969
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer" type="PanelContainer" parent="Hints/HintWelcome" unique_id=108566702]
+texture_filter = 1
+layout_mode = 0
+offset_left = -92.0
+offset_top = 5.0
+offset_right = 92.0
+offset_bottom = 70.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintWelcome/PanelContainer" unique_id=863240628]
+layout_mode = 2
+bbcode_enabled = true
+text = "[shake]WELCOME TO DIGGING FOR GOLD"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HintPickAxe" type="Control" parent="Hints" unique_id=722462271]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -24.0
+offset_right = 18.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_eoud1")
+
+[node name="TextureRect3" type="TextureRect" parent="Hints/HintPickAxe" unique_id=1032129824]
+texture_filter = 1
+layout_mode = 0
+offset_left = 246.0
+offset_top = -28.0
+offset_right = 286.0
+offset_bottom = 12.0
+rotation = -1.8325958
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer2" type="PanelContainer" parent="Hints/HintPickAxe" unique_id=400352748]
+texture_filter = 1
+layout_mode = 0
+offset_left = 64.0
+offset_top = -29.0
+offset_right = 265.0
+offset_bottom = 42.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintPickAxe/PanelContainer2" unique_id=1479669952]
+layout_mode = 2
+text = "Pickaxe strength to mine harder stone"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HintScaffold" type="Control" parent="Hints" unique_id=1863418084]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -24.0
+offset_right = 18.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_eoud1")
+
+[node name="TextureRect3" type="TextureRect" parent="Hints/HintScaffold" unique_id=995657910]
+texture_filter = 1
+layout_mode = 0
+offset_left = 247.0
+offset_top = -26.0
+offset_right = 287.0
+offset_bottom = 14.0
+rotation = -1.8325958
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer2" type="PanelContainer" parent="Hints/HintScaffold" unique_id=1726041296]
+texture_filter = 1
+layout_mode = 0
+offset_left = 133.0
+offset_top = -26.0
+offset_right = 317.0
+offset_bottom = 39.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintScaffold/PanelContainer2" unique_id=341508048]
+layout_mode = 2
+text = "Build scaffolds
+and bridges"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HintClaws" type="Control" parent="Hints" unique_id=188492429]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -24.0
+offset_right = 18.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_eoud1")
+
+[node name="TextureRect3" type="TextureRect" parent="Hints/HintClaws" unique_id=903269807]
+texture_filter = 1
+layout_mode = 0
+offset_left = 258.0
+offset_top = -21.0
+offset_right = 298.0
+offset_bottom = 19.0
+rotation = -2.0943952
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer2" type="PanelContainer" parent="Hints/HintClaws" unique_id=281546260]
+texture_filter = 1
+layout_mode = 0
+offset_left = 133.0
+offset_top = -26.0
+offset_right = 317.0
+offset_bottom = 39.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintClaws/PanelContainer2" unique_id=1523256022]
+layout_mode = 2
+text = "Claws to grab onto walls"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HintJetpack" type="Control" parent="Hints" unique_id=377989657]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -24.0
+offset_right = 18.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_eoud1")
+
+[node name="TextureRect3" type="TextureRect" parent="Hints/HintJetpack" unique_id=1536982203]
+texture_filter = 1
+layout_mode = 0
+offset_left = 277.0
+offset_top = -26.0
+offset_right = 317.0
+offset_bottom = 14.0
+rotation = -2.0943952
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer2" type="PanelContainer" parent="Hints/HintJetpack" unique_id=1848605288]
+texture_filter = 1
+layout_mode = 0
+offset_left = 133.0
+offset_top = -26.0
+offset_right = 317.0
+offset_bottom = 39.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintJetpack/PanelContainer2" unique_id=571248079]
+layout_mode = 2
+text = "Jetpack to
+\"double jump\""
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HintUpgrades" type="Control" parent="Hints" unique_id=333396358]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -24.0
+offset_right = 18.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_eoud1")
+
+[node name="TextureRect3" type="TextureRect" parent="Hints/HintUpgrades" unique_id=977895798]
+texture_filter = 1
+layout_mode = 0
+offset_left = 273.0
+offset_top = 40.0
+offset_right = 313.0
+offset_bottom = 80.0
+rotation = -1.8325958
+texture = ExtResource("3_evtv7")
+
+[node name="TextureRect4" type="TextureRect" parent="Hints/HintUpgrades" unique_id=1437888088]
+texture_filter = 1
+layout_mode = 0
+offset_left = 181.0
+offset_top = 35.999985
+offset_right = 221.0
+offset_bottom = 75.999985
+rotation = -3.0512195
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer2" type="PanelContainer" parent="Hints/HintUpgrades" unique_id=1752022647]
+texture_filter = 1
+layout_mode = 0
+offset_left = 130.0
+offset_top = 40.0
+offset_right = 314.0
+offset_bottom = 105.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintUpgrades/PanelContainer2" unique_id=1705403133]
+layout_mode = 2
+text = "How much each upgrade cost"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HintWorkshop" type="Control" parent="Hints" unique_id=642143446]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+
+[node name="TextureRect6" type="TextureRect" parent="Hints/HintWorkshop" unique_id=1027723852]
+texture_filter = 1
+layout_mode = 0
+offset_left = 319.0
+offset_top = 250.00003
+offset_right = 359.0
+offset_bottom = 290.00003
+rotation = -2.0943952
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer4" type="PanelContainer" parent="Hints/HintWorkshop" unique_id=262906480]
+texture_filter = 1
+layout_mode = 0
+offset_left = 202.0
+offset_top = 255.0
+offset_right = 384.0
+offset_bottom = 334.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintWorkshop/PanelContainer4" unique_id=828672793]
+layout_mode = 2
+text = "Look for anvils to craft upgrades"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HintInventory" type="Control" parent="Hints" unique_id=486946940]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_eoud1")
+
+[node name="TextureRect" type="TextureRect" parent="Hints/HintInventory" unique_id=1385779755]
+texture_filter = 1
+layout_mode = 0
+offset_left = -209.0
+offset_top = -29.0
+offset_right = -169.0
+offset_bottom = 11.0
+rotation = -2.8797934
+texture = ExtResource("3_evtv7")
+
+[node name="TextureRect2" type="TextureRect" parent="Hints/HintInventory" unique_id=468060258]
+texture_filter = 1
+layout_mode = 0
+offset_left = -92.0
+offset_top = -24.0
+offset_right = -52.0
+offset_bottom = 16.0
+rotation = -1.8325958
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer" type="PanelContainer" parent="Hints/HintInventory" unique_id=1689259631]
+texture_filter = 1
+layout_mode = 0
+offset_left = -236.0
+offset_top = -26.0
+offset_right = -52.0
+offset_bottom = 39.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintInventory/PanelContainer" unique_id=1495406686]
+layout_mode = 2
+text = "Gather Resources from the mine"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HintLife" type="Control" parent="Hints" unique_id=462877201]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -21.0
+offset_right = 11.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_eoud1")
+
+[node name="TextureRect5" type="TextureRect" parent="Hints/HintLife" unique_id=1227405178]
+texture_filter = 1
+layout_mode = 0
+offset_left = -63.000023
+offset_top = 104.99999
+offset_right = -23.000023
+offset_bottom = 145.0
+rotation = -0.2617994
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer3" type="PanelContainer" parent="Hints/HintLife" unique_id=1480921773]
+texture_filter = 1
+layout_mode = 0
+offset_left = -251.0
+offset_top = 66.0
+offset_right = -69.0
+offset_bottom = 145.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintLife/PanelContainer3" unique_id=632952343]
+layout_mode = 2
+text = "You can take some hits from enemies or lava."
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HintExit" type="Control" parent="Hints" unique_id=1183491180]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect7" type="TextureRect" parent="Hints/HintExit" unique_id=2107498788]
+texture_filter = 1
+layout_mode = 0
+offset_left = 369.00003
+offset_top = 231.0
+offset_right = 409.00003
+offset_bottom = 271.0
+rotation = 0.2617994
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer5" type="PanelContainer" parent="Hints/HintExit" unique_id=322359445]
+texture_filter = 1
+layout_mode = 0
+offset_left = 212.0
+offset_top = 178.0
+offset_right = 362.0
+offset_bottom = 248.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintExit/PanelContainer5" unique_id=1133104812]
+layout_mode = 2
+text = "Reach the exit
+to win"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HintControls" type="Control" parent="Hints" unique_id=58641557]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect8" type="TextureRect" parent="Hints/HintControls" unique_id=41137268]
+texture_filter = 1
+layout_mode = 0
+offset_left = 246.0
+offset_top = 198.0
+offset_right = 286.0
+offset_bottom = 238.0
+rotation = 3.1415927
+texture = ExtResource("3_evtv7")
+
+[node name="PanelContainer6" type="PanelContainer" parent="Hints/HintControls" unique_id=17994197]
+texture_filter = 1
+layout_mode = 0
+offset_left = 248.0
+offset_top = 160.0
+offset_right = 452.0
+offset_bottom = 311.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hints/HintControls/PanelContainer6" unique_id=1997894623]
+layout_mode = 2
+bbcode_enabled = true
+text = "This is you! 
+Move <[color=cyan]A[/color]>/<[color=cyan]D[/color]>
+Jump <[color=cyan]space[/color]>
+Dig / Use <[color=cyan]E[/color]>
+Build Scaffold <[color=cyan]Q[/color]>
+Build Bridge <[color=cyan]R[/color]>"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="InputHint" type="Control" parent="." unique_id=2004670666]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_kmc1n")
+metadata/_edit_lock_ = true
+
+[node name="Control" type="Control" parent="InputHint" unique_id=52650178]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -81.0
+offset_right = 20.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="RichTextLabel" parent="InputHint/Control" unique_id=1321157138]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -33.0
+offset_right = 42.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "<space> to
+continue"
+horizontal_alignment = 1
+vertical_alignment = 1

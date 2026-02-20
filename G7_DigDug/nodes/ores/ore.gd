@@ -3,13 +3,14 @@ class_name Ore
 extends Node2D
 
 
-enum Metal { COPPER, IRON, GOLD, DIAMOND }
+enum Metal { COPPER, IRON, GOLD, DIAMOND, WOODKIT }
 
 const metal_colors : Dictionary[Metal, Color] = {
 	Metal.COPPER: Color.ORANGE_RED,
 	Metal.IRON: Color.GRAY,
 	Metal.GOLD: Color.GOLD,
 	Metal.DIAMOND: Color.AQUA,
+	Metal.WOODKIT: Color.SADDLE_BROWN,
 }
 
 @export var type: Metal = Metal.COPPER:

@@ -10,6 +10,8 @@ var _gems: Array[HealthGem] = []
 
 @onready var wallgrab_toggle: CheckButton = %WallgrabToggle
 @onready var jetpack_toggle: CheckButton = %JetpackToggle
+@onready var scaffold_toggle: CheckButton = %ScaffoldToggle
+@onready var bridge_toggle: CheckButton = %BridgeToggle
 @onready var health_bar: GridContainer = %HealthBar
 #@onready var click_to_restart_message: Label = %ClickToRestartMessage
 #@onready var click_to_start_message: Label = %ClickToStartMessage
@@ -20,6 +22,10 @@ func _ready() -> void:
 	wallgrab_toggle.button_pressed = Game.abilities[Game.Ability.WALLGRAB]
 	jetpack_toggle.toggled.connect(_on_feature_toggled.bind(Game.Ability.JETPACK))
 	jetpack_toggle.button_pressed = Game.abilities[Game.Ability.JETPACK]
+	scaffold_toggle.toggled.connect(_on_feature_toggled.bind(Game.Ability.SCAFFOLD))
+	scaffold_toggle.button_pressed = Game.abilities[Game.Ability.SCAFFOLD]
+	bridge_toggle.toggled.connect(_on_feature_toggled.bind(Game.Ability.BRIDGE))
+	bridge_toggle.button_pressed = Game.abilities[Game.Ability.BRIDGE]
 	
 	_reset_gems()
 	#click_to_restart_message.hide()
@@ -37,6 +43,8 @@ func _on_feature_toggled(on: bool, ability: Game.Ability) -> void:
 	Events.abilities_changed.emit()
 	wallgrab_toggle.release_focus()
 	jetpack_toggle.release_focus()
+	scaffold_toggle.release_focus()
+	bridge_toggle.release_focus()
 
 
 func _on_level_loaded() -> void:

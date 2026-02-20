@@ -5,6 +5,7 @@ extends Control
 @onready var iron_amount_value: Label = %IronAmountValue
 @onready var gold_amount_value: Label = %GoldAmountValue
 @onready var diamond_amount_value: Label = %DiamondAmountValue
+@onready var wood_amount_value: Label = %WoodAmountValue
 
 
 func _ready() -> void:
@@ -13,6 +14,7 @@ func _ready() -> void:
 	iron_amount_value.text = "0"
 	gold_amount_value.text = "0"
 	diamond_amount_value.text = "0"
+	wood_amount_value.text = "0"
 
 
 func _on_inventory_changed() -> void:
@@ -20,3 +22,4 @@ func _on_inventory_changed() -> void:
 	iron_amount_value.text = str(Game.inventory[Ore.Metal.IRON])
 	gold_amount_value.text = str(Game.inventory[Ore.Metal.GOLD])
 	diamond_amount_value.text = str(Game.inventory[Ore.Metal.DIAMOND])
+	wood_amount_value.text = str(Game.inventory[Ore.Metal.WOODKIT])

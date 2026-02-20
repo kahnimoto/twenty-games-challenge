@@ -27,7 +27,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not playing:
 		return
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("restart"):
 		get_viewport().set_input_as_handled()
 		skip_tutorial()
 	if not ready_for_next:

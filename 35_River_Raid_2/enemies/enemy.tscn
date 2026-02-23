@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://blxe45jdu3wc5"]
+
+[ext_resource type="Script" uid="uid://dv5s234hdfnfx" path="res://enemies/enemy.gd" id="1_6v41j"]
+[ext_resource type="Texture2D" uid="uid://bbqvi46ewilru" path="res://enemies/textures/tanker_texture.tres" id="2_wmwwm"]
+[ext_resource type="Shape2D" uid="uid://bb8y430f5426v" path="res://enemies/shapes/jet_shape.tres" id="3_orwns"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orwns"]
+size = Vector2(680, 785)
+
+[node name="Enemy" type="Node2D" unique_id=2136191997]
+script = ExtResource("1_6v41j")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=713544759]
+texture = ExtResource("2_wmwwm")
+
+[node name="Crash" type="Area2D" parent="." unique_id=1624035951 groups=["enemy"]]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crash" unique_id=628688596]
+position = Vector2(-0.5, -0.5)
+shape = ExtResource("3_orwns")
+debug_color = Color(0.99215686, 0, 0.27058825, 0)
+metadata/_edit_lock_ = true
+
+[node name="Active" type="Area2D" parent="." unique_id=250928792]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Active" unique_id=1659425515]
+visible = false
+position = Vector2(1, 1.5)
+shape = SubResource("RectangleShape2D_orwns")
+debug_color = Color(0.17685348, 0.6157455, 0.5358738, 0)
+metadata/_edit_lock_ = true

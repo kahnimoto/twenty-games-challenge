@@ -1,0 +1,18 @@
+[gd_resource type="TileSet" format=3 uid="uid://cl10wh4k530my"]
+
+[ext_resource type="Texture2D" uid="uid://c3y72lhiuqtyv" path="res://assets/tileset.png" id="1_ur0ll"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ma8gn"]
+texture = ExtResource("1_ur0ll")
+0:4/0 = 0
+0:4/0/probability = 100.0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_ma8gn")

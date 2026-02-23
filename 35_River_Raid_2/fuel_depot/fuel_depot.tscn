@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dlpa5xckmshpn"]
+
+[ext_resource type="Script" uid="uid://paceb7gsduc0" path="res://fuel_depot/fuel_depot.gd" id="1_vatnv"]
+[ext_resource type="Texture2D" uid="uid://c3y72lhiuqtyv" path="res://assets/tileset.png" id="1_xhjv1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k865y"]
+atlas = ExtResource("1_xhjv1")
+region = Rect2(80, 96, 32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fxjhj"]
+radius = 14.0
+
+[node name="FuelDepot" type="Area2D" unique_id=1272891303 groups=["fuel"]]
+collision_layer = 64
+collision_mask = 10
+script = ExtResource("1_vatnv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1032363091]
+texture = SubResource("AtlasTexture_k865y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1048388529]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_fxjhj")

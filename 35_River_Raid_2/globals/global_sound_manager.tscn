@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ctfc1d12a4gcp"]
+
+[node name="GlobalSoundManager" type="Node" unique_id=1038908472]
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2113433395]
+bus = &"Music"
+
+[node name="Sound" type="AudioStreamPlayer" parent="." unique_id=1453896437]
+bus = &"Effects"

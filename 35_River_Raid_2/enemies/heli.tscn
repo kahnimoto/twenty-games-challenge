@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dd7s6n30suad1"]
+
+[ext_resource type="Script" uid="uid://dv5s234hdfnfx" path="res://enemies/enemy.gd" id="1_8gul4"]
+[ext_resource type="Texture2D" uid="uid://ca2dnv7dt6n80" path="res://enemies/textures/heli_texture.tres" id="2_6o8s7"]
+[ext_resource type="Shape2D" uid="uid://cjuonk6xvhiwf" path="res://enemies/shapes/heli_shape.tres" id="3_8gul4"]
+
+[node name="Helo" type="Node2D" unique_id=2136191997]
+script = ExtResource("1_8gul4")
+type = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=713544759]
+position = Vector2(0, -1)
+texture = ExtResource("2_6o8s7")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1624035951]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=628688596]
+shape = ExtResource("3_8gul4")
+debug_color = Color(0, 0.6, 0.69803923, 0.043137256)

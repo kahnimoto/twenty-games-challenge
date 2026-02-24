@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://paceb7gsduc0" path="res://fuel_depot/fuel_depot.gd" id="1_vatnv"]
 [ext_resource type="Texture2D" uid="uid://c3y72lhiuqtyv" path="res://assets/tileset.png" id="1_xhjv1"]
+[ext_resource type="AudioStream" uid="uid://cvn0xyfpekve4" path="res://assets/sound/rerrrrewr.mp3" id="3_jgob7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k865y"]
 atlas = ExtResource("1_xhjv1")
@@ -21,3 +22,7 @@ texture = SubResource("AtlasTexture_k865y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1048388529]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_fxjhj")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=171901545]
+stream = ExtResource("3_jgob7")
+bus = &"Effects"

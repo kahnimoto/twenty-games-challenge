@@ -1,9 +1,46 @@
 [gd_scene format=3 uid="uid://ctfc1d12a4gcp"]
 
+[ext_resource type="AudioStream" uid="uid://co7d14g85inv5" path="res://assets/sound/pao.mp3" id="1_d4j1j"]
+[ext_resource type="Script" uid="uid://c357l1y3oubgp" path="res://globals/global_sound_manager.gd" id="1_rnyyl"]
+[ext_resource type="AudioStream" uid="uid://cfrvh66h2tgmf" path="res://assets/sound/music.mp3" id="2_h6lrm"]
+[ext_resource type="AudioStream" uid="uid://dp6vqpo0cwimf" path="res://assets/sound/chee.mp3" id="2_rnyyl"]
+[ext_resource type="AudioStream" uid="uid://cqxmwfko8j173" path="res://assets/sound/die.mp3" id="5_ofw6i"]
+[ext_resource type="AudioStream" uid="uid://dtj2qf3jdnwyn" path="res://assets/sound/game_over.mp3" id="6_no4mr"]
+
 [node name="GlobalSoundManager" type="Node" unique_id=1038908472]
+script = ExtResource("1_rnyyl")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=2113433395]
+stream = ExtResource("2_h6lrm")
+volume_db = -5.16
+pitch_scale = 0.8
+autoplay = true
 bus = &"Music"
 
-[node name="Sound" type="AudioStreamPlayer" parent="." unique_id=1453896437]
+[node name="Fire" type="AudioStreamPlayer" parent="." unique_id=1453896437]
+stream = ExtResource("1_d4j1j")
+volume_db = -13.349
+pitch_scale = 1.1
 bus = &"Effects"
+
+[node name="Explode" type="AudioStreamPlayer" parent="." unique_id=909380070]
+stream = ExtResource("2_rnyyl")
+volume_db = -13.349
+pitch_scale = 1.1
+max_polyphony = 2
+bus = &"Effects"
+playback_type = 1
+
+[node name="Die" type="AudioStreamPlayer" parent="." unique_id=1238539499]
+stream = ExtResource("5_ofw6i")
+volume_db = -13.349
+pitch_scale = 0.7
+bus = &"Effects"
+playback_type = 1
+
+[node name="GameOver" type="AudioStreamPlayer" parent="." unique_id=1824778730]
+stream = ExtResource("6_no4mr")
+volume_db = -13.349
+pitch_scale = 0.7
+bus = &"Effects"
+playback_type = 1

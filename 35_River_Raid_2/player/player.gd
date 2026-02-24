@@ -23,12 +23,16 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if Game.over:
+		return
 	cool_down += delta
 	if cool_down >= SHOOT_COOL_DOWN and Input.is_action_pressed("shoot"):
 		shoot()
 
 
 func _physics_process(delta: float) -> void:
+	if Game.over:
+		return
 	var direction: float = Input.get_axis("move_left", "move_right")
 	if direction != 0.:
 		global_position.x += STRAFE * delta * direction
@@ -54,6 +58,7 @@ func _on_collision(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local
 
 
 func shoot() -> void:
+	Sounds.fire()
 	cool_down = 0.0
 	var new_bullet := BULLET.instantiate() as Bullet
 	bullet_parent.add_child(new_bullet)

@@ -57,6 +57,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	if Game.over:
+		queue_free()
 	if active:
 		_update_position(delta)
 
@@ -109,6 +113,7 @@ func _set_shape() -> void:
 func kill() -> void:
 	var points: int = POINTS[type]
 	Game.score(points)
+	Sounds.explode()
 	queue_free()
 
 
